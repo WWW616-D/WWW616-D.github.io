@@ -252,8 +252,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2026-03-13 09:23:23" itemprop="dateCreated datePublished" datetime="2026-03-13T09:23:23+08:00">2026-03-13</time>
+      <time title="Created: 2026-03-13 09:23:23 / Modified: 09:58:49" itemprop="dateCreated datePublished" datetime="2026-03-13T09:23:23+08:00">2026-03-13</time>
     </span>
 
   
@@ -266,7 +267,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <pre><code>这个内容的主要目的是记录一些本人阅读过程中零散的，思考的点，并不详尽。
+</code></pre>
+<h2 id="关于堆"><a href="#关于堆" class="headerlink" title="关于堆"></a>关于堆</h2><p>注意到堆自底向上的构建和插入上浮的构建时间复杂度是不同的，前者是O(n),后者是O(nlogn),这是一个比较有意思的点，<br>这是因为对于下沉来说，绝大多数的节点只需要少量的调整(因为叶子节点占据大多数)而上浮则会随着深度的增加，开销越来越大，在用一个与期望二叉堆的性质反序的数组插入构建二叉堆时，最坏的情况就会达到O(nlogn) </p>
+<p>从另一个角度分析–自底向上的构建利用了完全二叉树“底层节点多、顶层节点少”这一几何铁律。<br>无论数据怎么乱，它都强制每个节点只在它的子树范围内活动。因为大部分节点的子树都很矮（甚至没有），所以大部分工作都很轻量。而插入法构建受输入数据的影响是很大的。</p>
+<h2 id="关于归并排序"><a href="#关于归并排序" class="headerlink" title="关于归并排序"></a>关于归并排序</h2><p> 从这一算法中我一定程度上理解了利用递归树求和分析时间复杂度的技巧。</p>
+
       
     </div>
 
