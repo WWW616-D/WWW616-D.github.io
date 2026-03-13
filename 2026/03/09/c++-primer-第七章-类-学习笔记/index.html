@@ -20,13 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。  7.1： 在考虑用函数">
+<meta property="og:type" content="article">
 <meta property="og:title" content="c++ primer 第七章-类_学习笔记">
 <meta property="og:url" content="http://example.com/2026/03/09/c++-primer-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%B1%BB-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。  7.1： 在考虑用函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-09T09:16:12.000Z">
-<meta property="article:modified_time" content="2026-03-09T09:16:12.858Z">
+<meta property="article:modified_time" content="2026-03-13T01:23:59.565Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -106,7 +108,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -119,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">7.1：</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -190,6 +193,13 @@
 
       <time title="Created: 2026-03-09 17:16:12" itemprop="dateCreated datePublished" datetime="2026-03-09T17:16:12+08:00">2026-03-09</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-13 09:23:59" itemprop="dateModified" datetime="2026-03-13T09:23:59+08:00">2026-03-13</time>
+    </span>
 
   
 </div>
@@ -200,7 +210,48 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><style>
+p {
+  text-indent: 2em;  /* 段落首行缩进2个字符 */
+  margin: 0.5em 0;   /* 调整段落间距 */
+}
+li {
+  text-indent: 2em;  /* 列表项缩进1个字符 */
+  margin: 0.3em 0;   /* 列表项间距 */
+}
+</style>
+<pre><code>这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。
+</code></pre>
+<h2 id="7-1："><a href="#7-1：" class="headerlink" title="7.1："></a>7.1：</h2><ul>
+<li>在考虑用函数模拟运算符重载时，将*this作为返回值可以达成链式调用的目的。</li>
+<li>istream和ostream是两种类类型，平时使用cout和cin都是其中的类，它们实现的输入和输出操作只是运算符重载的结果。输入和输出操作会对它们造成一些状态上的改变</li>
+<li>使用列表法的构造函数可以避开类内部成员的初始化，以提高程序的效率。</li>
+<li>::运算符和我之前想的不太一样，不只是命名空间作用域的符号，还可以用来访问类中的特定类型，别名，静态变量，比如以下代码</li>
+</ul>
+<pre><code>class MyClass {
+public:
+ // 在类内部定义类型别名
+ using size_type = unsigned long;  // 类型别名
+ typedef int my_int;                // 另一种语法
+ 
+ // 静态成员
+ static const int VALUE = 100;
+ 
+private:
+ size_type length;  // 在类内部可以直接用
+};
+
+int main() {
+ // 在类外部需要用 :: 访问
+ MyClass::size_type s = 10;      
+ MyClass::my_int i = 20;         
+ int x = MyClass::VALUE;          
+ std::string::size_type len = std::string(&quot;hello&quot;).size();
+ 
+ return 0;
+}
+</code></pre>
+
     </div>
 
     
@@ -218,6 +269,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/03/13/W%E7%9A%84%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="W的算法导论学习笔记">
+                  W的算法导论学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
