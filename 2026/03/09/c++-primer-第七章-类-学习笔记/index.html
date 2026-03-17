@@ -28,7 +28,7 @@
 <meta property="og:description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。  7.1： 在考虑用函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-09T09:16:12.000Z">
-<meta property="article:modified_time" content="2026-03-13T01:23:59.565Z">
+<meta property="article:modified_time" content="2026-03-16T14:26:09.673Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -198,7 +198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-13 09:23:59" itemprop="dateModified" datetime="2026-03-13T09:23:59+08:00">2026-03-13</time>
+      <time title="Modified: 2026-03-16 22:26:09" itemprop="dateModified" datetime="2026-03-16T22:26:09+08:00">2026-03-16</time>
     </span>
 
   
@@ -228,29 +228,10 @@ li {
 <li>使用列表法的构造函数可以避开类内部成员的初始化，以提高程序的效率。</li>
 <li>::运算符和我之前想的不太一样，不只是命名空间作用域的符号，还可以用来访问类中的特定类型，别名，静态变量，比如以下代码</li>
 </ul>
-<pre><code>class MyClass {
-public:
- // 在类内部定义类型别名
- using size_type = unsigned long;  // 类型别名
- typedef int my_int;                // 另一种语法
- 
- // 静态成员
- static const int VALUE = 100;
- 
-private:
- size_type length;  // 在类内部可以直接用
-};
-
-int main() {
- // 在类外部需要用 :: 访问
- MyClass::size_type s = 10;      
- MyClass::my_int i = 20;         
- int x = MyClass::VALUE;          
- std::string::size_type len = std::string(&quot;hello&quot;).size();
- 
- return 0;
-}
-</code></pre>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   class MyClass &#123;</span><br><span class="line">public:</span><br><span class="line">    // 在类内部定义类型别名</span><br><span class="line">    using size_type = unsigned long;  // 类型别名</span><br><span class="line">    typedef int my_int;                // 另一种语法</span><br><span class="line">    </span><br><span class="line">    // 静态成员</span><br><span class="line">    static const int VALUE = 100;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    size_type length;  // 在类内部可以直接用</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    // 在类外部需要用 :: 访问</span><br><span class="line">    MyClass::size_type s = 10;      </span><br><span class="line">    MyClass::my_int i = 20;         </span><br><span class="line">    int x = MyClass::VALUE;          </span><br><span class="line">    std::string::size_type len = std::string(&quot;hello&quot;).size();</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>const 和mutable是编译期的概念，不会在后续汇编代码中体现。</li>
+</ul>
 
     </div>
 
