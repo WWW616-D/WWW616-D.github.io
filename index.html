@@ -346,7 +346,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-16 22:26:09" itemprop="dateModified" datetime="2026-03-16T22:26:09+08:00">2026-03-16</time>
+      <time title="Modified: 2026-03-18 19:36:11" itemprop="dateModified" datetime="2026-03-18T19:36:11+08:00">2026-03-18</time>
     </span>
 
   
@@ -381,6 +381,14 @@ li {
 <ul>
 <li>const 和mutable是编译期的概念，不会在后续汇编代码中体现。</li>
 </ul>
+<h2 id="7-3"><a href="#7-3" class="headerlink" title="7.3"></a>7.3</h2><p>友元类是你声明后对方可以访问你的数据，这有一点点单向讨好的意思在(?)大概就是，你无权决定对方是否给你访问只能决定你自己给谁访问。</p>
+<p>  也可以只给某个类的成员函数访问权限，但这样操作的定义声明顺序狠严苛。如果要对对方类的一组重载函数提供友元声明，那么每一个都要给。</p>
+<p>   <small>小贴士:友元声明不一定是真的声明</small></p>
+<h2 id="7-4"><a href="#7-4" class="headerlink" title="7.4"></a>7.4</h2><p>类在查找名字时表现的相当智能，会优先使用自己类内声明定义的内容，不分上下。</p>
+<p>函数得到的参数可能会隐藏类成员内部的参数，这种时候可以考虑用this指针表达，但最好别出现这种情况。初始化列表就不会混淆它们</p>
+<p>  函数查名顺序:内部-&gt;所属类-&gt;外部作用域</p>
+<h2 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h2><p>如果类成员是const或者引用之类的，必须使用构造函数初始化列表进行赋值  </p>
+<p>   类成员的初始化顺序与其在声明顺序一致</p>
 
       
     </div>
