@@ -28,7 +28,7 @@
 <meta property="og:description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。  7.1： 在考虑用函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-09T09:16:12.000Z">
-<meta property="article:modified_time" content="2026-03-18T11:36:11.260Z">
+<meta property="article:modified_time" content="2026-03-19T14:44:23.186Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -198,7 +198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-18 19:36:11" itemprop="dateModified" datetime="2026-03-18T19:36:11+08:00">2026-03-18</time>
+      <time title="Modified: 2026-03-19 22:44:23" itemprop="dateModified" datetime="2026-03-19T22:44:23+08:00">2026-03-19</time>
     </span>
 
   
@@ -239,7 +239,10 @@ li {
 <p>函数得到的参数可能会隐藏类成员内部的参数，这种时候可以考虑用this指针表达，但最好别出现这种情况。初始化列表就不会混淆它们</p>
 <p>  函数查名顺序:内部-&gt;所属类-&gt;外部作用域</p>
 <h2 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h2><p>如果类成员是const或者引用之类的，必须使用构造函数初始化列表进行赋值  </p>
-<p>   类成员的初始化顺序与其在声明顺序一致</p>
+<p>   类成员的初始化顺序与其在声明顺序一致  </p>
+<p>   在函数声明前面加上explicit可以防止一些隐式转换，是一个好的编程习惯，单参数的构造函数都建议这么做。</p>
+<p>   可以用static申请类的静态成员，但必须在类外初始化，并最好使用::访问它(因为它属于这个类而不是某个对象)
+  </p>
 
     </div>
 
