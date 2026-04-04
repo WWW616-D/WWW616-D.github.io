@@ -512,7 +512,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-19 22:44:23" itemprop="dateModified" datetime="2026-03-19T22:44:23+08:00">2026-03-19</time>
+      <time title="Modified: 2026-04-04 10:20:52" itemprop="dateModified" datetime="2026-04-04T10:20:52+08:00">2026-04-04</time>
     </span>
 
   
@@ -535,9 +535,9 @@ li {
   margin: 0.3em 0;   /* 列表项间距 */
 }
 </style>
-<pre><code>这篇博客会记录一些我在阅读这一章节时一些自认为值得在意的点。
+<pre><code>这篇博客会记录一些我在阅读这本书时一些自认为值得在意的点。
 </code></pre>
-<h2 id="7-1："><a href="#7-1：" class="headerlink" title="7.1："></a>7.1：</h2><ul>
+<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><h2 id="7-1："><a href="#7-1：" class="headerlink" title="7.1："></a>7.1：</h2><ul>
 <li>在考虑用函数模拟运算符重载时，将*this作为返回值可以达成链式调用的目的。</li>
 <li>istream和ostream是两种类类型，平时使用cout和cin都是其中的类，它们实现的输入和输出操作只是运算符重载的结果。输入和输出操作会对它们造成一些状态上的改变</li>
 <li>使用列表法的构造函数可以避开类内部成员的初始化，以提高程序的效率。</li>
@@ -556,8 +556,13 @@ li {
 <h2 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h2><p>如果类成员是const或者引用之类的，必须使用构造函数初始化列表进行赋值  </p>
 <p>   类成员的初始化顺序与其在声明顺序一致  </p>
 <p>   在函数声明前面加上explicit可以防止一些隐式转换，是一个好的编程习惯，单参数的构造函数都建议这么做。</p>
-<p>   可以用static申请类的静态成员，但必须在类外初始化，并最好使用::访问它(因为它属于这个类而不是某个对象)
-  </p>
+<p>   可以用static申请类的静态成员，但必须在类外初始化，并最好使用::访问它(因为它属于这个类而不是某个对象)</p>
+<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><pre><code>io对象将所有数据源与数据输出都抽象成了一些字节序列(流)，它们是功能完备的类。cin和cout是一个初始化好的全局类变量  
+</code></pre>
+<h2 id="something"><a href="#something" class="headerlink" title="something"></a>something</h2><p>使用cin时会刷新cout的缓冲区，因为它们互相关联，可以用.tie成员函数更改关系</p>
+<h4 id="一个效率上的优化提升"><a href="#一个效率上的优化提升" class="headerlink" title="一个效率上的优化提升"></a>一个效率上的优化提升</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(nullptr);</span><br></pre></td></tr></table></figure>
+<p>这个内容关闭了c++标准流和c标准流的同步同时取消了cin和cout的链接</p>
+<p><small>vector中emplace_back的效率比push_back更高哦(下次给这句换个地方)<small></p>
 
       
     </div>
