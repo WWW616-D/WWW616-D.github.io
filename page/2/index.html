@@ -20,26 +20,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="&lt;p {  text-indent: 2em;  margin: 0.8em 0;  line-height: 1.6;}h2 {  margin-top: 1.5em;  border-left: 4px solid #42b983;  padding-left: 10px;  color: #0056b3;}strong {  color: #e96900;  font-weight:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于trie树和线段树和线索二叉树的学习">
-<meta property="og:url" content="http://example.com/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="&lt;p {  text-indent: 2em;  margin: 0.8em 0;  line-height: 1.6;}h2 {  margin-top: 1.5em;  border-left: 4px solid #42b983;  padding-left: 10px;  color: #0056b3;}strong {  color: #e96900;  font-weight:">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-03-03T14:02:49.000Z">
-<meta property="article:modified_time" content="2026-03-29T02:39:47.154Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="http://example.com/page/2/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/","path":"2026/03/03/关于trie树和线段树的学习/","title":"关于trie树和线段树和线索二叉树的学习"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>关于trie树和线段树和线索二叉树的学习 | Hexo</title>
+<title>Hexo</title>
   
 
 
@@ -86,7 +82,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
+      <h1 class="site-title">Hexo</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -108,7 +104,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -121,7 +117,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Etrie%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">关于trie树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">关于线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">关于线索二叉树</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,18 +146,17 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-expand">
 
-
-  
+    
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/23/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -175,13 +169,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="关于trie树和线段树和线索二叉树的学习 | Hexo">
+      <meta itemprop="name" content=" | Hexo">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          关于trie树和线段树和线索二叉树的学习
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/02/23/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -191,14 +185,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2026-03-03 22:02:49" itemprop="dateCreated datePublished" datetime="2026-03-03T22:02:49+08:00">2026-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-29 10:39:47" itemprop="dateModified" datetime="2026-03-29T10:39:47+08:00">2026-03-29</time>
+      <time title="Created: 2026-02-23 00:23:56" itemprop="dateCreated datePublished" datetime="2026-02-23T00:23:56+08:00">2026-02-23</time>
     </span>
 
   
@@ -210,11 +197,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>&lt;<style><br>p {<br>  text-indent: 2em;<br>  margin: 0.8em 0;<br>  line-height: 1.6;<br>}<br>h2 {<br>  margin-top: 1.5em;<br>  border-left: 4px solid #42b983;<br>  padding-left: 10px;<br>  color: #0056b3;<br>}<br>strong {<br>  color: #e96900;<br>  font-weight: bold;<br>}<br>blockquote {<br>  background-color: #f6f8fa;<br>  border-left: 4px solid #dfe2e5;<br>  padding: 0.5em 1em;<br>  color: #586069;<br>  margin: 1em 0;<br>}<br></style></p>
-<h2 id="关于trie树"><a href="#关于trie树" class="headerlink" title="关于trie树"></a>关于trie树</h2><p>我今天学习了最基础的trie树，他让我理解了日常打字中后续的<strong>联想生成内容</strong>的部分逻辑，但背后应该还涉及了许多概率，权重和个性化之类的复杂涉及。只从今天学习的基本内容看，它对内存的开销不太理想，日后可能我会接触学习更好的树。</p>
-<h2 id="关于线段树"><a href="#关于线段树" class="headerlink" title="关于线段树"></a>关于线段树</h2><p>它的懒惰标记很精妙，初读时怀疑过对于一个区间标记懒惰后怎么区分懒惰到底要传多少给下一代，后来再详细阅读才发现只有<strong>完全囊括</strong>的区间才会被加上懒惰标记，这种办法也是线段树平均logn时间开销的核心。</p>
-<h2 id="关于线索二叉树"><a href="#关于线索二叉树" class="headerlink" title="关于线索二叉树"></a>关于线索二叉树</h2><p>它巧妙的严格运用中序遍历的顺序实现了线索的插入，产生了可以使用简单循环进行遍历的结果。</p>
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
     </div>
 
     
@@ -222,21 +220,8 @@
     
 
     <footer class="post-footer">
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2026/03/02/%E5%85%B3%E4%BA%8E%E4%BB%8A%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E7%82%B9%E5%86%85%E5%AE%B9-%E7%BA%A2%E9%BB%91%E6%A0%91%E4%B8%8Econspexpr/" rel="prev" title="关于今天学习的一点内容:红黑树与constexpr">
-                  <i class="fa fa-angle-left"></i> 关于今天学习的一点内容:红黑树与constexpr
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2026/03/09/W%E7%9A%84c++primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="c++ primer 第七章-类_学习笔记">
-                  c++ primer 第七章-类_学习笔记 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -244,7 +229,9 @@
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </div>
   </main>
