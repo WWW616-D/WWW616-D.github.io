@@ -28,7 +28,7 @@
 <meta property="og:description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这本书时一些自认为值得在意的点。  第七章7.1： 在考虑用">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-09T09:16:12.000Z">
-<meta property="article:modified_time" content="2026-04-22T01:08:41.959Z">
+<meta property="article:modified_time" content="2026-05-06T00:38:46.757Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -198,7 +198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-04-22 09:08:41" itemprop="dateModified" datetime="2026-04-22T09:08:41+08:00">2026-04-22</time>
+      <time title="Modified: 2026-05-06 08:38:46" itemprop="dateModified" datetime="2026-05-06T08:38:46+08:00">2026-05-06</time>
     </span>
 
   
@@ -242,7 +242,7 @@ li {
 <p>   类成员的初始化顺序与其在声明顺序一致  </p>
 <p>   在函数声明前面加上explicit可以防止一些隐式转换，是一个好的编程习惯，单参数的构造函数都建议这么做。</p>
 <p>   可以用static申请类的静态成员，但必须在类外初始化，并最好使用::访问它(因为它属于这个类而不是某个对象)</p>
-<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><pre><code>io对象将所有数据源与数据输出都抽象成了一些字节序列(流)，它们是功能完备的类。cin和cout是一个初始化好的全局类变量  
+<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><pre><code>io对象将所有数据源与数据输出都抽象成了一些字节序列(流)，它们是功能完备的类。cin和cout是一个初始化好的全局类变量,io对象没有拷贝或者赋值  
 </code></pre>
 <h2 id="something"><a href="#something" class="headerlink" title="something"></a>something</h2><p>使用cin时会刷新cout的缓冲区，因为它们互相关联，可以用.tie成员函数更改关系</p>
 <h4 id="一个效率上的优化提升"><a href="#一个效率上的优化提升" class="headerlink" title="一个效率上的优化提升"></a>一个效率上的优化提升</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(nullptr);</span><br></pre></td></tr></table></figure>
@@ -253,7 +253,8 @@ li {
 <p>  swap不交换元素本身只是交换了两个容器的内部数据结构，于是保证在常数时间内完成,string的短对象分配在对象上而不是堆，于是swap后有迭代器失效的可能。</p>
 <h1 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h1><p>迭代器令算法不依赖于容器,但算法依赖于元素类型的操作</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count=<span class="built_in">count</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>(),<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
-<p>算法不检查写入操作,于是我们使用back_inserter</p>
+<p>算法不检查写入操作,于是我们使用back_inserter  </p>
+<p>lambda表达式是一个很方便的操作，解决了需要调用小函数的时候要反复去管定义声明的问题同时功能更加强大。同时他的抽象也是零成本的</p>
 
     </div>
 
