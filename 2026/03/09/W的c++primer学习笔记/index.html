@@ -28,7 +28,7 @@
 <meta property="og:description" content="p {   text-indent: 2em;  &#x2F;* 段落首行缩进2个字符 *&#x2F;   margin: 0.5em 0;   &#x2F;* 调整段落间距 *&#x2F; } li {   text-indent: 2em;  &#x2F;* 列表项缩进1个字符 *&#x2F;   margin: 0.3em 0;   &#x2F;* 列表项间距 *&#x2F; }  这篇博客会记录一些我在阅读这本书时一些自认为值得在意的点。  第七章7.1： 在考虑用">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-09T09:16:12.000Z">
-<meta property="article:modified_time" content="2026-05-06T00:38:46.757Z">
+<meta property="article:modified_time" content="2026-05-06T01:13:16.701Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -198,7 +198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-06 08:38:46" itemprop="dateModified" datetime="2026-05-06T08:38:46+08:00">2026-05-06</time>
+      <time title="Modified: 2026-05-06 09:13:16" itemprop="dateModified" datetime="2026-05-06T09:13:16+08:00">2026-05-06</time>
     </span>
 
   
@@ -255,7 +255,8 @@ li {
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count=<span class="built_in">count</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>(),<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
 <p>算法不检查写入操作,于是我们使用back_inserter  </p>
 <p>lambda表达式是一个很方便的操作，解决了需要调用小函数的时候要反复去管定义声明的问题同时功能更加强大。同时他的抽象也是零成本的</p>
-
+<p>用流迭代器接入算法或者容器，可以将流标准化让算法或者容器不关心数据来自哪里，是很方便的输入手段</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream <span class="title function_">infile</span><span class="params">(<span class="string">&quot;numbers.txt&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (!infile) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;无法打开文件读取\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 用 istream_iterator 读取所有整数</span></span><br><span class="line"><span class="built_in">std</span>::istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in_it</span><span class="params">(infile)</span>, eof;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">read_data</span><span class="params">(in_it, eof)</span>;  <span class="comment">// 一步到位，构造时读取</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
