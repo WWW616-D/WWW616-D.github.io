@@ -336,7 +336,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-03 23:22:52" itemprop="dateModified" datetime="2026-05-03T23:22:52+08:00">2026-05-03</time>
+      <time title="Modified: 2026-05-21 23:44:53" itemprop="dateModified" datetime="2026-05-21T23:44:53+08:00">2026-05-21</time>
     </span>
 
   
@@ -360,6 +360,8 @@
 <h2 id="关于梯度下降"><a href="#关于梯度下降" class="headerlink" title="关于梯度下降"></a>关于梯度下降</h2><p>梯度就只是描述陡峭的程度，跟步长大小没有没有直接的几何意义联系，只起到指导作用</p>
 <h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>把输出分词，从前往后(递增)通过一个矩阵好多好多好多好多次叠加，但这不能并行计算而且容易梯度爆炸</p>
 <h2 id="一个很有意思的现象"><a href="#一个很有意思的现象" class="headerlink" title="一个很有意思的现象"></a>一个很有意思的现象</h2><p>在高维空间中，两个随机单位向量的点积<br>p<br>p 的分布，近似为一个均值为 0、方差为<br>1<br>&#x2F;<br>d<br>的正态分布。这导致了近似正交向量的数目随着维数加大呈现指数级变大，于是高维空间中的语义变得无比丰富</p>
+<h2 id="关于核方法-机器学习领域"><a href="#关于核方法-机器学习领域" class="headerlink" title="关于核方法(机器学习领域)"></a>关于核方法<small>(机器学习领域)</small></h2><p>寻找一个函数，使得这个函数对两个低维向量的运算结果可以等价于在某个高维空间中的内积。从而估计样本的相似度。</p>
+<h2 id="关于流形"><a href="#关于流形" class="headerlink" title="关于流形"></a>关于流形</h2><p>它的局部可能是低维空间但散布在高维空间上。人类那些复杂的数据如图片文本等可以近似看作大量流形处理，通过降维展开流形获取信息<br>emmmm,我认为流形假设是有一定道理的但是现在的神经网络没法正确的和流形拟合，只在宏观统计上达成了高度相关性，没有获取真正的几何特征。因为这一点所以对抗性扰动可以找到某个方向突破机器学习到的某个流形的界域。受高纬度方向可能性爆炸的恩惠,对抗性扰动这样的错误不会发生在正常的样本判断中.</p>
 
       
     </div>
@@ -506,7 +508,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-04-07 23:30:09" itemprop="dateModified" datetime="2026-04-07T23:30:09+08:00">2026-04-07</time>
+      <time title="Modified: 2026-05-13 23:12:05" itemprop="dateModified" datetime="2026-05-13T23:12:05+08:00">2026-05-13</time>
     </span>
 
   
@@ -527,7 +529,8 @@
 <p>  把乘法看作行列向量点积会做的快些  </p>
 <h2 id="一点额外的"><a href="#一点额外的" class="headerlink" title="一点额外的"></a>一点额外的</h2><p>  我必须告诉你的是,(XTX)<small>i j</small>是X的i特征和j特征的点积.数值越大，特征i和特征j在样本上“同向变化”的趋势越强。也就是它们的线性相关性。在几何上也可以描述基向量的长度和家教。</p>
 <p>统计学中往往行是样本，列是特征，XXT的每一个位置是样本i和样本j的点积，这个大小可以反映出样本之间的相似度，在几何上，他还可以用来计算在某个方向向量上所有列向量的投影平方和。因此 XXT 的较大特征值对应的特征向量，就是基向量集合整体延伸的主要方向。</p>
-<p>  要多关注点积在描述向量相关性方面的想法，useful<br>  我学不会线性代数</p>
+<p>  要多关注点积在描述向量相关性方面的想法，useful</p>
+<h2 id="拉格朗日"><a href="#拉格朗日" class="headerlink" title="拉格朗日"></a>拉格朗日</h2><p> 想象等高线和切出的曲线，相切，所以平行，所以梯度为0。<br>  我学不会线性代数</p>
 
       
     </div>
@@ -753,7 +756,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-06 09:13:16" itemprop="dateModified" datetime="2026-05-06T09:13:16+08:00">2026-05-06</time>
+      <time title="Modified: 2026-05-08 09:51:52" itemprop="dateModified" datetime="2026-05-08T09:51:52+08:00">2026-05-08</time>
     </span>
 
   
@@ -812,7 +815,7 @@ li {
 <p>算法不检查写入操作,于是我们使用back_inserter  </p>
 <p>lambda表达式是一个很方便的操作，解决了需要调用小函数的时候要反复去管定义声明的问题同时功能更加强大。同时他的抽象也是零成本的</p>
 <p>用流迭代器接入算法或者容器，可以将流标准化让算法或者容器不关心数据来自哪里，是很方便的输入手段</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream <span class="title function_">infile</span><span class="params">(<span class="string">&quot;numbers.txt&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (!infile) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;无法打开文件读取\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 用 istream_iterator 读取所有整数</span></span><br><span class="line"><span class="built_in">std</span>::istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in_it</span><span class="params">(infile)</span>, eof;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">read_data</span><span class="params">(in_it, eof)</span>;  <span class="comment">// 一步到位，构造时读取</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream <span class="title function_">infile</span><span class="params">(<span class="string">&quot;numbers.txt&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (!infile) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;无法打开文件读取\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 用 istream_iterator 读取所有整数</span></span><br><span class="line"><span class="built_in">std</span>::istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in_it</span><span class="params">(infile)</span>, eof;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">read_data</span><span class="params">(in_it, eof)</span>;  <span class="comment">// 一步到位，构造时读取</span></span><br><span class="line"></span><br><span class="line">istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in</span><span class="params">(<span class="built_in">cin</span>)</span>,eof;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; accumulate(in,eof,<span class="number">0</span>)&lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
       
     </div>
 
