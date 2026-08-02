@@ -174,7 +174,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/08/02/About-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks/" class="post-title-link" itemprop="url">���� "DeepFool: a simple and accurate method to fool deep neural networks"</a>
+          <a href="/2026/08/02/About-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks/" class="post-title-link" itemprop="url">关于 "DeepFool: a simple and accurate method to fool deep neural networks"</a>
         </h2>
 
         <div class="post-meta-container">
@@ -186,7 +186,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-08-02 17:12:01 / Modified: 22:14:59" itemprop="dateCreated datePublished" datetime="2026-08-02T17:12:01+08:00">2026-08-02</time>
+      <time title="Created: 2026-08-02 17:12:01 / Modified: 22:21:21" itemprop="dateCreated datePublished" datetime="2026-08-02T17:12:01+08:00">2026-08-02</time>
     </span>
 
   
@@ -199,35 +199,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="�K���������"><a href="#�K���������" class="headerlink" title="�Ķ���������"></a>�Ķ���������</h2><p>Ŀ������֤����ģ�ͶԶԿ����Ŷ��Ŀ��ԣ�    </p>
-<p>������Ҫһ�ָ��õ������Ŷ��ķ�����������������׼ȷ�Ժ������Ժ�Ч��</p>
-<p>���ַ�������ȥѰ�Ҿ��߽߱磬Ȼ���ҵ���������߽߱�Ĵ�ֱ����  </p>
-<p>����任 &#x3D; ���Ա任 + ƽ��</p>
-<p>���߽������ߵ�ʱ����Ϊ���·�߻������ߣ����ǲ��ϵ���ȡ���߷�������</p>
+          <h2 id="阅读过程碎语"><a href="#阅读过程碎语" class="headerlink" title="阅读过程碎语"></a>阅读过程碎语</h2><p>目的是验证评估模型对对抗性扰动的抗性？    </p>
+<p>所以需要一种更好的生成扰动的方法，这个方法兼顾了准确性和最优性和效率</p>
+<p>这种方法尝试去寻找决策边界，然后找到样本与决策边界的垂直方向。  </p>
+<p>仿射变换 &#x3D; 线性变换 + 平移</p>
+<p>当边界是曲线的时候，认为最短路线会是曲线，于是不断迭代取切线方向行走</p>
 <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>�ڶԿ��Ŷ�ͨ���߹�������С·���ϣ��������ľ��ߺ������ֳ����˵ľֲ�����</small></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>在对抗扰动通常走过的这条小路径上，深度网络的决策函数表现出惊人的局部线性</small></p>
 </blockquote>
-<p>  �Կ������������Ծֲ�����������</p>
-<p>���ڶ�������⣬Ѱ�ұ߽�������࣬��Ѱ��������С�Ŷ�</p>
-<p>  �ѵ�ǰλ�����Ի��������ݶȼ����Ŷ��仯�����ݱ仯�����������ʽ��  </p>
-<h1 id="DeepFool-���L�ʽ"><a href="#DeepFool-���L�ʽ" class="headerlink" title="DeepFool ���Ĺ�ʽ"></a>DeepFool ���Ĺ�ʽ</h1><h2 id="��ʽ-8-����-Ѱ������߽�"><a href="#��ʽ-8-����-Ѱ������߽�" class="headerlink" title="��ʽ(8) ���� Ѱ������߽�"></a>��ʽ(8) ���� Ѱ������߽�</h2><p>$$<br>\hat{l}(\mathbf{x}_0) &#x3D; \underset{k \neq \hat{k}(\mathbf{x}_0)}{\arg\min} \frac{|f_k(\mathbf{x}<em>0) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_0)|}{|\mathbf{w}<em>k - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)}|_2}<br>$$</p>
-<h2 id="��ʽ-9-����-��ֱͶӰ�Y�"><a href="#��ʽ-9-����-��ֱͶӰ�Y�" class="headerlink" title="��ʽ(9) ���� ��ֱͶӰ�Ŷ�"></a>��ʽ(9) ���� ��ֱͶӰ�Ŷ�</h2><p>$$<br>\mathbf{r}_*(\mathbf{x}<em>0) &#x3D; \frac{|f</em>{\hat{l}(\mathbf{x}_0)}(\mathbf{x}<em>0) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}<em>0)|}{|\mathbf{w}</em>{\hat{l}(\mathbf{x}<em>0)} - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)}|<em>2^2} (\mathbf{w}</em>{\hat{l}(\mathbf{x}<em>0)} - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)})<br>$$</p>
-<h2 id="��ʽ-15-����-o��ƽ��³����"><a href="#��ʽ-15-����-o��ƽ��³����" class="headerlink" title="��ʽ(15) ���� ȫ��ƽ��³����"></a>��ʽ(15) ���� ȫ��ƽ��³����</h2><p>$$<br>\hat{\rho}<em>{\mathrm{adv}}(f) &#x3D; \frac{1}{|\mathcal{D}|} \sum</em>{\mathbf{x} \in \mathcal{D}} \frac{|\hat{\mathbf{r}}(\mathbf{x})|_2}{|\mathbf{x}|_2}<br>$$</p>
-<h2 id="�����Զ����-����-�ֲ����Ի������壨��ʽ10��"><a href="#�����Զ����-����-�ֲ����Ի������壨��ʽ10��" class="headerlink" title="�����Զ���� ���� �ֲ����Ի������壨��ʽ10��"></a>�����Զ���� ���� �ֲ����Ի������壨��ʽ10��</h2><p>$$<br>\hat{P}<em>i &#x3D; \bigcap</em>{k&#x3D;1}^c \left{ \mathbf{x} : f_k(\mathbf{x}<em>i) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i) + \nabla f_k(\mathbf{x}<em>i)^\top \mathbf{x} - \nabla f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i)^\top \mathbf{x} \leq 0 \right}<br>$$</p>
+<p>  对抗样本往往来自局部线性敏感性</p>
+<p>对于多分类问题，寻找边界最近的类，再寻求对其的最小扰动</p>
+<p>  把当前位置线性化？根据梯度计算扰动变化，根据变化后相等联立等式，  </p>
+<h1 id="DeepFool-核心公式"><a href="#DeepFool-核心公式" class="headerlink" title="DeepFool 核心公式"></a>DeepFool 核心公式</h1><h2 id="公式-8-——-寻找最近边界"><a href="#公式-8-——-寻找最近边界" class="headerlink" title="公式(8) —— 寻找最近边界"></a>公式(8) —— 寻找最近边界</h2><p>$$<br>\hat{l}(\mathbf{x}_0) &#x3D; \underset{k \neq \hat{k}(\mathbf{x}_0)}{\arg\min} \frac{|f_k(\mathbf{x}<em>0) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_0)|}{|\mathbf{w}<em>k - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)}|_2}<br>$$</p>
+<h2 id="公式-9-——-垂直投影扰动"><a href="#公式-9-——-垂直投影扰动" class="headerlink" title="公式(9) —— 垂直投影扰动"></a>公式(9) —— 垂直投影扰动</h2><p>$$<br>\mathbf{r}_*(\mathbf{x}<em>0) &#x3D; \frac{|f</em>{\hat{l}(\mathbf{x}_0)}(\mathbf{x}<em>0) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}<em>0)|}{|\mathbf{w}</em>{\hat{l}(\mathbf{x}<em>0)} - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)}|<em>2^2} (\mathbf{w}</em>{\hat{l}(\mathbf{x}<em>0)} - \mathbf{w}</em>{\hat{k}(\mathbf{x}_0)})<br>$$</p>
+<h2 id="公式-15-——-全局平均鲁棒性"><a href="#公式-15-——-全局平均鲁棒性" class="headerlink" title="公式(15) —— 全局平均鲁棒性"></a>公式(15) —— 全局平均鲁棒性</h2><p>$$<br>\hat{\rho}<em>{\mathrm{adv}}(f) &#x3D; \frac{1}{|\mathcal{D}|} \sum</em>{\mathbf{x} \in \mathcal{D}} \frac{|\hat{\mathbf{r}}(\mathbf{x})|_2}{|\mathbf{x}|_2}<br>$$</p>
+<h2 id="非线性多分类-——-局部线性化多面体（公式10）"><a href="#非线性多分类-——-局部线性化多面体（公式10）" class="headerlink" title="非线性多分类 —— 局部线性化多面体（公式10）"></a>非线性多分类 —— 局部线性化多面体（公式10）</h2><p>$$<br>\hat{P}<em>i &#x3D; \bigcap</em>{k&#x3D;1}^c \left{ \mathbf{x} : f_k(\mathbf{x}<em>i) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i) + \nabla f_k(\mathbf{x}<em>i)^\top \mathbf{x} - \nabla f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i)^\top \mathbf{x} \leq 0 \right}<br>$$</p>
 <hr>
-<h2 id="�㷨2�еlֲ��������壨�����Զ����y�����㣩"><a href="#�㷨2�еlֲ��������壨�����Զ����y�����㣩" class="headerlink" title="�㷨2�еľֲ��������壨�����Զ����ÿ�����㣩"></a>�㷨2�еľֲ��������壨�����Զ����ÿ�����㣩</h2><p>��ÿ����� (k \neq \hat{k}(\mathbf{x}_0))���ڵ�ǰ�� (\mathbf{x}_i) �����Ի���</p>
+<h2 id="算法2中的局部变量定义（非线性多分类每步计算）"><a href="#算法2中的局部变量定义（非线性多分类每步计算）" class="headerlink" title="算法2中的局部变量定义（非线性多分类每步计算）"></a>算法2中的局部变量定义（非线性多分类每步计算）</h2><p>对每个类别 (k \neq \hat{k}(\mathbf{x}_0))，在当前点 (\mathbf{x}_i) 处线性化后：</p>
 <p>$$<br>f_k’ &#x3D; f_k(\mathbf{x}<em>i) - f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i)<br>$$</p>
 <p>$$<br>\mathbf{w}_k’ &#x3D; \nabla f_k(\mathbf{x}<em>i) - \nabla f</em>{\hat{k}(\mathbf{x}_0)}(\mathbf{x}_i)<br>$$</p>
 <hr>
-<h2 id="����߽�������������԰汾����Ӧ��ʽ8����չ��"><a href="#����߽�������������԰汾����Ӧ��ʽ8����չ��" class="headerlink" title="����߽�������������԰汾����Ӧ��ʽ8����չ��"></a>����߽�������������԰汾����Ӧ��ʽ8����չ��</h2><p>$$<br>\hat{l} &#x3D; \arg\min_{k \neq \hat{k}(\mathbf{x}_0)} \frac{|f_k’|}{|\mathbf{w}_k’|_2}<br>$$</p>
+<h2 id="最近边界的索引（非线性版本，对应公式8的扩展）"><a href="#最近边界的索引（非线性版本，对应公式8的扩展）" class="headerlink" title="最近边界的索引（非线性版本，对应公式8的扩展）"></a>最近边界的索引（非线性版本，对应公式8的扩展）</h2><p>$$<br>\hat{l} &#x3D; \arg\min_{k \neq \hat{k}(\mathbf{x}_0)} \frac{|f_k’|}{|\mathbf{w}_k’|_2}<br>$$</p>
 <hr>
-<h2 id="y�����Y����£������԰汾����Ӧ��ʽ9����չ��"><a href="#y�����Y����£������԰汾����Ӧ��ʽ9����չ��" class="headerlink" title="ÿ�����Ŷ����£������԰汾����Ӧ��ʽ9����չ��"></a>ÿ�����Ŷ����£������԰汾����Ӧ��ʽ9����չ��</h2><p>$$<br>\mathbf{r}<em>i &#x3D; \frac{|f</em>{\hat{l}}’|}{|\mathbf{w}_{\hat{l}}’|<em>2^2} , \mathbf{w}</em>{\hat{l}}’<br>$$</p>
+<h2 id="每步的扰动更新（非线性版本，对应公式9的扩展）"><a href="#每步的扰动更新（非线性版本，对应公式9的扩展）" class="headerlink" title="每步的扰动更新（非线性版本，对应公式9的扩展）"></a>每步的扰动更新（非线性版本，对应公式9的扩展）</h2><p>$$<br>\mathbf{r}<em>i &#x3D; \frac{|f</em>{\hat{l}}’|}{|\mathbf{w}_{\hat{l}}’|<em>2^2} , \mathbf{w}</em>{\hat{l}}’<br>$$</p>
 <hr>
-<h2 id="λ�o���"><a href="#λ�o���" class="headerlink" title="λ�ø���"></a>λ�ø���</h2><p>$$<br>\mathbf{x}_{i+1} &#x3D; \mathbf{x}_i + \mathbf{r}_i<br>$$</p>
+<h2 id="位置更新"><a href="#位置更新" class="headerlink" title="位置更新"></a>位置更新</h2><p>$$<br>\mathbf{x}_{i+1} &#x3D; \mathbf{x}_i + \mathbf{r}_i<br>$$</p>
 <hr>
-<h2 id="����ֹͣ����"><a href="#����ֹͣ����" class="headerlink" title="����ֹͣ����"></a>����ֹͣ����</h2><p>$$<br>\hat{k}(\mathbf{x}_{i+1}) \neq \hat{k}(\mathbf{x}_0)<br>$$</p>
+<h2 id="迭代停止条件"><a href="#迭代停止条件" class="headerlink" title="迭代停止条件"></a>迭代停止条件</h2><p>$$<br>\hat{k}(\mathbf{x}_{i+1}) \neq \hat{k}(\mathbf{x}_0)<br>$$</p>
 <hr>
-<h2 id="�����Y����"><a href="#�����Y����" class="headerlink" title="�����Ŷ����"></a>�����Ŷ����</h2><p>$$<br>\hat{\mathbf{r}} &#x3D; \sum_i \mathbf{r}_i<br>$$</p>
+<h2 id="最终扰动输出"><a href="#最终扰动输出" class="headerlink" title="最终扰动输出"></a>最终扰动输出</h2><p>$$<br>\hat{\mathbf{r}} &#x3D; \sum_i \mathbf{r}_i<br>$$</p>
 
       
     </div>
