@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="基本原理：深度学习模型对输入x和扰动δ并非完全线性，但存在相关性。即f(x+δ)−f(x) 与 f(δ)高度相关。为什么这个相关性存在？深层网络虽不是严格的线性系统，但ReLU等激活函数在局部近似线性。因此，扰动δ本身在网络中引发的“特征响应模式”，与它叠加到真实图片x上后引发的“特征变化模式”高度一致。换句话说：“δ的独立激活方向”就是“δ对x的破坏方向”。因此，最大化 f(δ）（即单独输入扰动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于GD-UAP方法">
+<meta property="og:url" content="http://example.com/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基本原理：深度学习模型对输入x和扰动δ并非完全线性，但存在相关性。即f(x+δ)−f(x) 与 f(δ)高度相关。为什么这个相关性存在？深层网络虽不是严格的线性系统，但ReLU等激活函数在局部近似线性。因此，扰动δ本身在网络中引发的“特征响应模式”，与它叠加到真实图片x上后引发的“特征变化模式”高度一致。换句话说：“δ的独立激活方向”就是“δ对x的破坏方向”。因此，最大化 f(δ）（即单独输入扰动">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-06T11:22:26.000Z">
+<meta property="article:modified_time" content="2026-08-10T10:05:30.084Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/","path":"2026/08/06/关于GD-UAP方法/","title":"关于GD-UAP方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>关于GD-UAP方法 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">基本原理：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UAP%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">UAP历史发展:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E6%96%B9%E6%B3%95%E7%BC%BA%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">早期方法缺点:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%86%E7%A2%8E%E6%83%B3%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">细碎想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">算法:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="关于GD-UAP方法 | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于GD-UAP方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-06 19:22:26" itemprop="dateCreated datePublished" datetime="2026-08-06T19:22:26+08:00">2026-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-10 18:05:30" itemprop="dateModified" datetime="2026-08-10T18:05:30+08:00">2026-08-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本原理："><a href="#基本原理：" class="headerlink" title="基本原理："></a>基本原理：</h2><p>深度学习模型对输入<br>x和扰动δ并非完全线性，但存在相关性。即<br>f(x+δ)−f(x) 与 f(δ)高度相关。为什么这个相关性存在？<br>深层网络虽不是严格的线性系统，但ReLU等激活函数在局部近似线性。因此，扰动δ本身在网络中引发的“特征响应模式”，与它叠加到真实图片x上后引发的“特征变化模式”高度一致。<br>换句话说：“δ的独立激活方向”就是“δ对x的破坏方向”。因此，最大化 f(δ）（即单独输入扰动时的特征响应），往往能在真实输入上产生显著的输出变化。</p>
+<h2 id="UAP历史发展"><a href="#UAP历史发展" class="headerlink" title="UAP历史发展:"></a>UAP历史发展:</h2><p>早期考虑是对一组图片进行deepfool(最短距离扰动)扰动叠加，也就是对于无法欺骗的图片，用deepfool生成它的最小扰动然后加到累计的扰动上，如果已经可以欺骗，则跳过这个图片。 </p>
+<h2 id="早期方法缺点"><a href="#早期方法缺点" class="headerlink" title="早期方法缺点:"></a>早期方法缺点:</h2><p>需要大量数据，可能会因为叠加导致毁坏原先结构需反复验证，计算量庞大。且非完全黑盒，不切实际,以及愚弄的概念可能需要专门设计</p>
+<h2 id="细碎想法"><a href="#细碎想法" class="headerlink" title="细碎想法"></a>细碎想法</h2><p>很让人惊讶的一点是:即使经过打印、光照变化、角度倾斜、摄像头传感器噪声等物理失真，对抗样本依然能骗过模型。这与我之前对对抗样本这种细微扰动的直觉判断是不符合的。<br>这里还提到range prior的做法，按照高斯分布生成随机数据d来模拟真实的x，防止扰动脱离实际，但是随机生成的数据d本身缺乏意义性，是否会对训练有影响？</p>
+<p>  L2 范数（能量）比均值更能代表“神经元整体兴奋程度”，连乘迫使所有层都充分激活，因此 GD-UAP 更强。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法:"></a>算法:</h2><pre><code class="language-markdown"># GD-UAP 算法流程
+
+---
+
+## 算法输入输出
+
+| 项目 | 说明 |
+| :--- | :--- |
+| **输入** | 目标CNN模型 `f`，数据载体 `g`（0 / 伪数据 / 真实数据） |
+| **输出** | 通用扰动 `δ` |
+| **超参数** | 限幅 ξ=10，学习率 η=0.1，饱和率阈值 θ=1e-5 |
+
+
+## 算法步骤
+
+# GD-UAP 算法流程
+
+## 一、输入与输出
+
+- **输入**：目标CNN模型 f，数据载体 g（g=0 或 g=伪数据 d 或 g=真实数据 x）
+- **输出**：通用扰动 δ
+- **超参数**：ξ=10，η=0.1，θ=1e-5，H（耐心值）
+
+
+## 二、算法步骤
+
+1. **初始化**
+   - 随机初始化 δ₀ ~ U[-ξ, ξ]
+   - t = 0
+   - F_t = 0
+
+2. **循环迭代**（重复执行以下步骤）
+
+   - **2.1 采样数据载体 g**
+     - No Prior：g = 0
+     - Range Prior：g = 高斯伪数据 d（随机裁剪+增强）
+     - Data Prior：g = 真实图片 x（随机采样）
+
+   - **2.2 前向传播**
+     - 计算各层特征图：l₁(g+δ)，l₂(g+δ)，...，l_K(g+δ)
+     - 只刺激卷积层，不碰全连接层
+
+   - **2.3 计算损失**
+     - Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
+     - 连乘：确保每一层都被充分激活
+     - 取对数：防止数值下溢
+
+   - **2.4 反向传播与更新**
+     - 计算梯度：∇_δ(Loss)
+     - 梯度上升更新：δ ← δ + η · ∇_δ(Loss)
+     - 限幅：δ ← clip(δ, -ξ, ξ)
+     - 注意：模型权重冻结，只更新 δ
+
+   - **2.5 自适应缩放**
+     - 计算饱和率 S_t（像素值 == ±ξ 的比例）
+     - if S_t 增长速度 &lt; θ：
+       - δ ← δ / 2（释放空间，保留方向模式）
+
+   - **2.6 验证**
+     - 每 200/400 步在验证集 D 上测试愚弄率 F_t
+
+3. **收敛判断**
+   - if F_t 连续 H 次不再提升：
+     - 停止迭代
+
+4. **返回结果**
+   - j ← argmax(F_t)
+   - return δ_j
+
+
+## 三、核心损失函数
+
+&gt; Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
+
+- l_i：第 i 层卷积层的输出特征图
+- ||·||₂：L2范数（该层总能量）
+
+
+## 四、三种数据模式
+
+| 模式 | 载体 g | 说明 |
+| :--- | :--- | :--- |
+| No Prior | g = 0 | 纯黑背景，完全无数据 |
+| Range Prior | g = d | 高斯伪数据，使用数据均值和动态范围 |
+| Data Prior | g = x | 真实训练样本，仅作对比 |
+
+
+## 五、一句话总结
+
+&gt; 通过梯度上升最大化CNN中间层的激活能量，在纯噪声或伪数据上学习，生成无需真实数据的通用对抗扰动。
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/02/About-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks/" rel="prev" title="关于 &quot;DeepFool: a simple and accurate method to fool deep neural networks&quot;">
+                  <i class="fa fa-angle-left"></i> 关于 "DeepFool: a simple and accurate method to fool deep neural networks"
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">John Doe</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

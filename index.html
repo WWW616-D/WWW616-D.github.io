@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -147,6 +147,177 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/08/06/%E5%85%B3%E4%BA%8EGD-UAP%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">关于GD-UAP方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-06 19:22:26" itemprop="dateCreated datePublished" datetime="2026-08-06T19:22:26+08:00">2026-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-10 18:05:30" itemprop="dateModified" datetime="2026-08-10T18:05:30+08:00">2026-08-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="基本原理："><a href="#基本原理：" class="headerlink" title="基本原理："></a>基本原理：</h2><p>深度学习模型对输入<br>x和扰动δ并非完全线性，但存在相关性。即<br>f(x+δ)−f(x) 与 f(δ)高度相关。为什么这个相关性存在？<br>深层网络虽不是严格的线性系统，但ReLU等激活函数在局部近似线性。因此，扰动δ本身在网络中引发的“特征响应模式”，与它叠加到真实图片x上后引发的“特征变化模式”高度一致。<br>换句话说：“δ的独立激活方向”就是“δ对x的破坏方向”。因此，最大化 f(δ）（即单独输入扰动时的特征响应），往往能在真实输入上产生显著的输出变化。</p>
+<h2 id="UAP历史发展"><a href="#UAP历史发展" class="headerlink" title="UAP历史发展:"></a>UAP历史发展:</h2><p>早期考虑是对一组图片进行deepfool(最短距离扰动)扰动叠加，也就是对于无法欺骗的图片，用deepfool生成它的最小扰动然后加到累计的扰动上，如果已经可以欺骗，则跳过这个图片。 </p>
+<h2 id="早期方法缺点"><a href="#早期方法缺点" class="headerlink" title="早期方法缺点:"></a>早期方法缺点:</h2><p>需要大量数据，可能会因为叠加导致毁坏原先结构需反复验证，计算量庞大。且非完全黑盒，不切实际,以及愚弄的概念可能需要专门设计</p>
+<h2 id="细碎想法"><a href="#细碎想法" class="headerlink" title="细碎想法"></a>细碎想法</h2><p>很让人惊讶的一点是:即使经过打印、光照变化、角度倾斜、摄像头传感器噪声等物理失真，对抗样本依然能骗过模型。这与我之前对对抗样本这种细微扰动的直觉判断是不符合的。<br>这里还提到range prior的做法，按照高斯分布生成随机数据d来模拟真实的x，防止扰动脱离实际，但是随机生成的数据d本身缺乏意义性，是否会对训练有影响？</p>
+<p>  L2 范数（能量）比均值更能代表“神经元整体兴奋程度”，连乘迫使所有层都充分激活，因此 GD-UAP 更强。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法:"></a>算法:</h2><pre><code class="language-markdown"># GD-UAP 算法流程
+
+---
+
+## 算法输入输出
+
+| 项目 | 说明 |
+| :--- | :--- |
+| **输入** | 目标CNN模型 `f`，数据载体 `g`（0 / 伪数据 / 真实数据） |
+| **输出** | 通用扰动 `δ` |
+| **超参数** | 限幅 ξ=10，学习率 η=0.1，饱和率阈值 θ=1e-5 |
+
+
+## 算法步骤
+
+# GD-UAP 算法流程
+
+## 一、输入与输出
+
+- **输入**：目标CNN模型 f，数据载体 g（g=0 或 g=伪数据 d 或 g=真实数据 x）
+- **输出**：通用扰动 δ
+- **超参数**：ξ=10，η=0.1，θ=1e-5，H（耐心值）
+
+
+## 二、算法步骤
+
+1. **初始化**
+   - 随机初始化 δ₀ ~ U[-ξ, ξ]
+   - t = 0
+   - F_t = 0
+
+2. **循环迭代**（重复执行以下步骤）
+
+   - **2.1 采样数据载体 g**
+     - No Prior：g = 0
+     - Range Prior：g = 高斯伪数据 d（随机裁剪+增强）
+     - Data Prior：g = 真实图片 x（随机采样）
+
+   - **2.2 前向传播**
+     - 计算各层特征图：l₁(g+δ)，l₂(g+δ)，...，l_K(g+δ)
+     - 只刺激卷积层，不碰全连接层
+
+   - **2.3 计算损失**
+     - Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
+     - 连乘：确保每一层都被充分激活
+     - 取对数：防止数值下溢
+
+   - **2.4 反向传播与更新**
+     - 计算梯度：∇_δ(Loss)
+     - 梯度上升更新：δ ← δ + η · ∇_δ(Loss)
+     - 限幅：δ ← clip(δ, -ξ, ξ)
+     - 注意：模型权重冻结，只更新 δ
+
+   - **2.5 自适应缩放**
+     - 计算饱和率 S_t（像素值 == ±ξ 的比例）
+     - if S_t 增长速度 &lt; θ：
+       - δ ← δ / 2（释放空间，保留方向模式）
+
+   - **2.6 验证**
+     - 每 200/400 步在验证集 D 上测试愚弄率 F_t
+
+3. **收敛判断**
+   - if F_t 连续 H 次不再提升：
+     - 停止迭代
+
+4. **返回结果**
+   - j ← argmax(F_t)
+   - return δ_j
+
+
+## 三、核心损失函数
+
+&gt; Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
+
+- l_i：第 i 层卷积层的输出特征图
+- ||·||₂：L2范数（该层总能量）
+
+
+## 四、三种数据模式
+
+| 模式 | 载体 g | 说明 |
+| :--- | :--- | :--- |
+| No Prior | g = 0 | 纯黑背景，完全无数据 |
+| Range Prior | g = d | 高斯伪数据，使用数据均值和动态范围 |
+| Data Prior | g = x | 真实训练样本，仅作对比 |
+
+
+## 五、一句话总结
+
+&gt; 通过梯度上升最大化CNN中间层的激活能量，在纯噪声或伪数据上学习，生成无需真实数据的通用对抗扰动。
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -282,9 +453,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-05-04 16:30:24 / Modified: 16:37:41" itemprop="dateCreated datePublished" datetime="2026-05-04T16:30:24+08:00">2026-05-04</time>
+      <time title="Created: 2026-05-04 16:30:24" itemprop="dateCreated datePublished" datetime="2026-05-04T16:30:24+08:00">2026-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-05 17:47:21" itemprop="dateModified" datetime="2026-08-05T17:47:21+08:00">2026-08-05</time>
     </span>
 
   
@@ -298,6 +475,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><p>编译器需要考虑最坏情况来决定是否优化代码<br>考虑让你的程序可以并行计算</p>
+<h1 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h1><p>要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。</p>
+<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int global_count = 10;          // 全局符号（Global）</span><br><span class="line">static int hidden_secret = 5;   // 局部符号（Local）</span><br><span class="line">void func1() &#123;&#125;                 // 全局符号（Global）</span><br><span class="line">static void helper() &#123;&#125;         // 局部符号（Local）</span><br></pre></td></tr></table></figure>
+<p>链接的本质：把多个.o目标文件合并成一个可执行文件，核心工作是符号解析（解决谁定义了哪个符号）和重定位（把相对偏移改成绝对虚拟地址）。</p>
+<p>两种链接方式：静态链接（.a）在编译时把库代码复制进可执行文件；动态链接（.so）在加载&#x2F;运行时才解析地址，通过GOT和PLT实现位置无关代码和延迟绑定。</p>
+<p>关键细节：静态库链接时顺序敏感（被依赖的库要放后面）；动态库通过LD_PRELOAD可以实现库打桩（用自己的函数替换系统库函数）。</p>
 
       
     </div>
@@ -692,7 +874,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-26 15:16:15" itemprop="dateModified" datetime="2026-05-26T15:16:15+08:00">2026-05-26</time>
+      <time title="Modified: 2026-08-04 16:42:42" itemprop="dateModified" datetime="2026-08-04T16:42:42+08:00">2026-08-04</time>
     </span>
 
   
@@ -712,6 +894,7 @@
 <p><small>记笔记：堆排序打不过快速选择（电子斗蛐蛐这一块）</small></p>
 <h2 id="关于倍数筛选"><a href="#关于倍数筛选" class="headerlink" title="关于倍数筛选"></a>关于倍数筛选</h2><p>这个方法在所有关于素数约数的问题都非常好用，记住他。i的倍数都不是因数，i的倍数的因数中都包含i,同时考虑选择合适的起点来为算法加速</p>
 <h2 id="关于线段树"><a href="#关于线段树" class="headerlink" title="关于线段树"></a>关于线段树</h2><p>这是个很漂亮的办法，在一切需要频繁更新子段和的问题上考虑它，或者尝试构造这样的问题<br><small>尝试利用你已有的空间做文章，最小正数的问题是个很好的例子(负数标记)</small></p>
+<h2 id="关于差分"><a href="#关于差分" class="headerlink" title="关于差分"></a>关于差分</h2><p>对于一个组内频繁的数据更新，考虑记录变化的节点，然后再累加回去</p>
 
       
     </div>
@@ -915,85 +1098,6 @@ li {
 <p>lambda表达式是一个很方便的操作，解决了需要调用小函数的时候要反复去管定义声明的问题同时功能更加强大。同时他的抽象也是零成本的</p>
 <p>用流迭代器接入算法或者容器，可以将流标准化让算法或者容器不关心数据来自哪里，是很方便的输入手段</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream <span class="title function_">infile</span><span class="params">(<span class="string">&quot;numbers.txt&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (!infile) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;无法打开文件读取\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 用 istream_iterator 读取所有整数</span></span><br><span class="line"><span class="built_in">std</span>::istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in_it</span><span class="params">(infile)</span>, eof;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">read_data</span><span class="params">(in_it, eof)</span>;  <span class="comment">// 一步到位，构造时读取</span></span><br><span class="line"></span><br><span class="line">istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in</span><span class="params">(<span class="built_in">cin</span>)</span>,eof;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; accumulate(in,eof,<span class="number">0</span>)&lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/03/%E5%85%B3%E4%BA%8Etrie%E6%A0%91%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">关于trie树和线段树和线索二叉树的学习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-03-03 22:02:49" itemprop="dateCreated datePublished" datetime="2026-03-03T22:02:49+08:00">2026-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-29 10:39:47" itemprop="dateModified" datetime="2026-03-29T10:39:47+08:00">2026-03-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>&lt;<style><br>p {<br>  text-indent: 2em;<br>  margin: 0.8em 0;<br>  line-height: 1.6;<br>}<br>h2 {<br>  margin-top: 1.5em;<br>  border-left: 4px solid #42b983;<br>  padding-left: 10px;<br>  color: #0056b3;<br>}<br>strong {<br>  color: #e96900;<br>  font-weight: bold;<br>}<br>blockquote {<br>  background-color: #f6f8fa;<br>  border-left: 4px solid #dfe2e5;<br>  padding: 0.5em 1em;<br>  color: #586069;<br>  margin: 1em 0;<br>}<br></style></p>
-<h2 id="关于trie树"><a href="#关于trie树" class="headerlink" title="关于trie树"></a>关于trie树</h2><p>我今天学习了最基础的trie树，他让我理解了日常打字中后续的<strong>联想生成内容</strong>的部分逻辑，但背后应该还涉及了许多概率，权重和个性化之类的复杂涉及。只从今天学习的基本内容看，它对内存的开销不太理想，日后可能我会接触学习更好的树。</p>
-<h2 id="关于线段树"><a href="#关于线段树" class="headerlink" title="关于线段树"></a>关于线段树</h2><p>它的懒惰标记很精妙，初读时怀疑过对于一个区间标记懒惰后怎么区分懒惰到底要传多少给下一代，后来再详细阅读才发现只有<strong>完全囊括</strong>的区间才会被加上懒惰标记，这种办法也是线段树平均logn时间开销的核心。</p>
-<h2 id="关于线索二叉树"><a href="#关于线索二叉树" class="headerlink" title="关于线索二叉树"></a>关于线索二叉树</h2><p>它巧妙的严格运用中序遍历的顺序实现了线索的插入，产生了可以使用简单循环进行遍历的结果。</p>
-
       
     </div>
 
