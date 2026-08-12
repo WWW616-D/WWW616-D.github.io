@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -147,6 +147,457 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/12/Q-learning%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/08/12/Q-learning%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Q-learning笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-08-12 12:49:57 / Modified: 19:58:34" itemprop="dateCreated datePublished" datetime="2026-08-12T12:49:57+08:00">2026-08-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>强化学习就是让机器去模仿人类与环境交互，在不断的交互中学习  </p>
+</blockquote>
+<h2 id="Q-Learning-核心公式"><a href="#Q-Learning-核心公式" class="headerlink" title="Q-Learning 核心公式"></a>Q-Learning 核心公式</h2><hr>
+<h3 id="一、核心公式"><a href="#一、核心公式" class="headerlink" title="一、核心公式"></a>一、核心公式</h3><p>$$<br>Q(s,a) \leftarrow Q(s,a) + \alpha \left[ r + \gamma \max_{a’} Q(s’,a’) - Q(s,a) \right]<br>$$</p>
+<hr>
+<h3 id="二、符号含义"><a href="#二、符号含义" class="headerlink" title="二、符号含义"></a>二、符号含义</h3><table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$Q(s,a)$</td>
+<td align="left">在状态 $s$ 做动作 $a$ 的<strong>价值评分</strong></td>
+</tr>
+<tr>
+<td align="center">$r$</td>
+<td align="left">做动作后<strong>立刻得到的奖励</strong></td>
+</tr>
+<tr>
+<td align="center">$\gamma$</td>
+<td align="left"><strong>折扣因子</strong>（未来奖励的打折率，常用 0.95）</td>
+</tr>
+<tr>
+<td align="center">$\max Q(s’,a’)$</td>
+<td align="left">在新状态下<strong>未来能得到的最高评分</strong></td>
+</tr>
+<tr>
+<td align="center">$\alpha$</td>
+<td align="left"><strong>学习率</strong>（新信息覆盖旧信息的速度，常用 0.1）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="三、一句话理解"><a href="#三、一句话理解" class="headerlink" title="三、一句话理解"></a>三、一句话理解</h3><blockquote>
+<p><strong>新评分 &#x3D; 旧评分 + 学习率 × (实际拿到的 + 未来预期的 - 旧评分)</strong></p>
+</blockquote>
+<hr>
+<h3 id="四、代码实现"><a href="#四、代码实现" class="headerlink" title="四、代码实现"></a>四、代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算目标值</span></span><br><span class="line">td_target = reward + gamma * <span class="built_in">max</span>(q_table[next_state])  <span class="comment"># 如果 done 则没有未来项</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 Q 值</span></span><br><span class="line">q_table[state, action] += alpha * (td_target - q_table[state, action])</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="五、三种特殊情况"><a href="#五、三种特殊情况" class="headerlink" title="五、三种特殊情况"></a>五、三种特殊情况</h3><table>
+<thead>
+<tr>
+<th align="left">情况</th>
+<th align="left">公式变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>正常</strong></td>
+<td align="left">$Q \leftarrow Q + \alpha [r + \gamma \max Q(s’) - Q]$</td>
+</tr>
+<tr>
+<td align="left"><strong>终止状态</strong></td>
+<td align="left">$Q \leftarrow Q + \alpha [r - Q]$（没有 $\gamma \max Q(s’)$）</td>
+</tr>
+<tr>
+<td align="left"><strong>撞墙（状态不变）</strong></td>
+<td align="left">同上，$s’ &#x3D; s$，$Q$ 依然更新</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="六、完整算法伪代码"><a href="#六、完整算法伪代码" class="headerlink" title="六、完整算法伪代码"></a>六、完整算法伪代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始化 Q 表 = 0</span><br><span class="line">重复 300 轮：</span><br><span class="line">    重置到起点</span><br><span class="line">    重复直到结束：</span><br><span class="line">        选择动作（探索或利用）(带有指数衰减的 ε-贪心探索策略)</span><br><span class="line">        执行动作，得到 r, s&#x27;</span><br><span class="line">        更新 Q[s,a] = Q[s,a] + α × [r + γ × max(Q[s&#x27;]) - Q[s,a]]</span><br><span class="line">        s = s&#x27;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>核心就这一行公式，其他全是围绕它的工程实现！</strong> 👍</p>
+<h3 id="这是一张最基础的-Q-Table-表格，展示-10-个状态和-5-个动作的-Q-值："><a href="#这是一张最基础的-Q-Table-表格，展示-10-个状态和-5-个动作的-Q-值：" class="headerlink" title="这是一张最基础的 Q-Table 表格，展示 10 个状态和 5 个动作的 Q 值："></a>这是一张最基础的 Q-Table 表格，展示 10 个状态和 5 个动作的 Q 值：</h3><h2 id="Q-Table：10个状态-×-5个动作"><a href="#Q-Table：10个状态-×-5个动作" class="headerlink" title="Q-Table：10个状态 × 5个动作"></a>Q-Table：10个状态 × 5个动作</h2><table>
+<thead>
+<tr>
+<th align="center">状态 (State)</th>
+<th align="center">动作 A₀</th>
+<th align="center">动作 A₁</th>
+<th align="center">动作 A₂</th>
+<th align="center">动作 A₃</th>
+<th align="center">动作 A₄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>S₀</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₁</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₂</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₃</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₄</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₅</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₆</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₇</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₈</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+<tr>
+<td align="center"><strong>S₉</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="表格结构说明"><a href="#表格结构说明" class="headerlink" title="表格结构说明"></a>表格结构说明</h2><table>
+<thead>
+<tr>
+<th align="left">组成部分</th>
+<th align="left">含义</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>行（状态）</strong></td>
+<td align="left">智能体所处的环境位置或情况</td>
+<td align="left">S₀ &#x3D; 起点，S₉ &#x3D; 终点</td>
+</tr>
+<tr>
+<td align="left"><strong>列（动作）</strong></td>
+<td align="left">智能体可以执行的操作</td>
+<td align="left">A₀ &#x3D; 上，A₁ &#x3D; 下，A₂ &#x3D; 左，A₃ &#x3D; 右，A₄ &#x3D; 不动</td>
+</tr>
+<tr>
+<td align="left"><strong>单元格值</strong></td>
+<td align="left">在该状态下执行该动作的<strong>预期累积奖励</strong></td>
+<td align="left">数值越大表示该动作越好</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="训练过程中的-Q-Table（经过部分学习后）"><a href="#训练过程中的-Q-Table（经过部分学习后）" class="headerlink" title="训练过程中的 Q-Table（经过部分学习后）"></a>训练过程中的 Q-Table（经过部分学习后）</h2><table>
+<thead>
+<tr>
+<th align="center">状态 (State)</th>
+<th align="center">动作 A₀</th>
+<th align="center">动作 A₁</th>
+<th align="center">动作 A₂</th>
+<th align="center">动作 A₃</th>
+<th align="center">动作 A₄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>S₀</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center"><strong>7.50</strong></td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₁</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center"><strong>8.20</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₂</strong></td>
+<td align="center"><strong>8.90</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₃</strong></td>
+<td align="center">-1.50</td>
+<td align="center"><strong>4.30</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₄</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center"><strong>9.50</strong></td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₅</strong></td>
+<td align="center"><strong>6.80</strong></td>
+<td align="center">-2.00</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₆</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center"><strong>3.20</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₇</strong></td>
+<td align="center">-0.10</td>
+<td align="center"><strong>5.60</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+</tr>
+<tr>
+<td align="center"><strong>S₈</strong></td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center">-0.10</td>
+<td align="center"><strong>9.90</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>S₉</strong></td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>：</p>
+<ul>
+<li><strong>加粗数字</strong> &#x3D; 该状态下的最优动作（Q值最大）</li>
+<li><strong>负数</strong> &#x3D; 该动作会导致负面后果（如撞墙、踩陷阱）</li>
+<li><strong>S₉ &#x3D; 0.00</strong> &#x3D; 终止状态，所有动作值为0（游戏结束）</li>
+</ul>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/11/%E6%88%91%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/08/11/%E6%88%91%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">我的计算机视觉学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-11 20:22:00" itemprop="dateCreated datePublished" datetime="2026-08-11T20:22:00+08:00">2026-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="第一讲"><a href="#第一讲" class="headerlink" title="第一讲"></a>第一讲</h2><blockquote>
+<p>在视觉中 边缘纹理和信息沿着视觉处理的方向流动是一切的根基  </p>
+<p>计算机视觉的目的是通用且可泛化的三维场景理解与重建</p>
+</blockquote>
+<ul>
+<li>几何化？  </li>
+<li>分割图形？</li>
+<li>像素分组？  </li>
+<li>基于特征的对象识别？识别关键特征然后去匹配类似的对象</li>
+</ul>
+<h2 id="第二讲"><a href="#第二讲" class="headerlink" title="第二讲"></a>第二讲</h2><h3 id="图像识别的难点"><a href="#图像识别的难点" class="headerlink" title="图像识别的难点:"></a>图像识别的难点:</h3><ul>
+<li>只能看到数字</li>
+<li>方向，光照，姿态等等影响，甚至只露出部分</li>
+<li>与背景相似的猫？</li>
+</ul>
+<blockquote>
+<p>我们的算法需要考虑以上所有问题，而真正明确的显式算法是不存在的，于是人们考虑把目光投向数据驱动，训练模型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">images,labels</span>)：</span><br><span class="line">    <span class="keyword">return</span> models</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">model,test_images</span>):</span><br><span class="line">    <span class="keyword">return</span> test_labels</span><br></pre></td></tr></table></figure>
+<h3 id="K近邻"><a href="#K近邻" class="headerlink" title="K近邻:"></a>K近邻:</h3><p>KNN是一种基于实例的监督学习算法，通过计算新样本与训练集中所有样本的距离，找出最近的K个邻居，然后根据这K个邻居的多数类别（分类）或平均值（回归）来预测新样本的标签。</p>
+<h4 id="最简单的考虑l1范数的KNN示例-K等于1"><a href="#最简单的考虑l1范数的KNN示例-K等于1" class="headerlink" title="最简单的考虑l1范数的KNN示例:(K等于1)"></a><em>最简单的考虑l1范数的KNN示例:(K等于1)</em></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NearestNeighbor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">self, X, y</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example. Y is 1-dimension of size N&quot;&quot;&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.Xtr = X  <span class="comment"># 保存训练数据</span></span><br><span class="line">        <span class="variable language_">self</span>.yt = y   <span class="comment"># 保存训练标签</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example we wish to predict label for&quot;&quot;&quot;</span></span><br><span class="line">        num_test = X.shape[<span class="number">0</span>]  <span class="comment"># 测试样本数量</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建存储预测结果的数组</span></span><br><span class="line">        Ypred = np.zeros(num_test, dtype=<span class="variable language_">self</span>.yt.dtype)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_test):  <span class="comment"># 遍历每个测试样本</span></span><br><span class="line">            <span class="comment"># 计算L1距离</span></span><br><span class="line">            distances = np.<span class="built_in">sum</span>(np.<span class="built_in">abs</span>(<span class="variable language_">self</span>.Xtr - X[i, :]), axis=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 找到距离最近的训练样本索引</span></span><br><span class="line">            min_index = np.argmin(distances)</span><br><span class="line">            <span class="comment"># 预测为该样本的标签</span></span><br><span class="line">            Ypred[i] = <span class="variable language_">self</span>.yt[min_index]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
+<p>l1范数对空间过于敏感，l2范数更加的平滑，距离度量稳定<br>k近邻方法存在维度的诅咒，无法获取足够多的点覆盖高维空间</p>
+<p>线性分类难以解决XOR问题</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -616,7 +1067,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-28 14:02:26" itemprop="dateModified" datetime="2026-05-28T14:02:26+08:00">2026-05-28</time>
+      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
     </span>
 
   
@@ -643,6 +1094,8 @@
 <h2 id="关于核方法-机器学习领域"><a href="#关于核方法-机器学习领域" class="headerlink" title="关于核方法(机器学习领域)"></a>关于核方法<small>(机器学习领域)</small></h2><p>寻找一个函数，使得这个函数对两个低维向量的运算结果可以等价于在某个高维空间中的内积。从而估计样本的相似度。</p>
 <h2 id="关于流形"><a href="#关于流形" class="headerlink" title="关于流形"></a>关于流形</h2><p>它的局部可能是低维空间但散布在高维空间上。人类那些复杂的数据如图片文本等可以近似看作大量流形处理，通过降维展开流形获取信息<br>emmmm,我认为流形假设是有一定道理的但是现在的神经网络没法正确的和流形拟合，只在宏观统计上达成了高度相关性，没有获取真正的几何特征。因为这一点所以对抗性扰动可以找到某个方向突破机器学习到的某个流形的界域。受高纬度方向可能性爆炸的恩惠,对抗性扰动这样的错误不会发生在正常的样本判断中.</p>
 <h2 id="关于决策树"><a href="#关于决策树" class="headerlink" title="关于决策树"></a>关于决策树</h2><p>有几个常见的优化方法需要记录:一个是卡方检验寻找最可能有关的变量(但要求把有序量转化为无序量)，必要时转线性，还有就是进行剪枝操作，交叉验证，</p>
+<h2 id="关于adam"><a href="#关于adam" class="headerlink" title="关于adam"></a>关于adam</h2><p>Adam &#x3D; 带动量的自适应学习率优化算法，每个参数独立调整步长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g = ∇f(θ)                           <span class="comment"># 1. 计算梯度</span></span><br><span class="line">m = β₁·m + (<span class="number">1</span>-β₁)·g                 <span class="comment"># 2. 一阶动量（方向）</span></span><br><span class="line">v = β₂·v + (<span class="number">1</span>-β₂)·g²                <span class="comment"># 3. 二阶动量（步长控制）</span></span><br><span class="line">m̂ = m/(<span class="number">1</span>-β₁ᵗ), v̂ = v/(<span class="number">1</span>-β₂ᵗ)      <span class="comment"># 4. 偏差修正</span></span><br><span class="line">θ = θ - α·m̂/(√v̂ + ε)               <span class="comment"># 5. 更新参数</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -896,208 +1349,6 @@
 <h2 id="关于线段树"><a href="#关于线段树" class="headerlink" title="关于线段树"></a>关于线段树</h2><p>这是个很漂亮的办法，在一切需要频繁更新子段和的问题上考虑它，或者尝试构造这样的问题<br><small>尝试利用你已有的空间做文章，最小正数的问题是个很好的例子(负数标记)</small></p>
 <h2 id="关于差分"><a href="#关于差分" class="headerlink" title="关于差分"></a>关于差分</h2><p>对于一个组内频繁的数据更新，考虑记录变化的节点，然后再累加回去</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/13/W%E7%9A%84%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/13/W%E7%9A%84%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">W的算法导论学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-03-13 09:23:23" itemprop="dateCreated datePublished" datetime="2026-03-13T09:23:23+08:00">2026-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-29 10:31:21" itemprop="dateModified" datetime="2026-03-29T10:31:21+08:00">2026-03-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <pre><code>这个内容的主要目的是记录一些本人阅读过程中零散的，思考的点，并不详尽。
-</code></pre>
-<h2 id="关于堆"><a href="#关于堆" class="headerlink" title="关于堆"></a>关于堆</h2><p>注意到堆自底向上的构建和插入上浮的构建时间复杂度是不同的，前者是O(n),后者是O(nlogn),这是一个比较有意思的点，<br>这是因为对于下沉来说，绝大多数的节点只需要少量的调整(因为叶子节点占据大多数)而上浮则会随着深度的增加，开销越来越大，在用一个与期望二叉堆的性质反序的数组插入构建二叉堆时，最坏的情况就会达到O(nlogn) </p>
-<p>从另一个角度分析–自底向上的构建利用了完全二叉树“底层节点多、顶层节点少”这一几何铁律。<br>无论数据怎么乱，它都强制每个节点只在它的子树范围内活动。因为大部分节点的子树都很矮（甚至没有），所以大部分工作都很轻量。而插入法构建受输入数据的影响是很大的。</p>
-<h2 id="关于归并排序"><a href="#关于归并排序" class="headerlink" title="关于归并排序"></a>关于归并排序</h2><p> 从这一算法中我一定程度上理解了利用递归树求和分析时间复杂度的技巧。</p>
-<h2 id="关于dp"><a href="#关于dp" class="headerlink" title="关于dp"></a>关于dp</h2><p> 考虑最优子结构和重叠问题是否存在，设计状态转移方程，尽量考虑局部问题的逐步实现是否可以达成最优解。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/09/W%E7%9A%84c++primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/09/W%E7%9A%84c++primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">c++ primer 第七章-类_学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-03-09 17:16:12" itemprop="dateCreated datePublished" datetime="2026-03-09T17:16:12+08:00">2026-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-08 09:51:52" itemprop="dateModified" datetime="2026-05-08T09:51:52+08:00">2026-05-08</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <style>
-p {
-  text-indent: 2em;  /* 段落首行缩进2个字符 */
-  margin: 0.5em 0;   /* 调整段落间距 */
-}
-li {
-  text-indent: 2em;  /* 列表项缩进1个字符 */
-  margin: 0.3em 0;   /* 列表项间距 */
-}
-</style>
-<pre><code>这篇博客会记录一些我在阅读这本书时一些自认为值得在意的点。
-</code></pre>
-<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><h2 id="7-1："><a href="#7-1：" class="headerlink" title="7.1："></a>7.1：</h2><ul>
-<li>在考虑用函数模拟运算符重载时，将*this作为返回值可以达成链式调用的目的。</li>
-<li>istream和ostream是两种类类型，平时使用cout和cin都是其中的类，它们实现的输入和输出操作只是运算符重载的结果。输入和输出操作会对它们造成一些状态上的改变</li>
-<li>使用列表法的构造函数可以避开类内部成员的初始化，以提高程序的效率。</li>
-<li>::运算符和我之前想的不太一样，不只是命名空间作用域的符号，还可以用来访问类中的特定类型，别名，静态变量，比如以下代码</li>
-</ul>
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   class MyClass &#123;</span><br><span class="line">public:</span><br><span class="line">    // 在类内部定义类型别名</span><br><span class="line">    using size_type = unsigned long;  // 类型别名</span><br><span class="line">    typedef int my_int;                // 另一种语法</span><br><span class="line">    </span><br><span class="line">    // 静态成员</span><br><span class="line">    static const int VALUE = 100;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    size_type length;  // 在类内部可以直接用</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    // 在类外部需要用 :: 访问</span><br><span class="line">    MyClass::size_type s = 10;      </span><br><span class="line">    MyClass::my_int i = 20;         </span><br><span class="line">    int x = MyClass::VALUE;          </span><br><span class="line">    std::string::size_type len = std::string(&quot;hello&quot;).size();</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>const 和mutable是编译期的概念，不会在后续汇编代码中体现。</li>
-</ul>
-<h2 id="7-3"><a href="#7-3" class="headerlink" title="7.3"></a>7.3</h2><p>友元类是你声明后对方可以访问你的数据，这有一点点单向讨好的意思在(?)大概就是，你无权决定对方是否给你访问只能决定你自己给谁访问。</p>
-<p>  也可以只给某个类的成员函数访问权限，但这样操作的定义声明顺序狠严苛。如果要对对方类的一组重载函数提供友元声明，那么每一个都要给。</p>
-<p>   <small>小贴士:友元声明不一定是真的声明</small></p>
-<h2 id="7-4"><a href="#7-4" class="headerlink" title="7.4"></a>7.4</h2><p>类在查找名字时表现的相当智能，会优先使用自己类内声明定义的内容，不分上下。</p>
-<p>函数得到的参数可能会隐藏类成员内部的参数，这种时候可以考虑用this指针表达，但最好别出现这种情况。初始化列表就不会混淆它们</p>
-<p>  函数查名顺序:内部-&gt;所属类-&gt;外部作用域</p>
-<h2 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h2><p>如果类成员是const或者引用之类的，必须使用构造函数初始化列表进行赋值  </p>
-<p>   类成员的初始化顺序与其在声明顺序一致  </p>
-<p>   在函数声明前面加上explicit可以防止一些隐式转换，是一个好的编程习惯，单参数的构造函数都建议这么做。</p>
-<p>   可以用static申请类的静态成员，但必须在类外初始化，并最好使用::访问它(因为它属于这个类而不是某个对象)</p>
-<h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><pre><code>io对象将所有数据源与数据输出都抽象成了一些字节序列(流)，它们是功能完备的类。cin和cout是一个初始化好的全局类变量,io对象没有拷贝或者赋值  
-</code></pre>
-<h2 id="something"><a href="#something" class="headerlink" title="something"></a>something</h2><p>使用cin时会刷新cout的缓冲区，因为它们互相关联，可以用.tie成员函数更改关系</p>
-<h4 id="一个效率上的优化提升"><a href="#一个效率上的优化提升" class="headerlink" title="一个效率上的优化提升"></a>一个效率上的优化提升</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(nullptr);</span><br></pre></td></tr></table></figure>
-<p>这个内容关闭了c++标准流和c标准流的同步同时取消了cin和cout的链接</p>
-<p><small>vector中emplace_back的效率比push_back更高(下次给这句换个地方)</small></p>
-<h1 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h1><p>  除非你有很好的理由选择其他容器，否则应该使用vector</p>
-<p>  你需要详细考虑使用每一种容器的理由，即使对应同一组数据，你也可以通过拷贝在中途切换容器的使用(比如如果在读取输入时才考虑在中间插入数据，而完成输入后需要随机访问，可以在输入时使用list，结束后转vector(assign))</p>
-<p>  swap不交换元素本身只是交换了两个容器的内部数据结构，于是保证在常数时间内完成,string的短对象分配在对象上而不是堆，于是swap后有迭代器失效的可能。</p>
-<h1 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h1><p>迭代器令算法不依赖于容器,但算法依赖于元素类型的操作</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count=<span class="built_in">count</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>(),<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
-<p>算法不检查写入操作,于是我们使用back_inserter  </p>
-<p>lambda表达式是一个很方便的操作，解决了需要调用小函数的时候要反复去管定义声明的问题同时功能更加强大。同时他的抽象也是零成本的</p>
-<p>用流迭代器接入算法或者容器，可以将流标准化让算法或者容器不关心数据来自哪里，是很方便的输入手段</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ifstream <span class="title function_">infile</span><span class="params">(<span class="string">&quot;numbers.txt&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (!infile) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;无法打开文件读取\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 用 istream_iterator 读取所有整数</span></span><br><span class="line"><span class="built_in">std</span>::istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in_it</span><span class="params">(infile)</span>, eof;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">read_data</span><span class="params">(in_it, eof)</span>;  <span class="comment">// 一步到位，构造时读取</span></span><br><span class="line"></span><br><span class="line">istream_iterator&lt;<span class="type">int</span>&gt; <span class="title function_">in</span><span class="params">(<span class="built_in">cin</span>)</span>,eof;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; accumulate(in,eof,<span class="number">0</span>)&lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
       
     </div>
 

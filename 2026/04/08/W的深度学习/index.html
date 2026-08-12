@@ -28,7 +28,7 @@
 <meta property="og:description" content="这里会记录一些简单精炼的内容，让我能在未来回忆起一些知识  给定正确的输出，把观察到的错误回溯到最初，指导它改进路线。这是监督学习  关于transformertoken对应预设的向量，向量的方向和长度携带着实际的语义信息，它们散布在高维语义空间中。通过可学习的修正矩阵（Q&#x2F;K&#x2F;V投影矩阵），模型探索token之间的相互联系和作用方式，最终为每个位置生成融合了上下文信息的向量。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T14:59:35.000Z">
-<meta property="article:modified_time" content="2026-05-28T06:02:26.322Z">
+<meta property="article:modified_time" content="2026-08-12T02:42:17.587Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Etransformer"><span class="nav-number">1.</span> <span class="nav-text">关于transformer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%B7%E7%A7%AF"><span class="nav-number">2.</span> <span class="nav-text">关于卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">3.</span> <span class="nav-text">关于线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">4.</span> <span class="nav-text">关于梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">5.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%8E%B0%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">一个很有意思的现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%A2%86%E5%9F%9F"><span class="nav-number">7.</span> <span class="nav-text">关于核方法(机器学习领域)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%B5%81%E5%BD%A2"><span class="nav-number">8.</span> <span class="nav-text">关于流形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">9.</span> <span class="nav-text">关于决策树</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Etransformer"><span class="nav-number">1.</span> <span class="nav-text">关于transformer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%B7%E7%A7%AF"><span class="nav-number">2.</span> <span class="nav-text">关于卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">3.</span> <span class="nav-text">关于线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">4.</span> <span class="nav-text">关于梯度下降</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">5.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%8E%B0%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">一个很有意思的现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%A2%86%E5%9F%9F"><span class="nav-number">7.</span> <span class="nav-text">关于核方法(机器学习领域)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%B5%81%E5%BD%A2"><span class="nav-number">8.</span> <span class="nav-text">关于流形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">9.</span> <span class="nav-text">关于决策树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Eadam"><span class="nav-number">10.</span> <span class="nav-text">关于adam</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -198,7 +198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-28 14:02:26" itemprop="dateModified" datetime="2026-05-28T14:02:26+08:00">2026-05-28</time>
+      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
     </span>
 
   
@@ -224,6 +224,8 @@
 <h2 id="关于核方法-机器学习领域"><a href="#关于核方法-机器学习领域" class="headerlink" title="关于核方法(机器学习领域)"></a>关于核方法<small>(机器学习领域)</small></h2><p>寻找一个函数，使得这个函数对两个低维向量的运算结果可以等价于在某个高维空间中的内积。从而估计样本的相似度。</p>
 <h2 id="关于流形"><a href="#关于流形" class="headerlink" title="关于流形"></a>关于流形</h2><p>它的局部可能是低维空间但散布在高维空间上。人类那些复杂的数据如图片文本等可以近似看作大量流形处理，通过降维展开流形获取信息<br>emmmm,我认为流形假设是有一定道理的但是现在的神经网络没法正确的和流形拟合，只在宏观统计上达成了高度相关性，没有获取真正的几何特征。因为这一点所以对抗性扰动可以找到某个方向突破机器学习到的某个流形的界域。受高纬度方向可能性爆炸的恩惠,对抗性扰动这样的错误不会发生在正常的样本判断中.</p>
 <h2 id="关于决策树"><a href="#关于决策树" class="headerlink" title="关于决策树"></a>关于决策树</h2><p>有几个常见的优化方法需要记录:一个是卡方检验寻找最可能有关的变量(但要求把有序量转化为无序量)，必要时转线性，还有就是进行剪枝操作，交叉验证，</p>
+<h2 id="关于adam"><a href="#关于adam" class="headerlink" title="关于adam"></a>关于adam</h2><p>Adam &#x3D; 带动量的自适应学习率优化算法，每个参数独立调整步长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g = ∇f(θ)                           <span class="comment"># 1. 计算梯度</span></span><br><span class="line">m = β₁·m + (<span class="number">1</span>-β₁)·g                 <span class="comment"># 2. 一阶动量（方向）</span></span><br><span class="line">v = β₂·v + (<span class="number">1</span>-β₂)·g²                <span class="comment"># 3. 二阶动量（步长控制）</span></span><br><span class="line">m̂ = m/(<span class="number">1</span>-β₁ᵗ), v̂ = v/(<span class="number">1</span>-β₂ᵗ)      <span class="comment"># 4. 偏差修正</span></span><br><span class="line">θ = θ - α·m̂/(√v̂ + ε)               <span class="comment"># 5. 更新参数</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
