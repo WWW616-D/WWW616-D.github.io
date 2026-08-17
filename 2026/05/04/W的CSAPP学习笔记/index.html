@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="第五章编译器需要考虑最坏情况来决定是否优化代码考虑让你的程序可以并行计算 第六章要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。 第七章1234int global_count &#x3D; 10;          &#x2F;&#x2F; 全局符号（Global）static int hidden_s">
+    <meta name="description" content="第五章 编译器需要考虑最坏情况来决定是否优化代码 考虑让你的程序可以并行计算 第六章 要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。 第七章 1234int global_count &#x3D; 10;          &#x2F;&#x2F; 全局符号（Global）static int hidd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="W的CSAPP学习笔记">
 <meta property="og:url" content="http://example.com/2026/05/04/W%E7%9A%84CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第五章编译器需要考虑最坏情况来决定是否优化代码考虑让你的程序可以并行计算 第六章要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。 第七章1234int global_count &#x3D; 10;          &#x2F;&#x2F; 全局符号（Global）static int hidden_s">
+<meta property="og:description" content="第五章 编译器需要考虑最坏情况来决定是否优化代码 考虑让你的程序可以并行计算 第六章 要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。 第七章 1234int global_count &#x3D; 10;          &#x2F;&#x2F; 全局符号（Global）static int hidd">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-04T08:30:24.000Z">
 <meta property="article:modified_time" content="2026-08-05T09:47:21.253Z">
@@ -239,7 +239,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">第五章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">第六章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0"><span class="nav-number">3.</span> <span class="nav-text">第七章</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">第五章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第六章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">第七章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -328,11 +328,15 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><p>编译器需要考虑最坏情况来决定是否优化代码<br>考虑让你的程序可以并行计算</p>
-<h1 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h1><p>要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。</p>
-<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int global_count = 10;          // 全局符号（Global）</span><br><span class="line">static int hidden_secret = 5;   // 局部符号（Local）</span><br><span class="line">void func1() &#123;&#125;                 // 全局符号（Global）</span><br><span class="line">static void helper() &#123;&#125;         // 局部符号（Local）</span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><h1>第五章</h1>
+<p>编译器需要考虑最坏情况来决定是否优化代码<br>
+考虑让你的程序可以并行计算</p>
+<h1>第六章</h1>
+<p>要赋予程序好的局部性:这样的程序倾向于引用邻近于其他最近引用过的数据项的数据项，或是它的本身，或是与他邻近的数据(行优先)，对于循环数组操作的程序，步长越小空间局部性越好。</p>
+<h1>第七章</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int global_count = 10;          // 全局符号（Global）</span><br><span class="line">static int hidden_secret = 5;   // 局部符号（Local）</span><br><span class="line">void func1() &#123;&#125;                 // 全局符号（Global）</span><br><span class="line">static void helper() &#123;&#125;         // 局部符号（Local）</span><br></pre></td></tr></table></figure>
 <p>链接的本质：把多个.o目标文件合并成一个可执行文件，核心工作是符号解析（解决谁定义了哪个符号）和重定位（把相对偏移改成绝对虚拟地址）。</p>
-<p>两种链接方式：静态链接（.a）在编译时把库代码复制进可执行文件；动态链接（.so）在加载&#x2F;运行时才解析地址，通过GOT和PLT实现位置无关代码和延迟绑定。</p>
+<p>两种链接方式：静态链接（.a）在编译时把库代码复制进可执行文件；动态链接（.so）在加载/运行时才解析地址，通过GOT和PLT实现位置无关代码和延迟绑定。</p>
 <p>关键细节：静态库链接时顺序敏感（被依赖的库要放后面）；动态库通过LD_PRELOAD可以实现库打桩（用自己的函数替换系统库函数）。</p>
 
     </div>
