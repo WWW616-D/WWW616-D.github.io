@@ -247,7 +247,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -265,6 +265,381 @@ mjx-container[display="true"] + br {
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/16/%E5%85%B3%E4%BA%8EAdversarial-Reinforcement-Learning-for-Large-Language-Model-Agent-Safety/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/08/16/%E5%85%B3%E4%BA%8EAdversarial-Reinforcement-Learning-for-Large-Language-Model-Agent-Safety/" class="post-title-link" itemprop="url">关于Adversarial Reinforcement Learning for Large Language Model Agent Safety</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-16 20:36:02" itemprop="dateCreated datePublished" datetime="2026-08-16T20:36:02+08:00">2026-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-17 08:49:32" itemprop="dateModified" datetime="2026-08-17T08:49:32+08:00">2026-08-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="基本想法"><a href="#基本想法" class="headerlink" title="基本想法"></a>基本想法</h2><ul>
+<li>先用成熟模型进行回合预训练，通过监督学习数据得到攻击model和防御model，做一定的微调确保基础功能不丧失</li>
+<li>再开始模拟训练，设计稀疏奖励反复对抗进行强化学习</li>
+</ul>
+<hr>
+<h2 id="一、整体框架（核心思想）"><a href="#一、整体框架（核心思想）" class="headerlink" title="一、整体框架（核心思想）"></a>一、整体框架（核心思想）</h2><p>ARLAS 同时训练两个模型：</p>
+<ul>
+<li><strong>攻击者（Attacker）</strong>：生成间接提示注入（恶意文本），插入到智能体观察到的网页&#x2F;邮件内容中。</li>
+<li><strong>智能体（Agent）</strong>：执行任务（如订机票），同时要抵抗注入，不泄露用户信息。</li>
+</ul>
+<p>两者通过**强化学习（RL）**对抗式共同进化。</p>
+<hr>
+<h2 id="二、问题建模（形式化）"><a href="#二、问题建模（形式化）" class="headerlink" title="二、问题建模（形式化）"></a>二、问题建模（形式化）</h2><p>将问题建模为<strong>双人博弈</strong>，每个回合包含多个时间步：</p>
+<ul>
+<li>每个时间步：<ol>
+<li>攻击者根据当前状态 ( s ) 生成提示注入 ( a_{atk} )</li>
+<li>智能体根据状态 + 用户信息 + 注入内容，选择工具调用 ( a_{agt} )</li>
+</ol>
+</li>
+<li>回合结束时，根据结果给出<strong>稀疏奖励</strong>（只在最后一步给）：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>结果</th>
+<th>攻击者奖励</th>
+<th>智能体奖励</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>泄露用户信息</td>
+<td>+1</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>任务成功且未泄露</td>
+<td>-1</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>任务失败或超时</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>其他（未结束）</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>目标是：攻击者最大化自己的奖励，智能体最大化自己的奖励。</p>
+<hr>
+<h2 id="三、训练流程（三个阶段）"><a href="#三、训练流程（三个阶段）" class="headerlink" title="三、训练流程（三个阶段）"></a>三、训练流程（三个阶段）</h2><h3 id="阶段-1：预热——模仿学习（Imitation-Learning）"><a href="#阶段-1：预热——模仿学习（Imitation-Learning）" class="headerlink" title="阶段 1：预热——模仿学习（Imitation Learning）"></a>阶段 1：预热——模仿学习（Imitation Learning）</h3><p><strong>目的</strong>：避免两个模型一开始随机探索效率太低。</p>
+<p>做法：</p>
+<ol>
+<li>使用<strong>更强的大模型</strong>（如 27B&#x2F;32B）收集 1 万条完整回合数据。</li>
+<li>只保留<strong>攻击者成功</strong>或<strong>智能体成功</strong>的回合。</li>
+<li>对攻击者和智能体分别做<strong>监督微调（SFT）</strong>，让它们先学会基本的成功模式。</li>
+<li>使用 <strong>KL 正则化</strong>，避免偏离原始模型太远。</li>
+</ol>
+<hr>
+<h3 id="阶段-2：对抗式强化学习（核心）"><a href="#阶段-2：对抗式强化学习（核心）" class="headerlink" title="阶段 2：对抗式强化学习（核心）"></a>阶段 2：对抗式强化学习（核心）</h3><p>采用<strong>种群训练（Population-Based Training）</strong>，这是关键创新点。</p>
+<h4 id="训练迭代结构："><a href="#训练迭代结构：" class="headerlink" title="训练迭代结构："></a>训练迭代结构：</h4><p>每次迭代包含：</p>
+<ul>
+<li><strong>数据收集</strong></li>
+<li><strong>模型更新</strong></li>
+</ul>
+<hr>
+<h4 id="数据收集（对抗配对策略）"><a href="#数据收集（对抗配对策略）" class="headerlink" title="数据收集（对抗配对策略）"></a>数据收集（对抗配对策略）</h4><ul>
+<li><p><strong>对智能体（Agent）</strong>：</p>
+<ul>
+<li>当前最新的智能体 ( \pi_{agt}^i )</li>
+<li>从<strong>所有历史攻击者</strong> ( {\pi_{atk}^1, …, \pi_{atk}^i} ) 中均匀采样一个对手</li>
+<li>目的：让智能体见过所有旧攻击模式，防止“遗忘”</li>
+</ul>
+</li>
+<li><p><strong>对攻击者（Attacker）</strong>：</p>
+<ul>
+<li>当前最新的攻击者 ( \pi_{atk}^i )</li>
+<li><strong>只和当前最新的智能体</strong> ( \pi_{agt}^i ) 对战</li>
+<li>目的：迫使攻击者不断创新，不能只欺负旧版本</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>这比“最新对最新”的迭代学习更稳定，避免策略循环振荡。</p>
+</blockquote>
+<hr>
+<h4 id="模型更新（GRPO-算法）"><a href="#模型更新（GRPO-算法）" class="headerlink" title="模型更新（GRPO 算法）"></a>模型更新（GRPO 算法）</h4><p>因为奖励只出现在回合结束，需要做<strong>信用分配</strong>，ARLAS 采用 <strong>GRPO（Group Relative Policy Optimization）</strong>：</p>
+<ol>
+<li><p>对每个任务，采集 ( G ) 个回合（如 16 个）。</p>
+</li>
+<li><p>对每个回合的<strong>每个动作</strong>，计算<strong>相对优势</strong>：<br>[<br>A_{t,j}^g &#x3D; \frac{r_T^g - \text{mean}({r_T})}{\text{std}({r_T})}<br>]</p>
+<ul>
+<li>正优势：该回合比平均好</li>
+<li>负优势：比平均差</li>
+</ul>
+</li>
+<li><p>过滤掉优势为 0 的回合（太简单或太难，无学习价值）。</p>
+</li>
+<li><p>使用 <strong>裁剪的 PPO 风格目标</strong> 更新策略：</p>
+<ul>
+<li>计算新旧策略的概率比 ( R_{t,j}^g )</li>
+<li>裁剪到 ( [1-\epsilon_{low}, 1+\epsilon_{high}] )</li>
+<li>加上 KL 正则项，防止偏离 SFT 模型太远</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="阶段-3：输出最终模型"><a href="#阶段-3：输出最终模型" class="headerlink" title="阶段 3：输出最终模型"></a>阶段 3：输出最终模型</h3><p>训练多轮后，返回<strong>最终的智能体模型</strong> ( \pi_{agt} )，用于实际部署。</p>
+<hr>
+<h2 id="四、关键技术创新（方法上的亮点）"><a href="#四、关键技术创新（方法上的亮点）" class="headerlink" title="四、关键技术创新（方法上的亮点）"></a>四、关键技术创新（方法上的亮点）</h2><table>
+<thead>
+<tr>
+<th>技术点</th>
+<th>具体做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>预热（SFT）</td>
+<td>用更强模型收集成功轨迹，解决初始探索难</td>
+</tr>
+<tr>
+<td>种群训练</td>
+<td>智能体对所有历史攻击者训练，避免遗忘</td>
+</tr>
+<tr>
+<td>非对称配对</td>
+<td>攻击者只打最新智能体，强制创新</td>
+</tr>
+<tr>
+<td>稀疏奖励处理</td>
+<td>GRPO 做组内归一化，过滤无用轨迹</td>
+</tr>
+<tr>
+<td>多样性生成</td>
+<td>攻击者被奖励驱动，自动产生多样化注入（验证了嵌入距离增大）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、一句话总结方法"><a href="#五、一句话总结方法" class="headerlink" title="五、一句话总结方法"></a>五、一句话总结方法</h2><blockquote>
+<p><strong>ARLAS &#x3D; 模仿学习预热 + 种群对抗式 RL（智能体打所有旧攻击者，攻击者只打最新智能体）+ GRPO 优化稀疏奖励，最终生成一个既安全又能完成任务的高鲁棒性 LLM 智能体。</strong></p>
+</blockquote>
+<hr>
+<h2 id="公式-1：优势函数（这回合表现怎么样）"><a href="#公式-1：优势函数（这回合表现怎么样）" class="headerlink" title="公式 1：优势函数（这回合表现怎么样）"></a>公式 1：优势函数（这回合表现怎么样）</h2><p>$$<br>A_{t,j}^{g} &#x3D; \frac{r_{T}^{g} - \text{mean}({r_{T}^{g}}<em>{g&#x3D;1}^{G})}{\text{std}({r</em>{T}^{g}}_{g&#x3D;1}^{G})}<br>$$</p>
+<h3 id="符号说明"><a href="#符号说明" class="headerlink" title="符号说明"></a>符号说明</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>人话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$A_{t,j}^{g}$</td>
+<td>第 $g$ 个回合中，第 $t$ 步第 $j$ 个 token 的优势</td>
+<td>这个回合的”得分系数”</td>
+</tr>
+<tr>
+<td>$r_{T}^{g}$</td>
+<td>第 $g$ 个回合的最终奖励（只有最后一步 $T$ 才有值）</td>
+<td>这回合得了多少分</td>
+</tr>
+<tr>
+<td>$G$</td>
+<td>同一任务采集的回合总数</td>
+<td>一共跑了 16 局</td>
+</tr>
+<tr>
+<td>mean &#x2F; std</td>
+<td>对这 $G$ 个 $r_T$ 求平均和标准差</td>
+<td>16 局的平均分和波动</td>
+</tr>
+</tbody></table>
+<h3 id="做了什么？"><a href="#做了什么？" class="headerlink" title="做了什么？"></a>做了什么？</h3><p>用同一任务的 <strong>16 个回合成绩</strong> 做归一化，算出每个回合的相对好坏。</p>
+<hr>
+<h2 id="公式-2：概率比（模型变心了多少）"><a href="#公式-2：概率比（模型变心了多少）" class="headerlink" title="公式 2：概率比（模型变心了多少）"></a>公式 2：概率比（模型变心了多少）</h2><p>$$<br>R_{t,j}^{g} &#x3D; \frac{\pi(a_{t,j}^{g} \mid s_{t}^{g}, a_{t,&lt;j}^{g})}{\pi_{\text{old}}(a_{t,j}^{g} \mid s_{t}^{g}, a_{t,&lt;j}^{g})}<br>$$</p>
+<h3 id="符号说明-1"><a href="#符号说明-1" class="headerlink" title="符号说明"></a>符号说明</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>人话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$R_{t,j}^{g}$</td>
+<td>第 $g$ 回合第 $t$ 步第 $j$ 个 token 的概率比</td>
+<td>“变心倍率”</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td><strong>当前</strong>模型（正在训练更新的那个）</td>
+<td>新模型</td>
+</tr>
+<tr>
+<td>$\pi_{\text{old}}$</td>
+<td><strong>旧</strong>模型（采集这批数据时的那个）</td>
+<td>旧模型</td>
+</tr>
+<tr>
+<td>$a_{t,j}^{g}$</td>
+<td>第 $g$ 回合第 $t$ 步生成的第 $j$ 个 token</td>
+<td>具体的某个词</td>
+</tr>
+<tr>
+<td>$s_{t}^{g}$</td>
+<td>第 $g$ 回合第 $t$ 步的状态</td>
+<td>当时看到了什么</td>
+</tr>
+<tr>
+<td>$a_{t,&lt;j}^{g}$</td>
+<td>第 $j$ 个 token 之前已经生成的所有 token</td>
+<td>这个词前面的上下文</td>
+</tr>
+</tbody></table>
+<h3 id="做了什么？-1"><a href="#做了什么？-1" class="headerlink" title="做了什么？"></a>做了什么？</h3><p>用旧模型采集的数据，但用新模型算概率，看新模型对<strong>同一个 token</strong> 的偏好变化了多少倍。</p>
+<hr>
+<h2 id="公式-3：损失函数（怎么调模型）"><a href="#公式-3：损失函数（怎么调模型）" class="headerlink" title="公式 3：损失函数（怎么调模型）"></a>公式 3：损失函数（怎么调模型）</h2><p>$$<br>\mathcal{L}<em>{RL}(\pi) &#x3D; \mathbb{E}\left[<br>\frac{1}{\sum</em>{g&#x3D;1}^{G}\sum_{t&#x3D;1}^{T}|a_{t}^{g}|}<br>\sum_{g&#x3D;1}^{G}\sum_{t&#x3D;1}^{T}\sum_{j&#x3D;1}^{|a_{t}^{g}|}<br>\left(<br>\min\left( R_{t,j}^{g} \cdot A_{t,j}^{g}, \text{clip}(R_{t,j}^{g}, 1-\epsilon_{\text{low}}, 1+\epsilon_{\text{high}}) \cdot A_{t,j}^{g} \right)</p>
+<ul>
+<li>\beta_{RL} \cdot \text{KL}[\pi \mid\mid \pi_{\text{SFT}}]<br>\right)<br>\right]<br>$$</li>
+</ul>
+<h3 id="符号说明-2"><a href="#符号说明-2" class="headerlink" title="符号说明"></a>符号说明</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>人话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\mathcal{L}_{RL}$</td>
+<td>强化学习损失函数</td>
+<td>总损失（越小越好）</td>
+</tr>
+<tr>
+<td>$\mathbb{E}[\cdot]$</td>
+<td>对所有数据取平均</td>
+<td>整体平均</td>
+</tr>
+<tr>
+<td>$\sum_{g}\sum_{t}\sum_{j}$</td>
+<td>遍历所有回合、所有步骤、所有 token</td>
+<td>每个词都算一遍</td>
+</tr>
+<tr>
+<td>$\frac{1}{\text{总token数}}$</td>
+<td>归一化分母</td>
+<td>防止长度不同影响损失大小</td>
+</tr>
+<tr>
+<td>$</td>
+<td>a_{t}^{g}</td>
+<td>$</td>
+</tr>
+<tr>
+<td>$\min(\cdot, \cdot)$</td>
+<td>取两者中较小的</td>
+<td>保守更新</td>
+</tr>
+<tr>
+<td>$\text{clip}(R, 1-\epsilon_{\text{low}}, 1+\epsilon_{\text{high}})$</td>
+<td>把 R 限制在 $[0.9, 1.3]$ 范围内</td>
+<td>安全绳，防止步子太大</td>
+</tr>
+<tr>
+<td>$\epsilon_{\text{low}} &#x3D; 0.1$</td>
+<td>下界 &#x3D; 0.9</td>
+<td>R 不能低于 0.9</td>
+</tr>
+<tr>
+<td>$\epsilon_{\text{high}} &#x3D; 0.3$</td>
+<td>上界 &#x3D; 1.3</td>
+<td>R 不能高于 1.3</td>
+</tr>
+<tr>
+<td>$\beta_{RL} &#x3D; 0.05$</td>
+<td>KL 正则化系数</td>
+<td>控制”稳一稳”的力度</td>
+</tr>
+<tr>
+<td>$\text{KL}[\pi \mid\mid \pi_{\text{SFT}}]$</td>
+<td>当前模型与 SFT 模型的 KL 散度</td>
+<td>当前模型跑偏了多少</td>
+</tr>
+<tr>
+<td>$\pi_{\text{SFT}}$</td>
+<td>模仿学习阶段结束后的模型</td>
+<td>基准版好学生</td>
+</tr>
+</tbody></table>
+<h3 id="做了什么？-2"><a href="#做了什么？-2" class="headerlink" title="做了什么？"></a>做了什么？</h3><p>把<strong>每个 token</strong> 的 $R$ 和 $A$ 结合起来，指导模型更新方向，同时加了两道保险：</p>
+<ol>
+<li><strong>裁剪</strong>：$R$ 跑出 $[0.9, 1.3]$ 就拉回来</li>
+<li><strong>KL 正则</strong>：整个模型跑偏就拽回 SFT</li>
+</ol>
+<hr>
+<h2 id="三个公式的关系图"><a href="#三个公式的关系图" class="headerlink" title="三个公式的关系图"></a>三个公式的关系图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">公式1（算 A）</span><br><span class="line">    ↓</span><br><span class="line">每个回合一个 A，所有 token 共享</span><br><span class="line">    ↓</span><br><span class="line">公式2（算 R）</span><br><span class="line">    ↓</span><br><span class="line">每个 token 自己的 R</span><br><span class="line">    ↓</span><br><span class="line">公式3（算损失）</span><br><span class="line">    用 A 和 R 共同决定：</span><br><span class="line">    - 好回合（A&gt;0）：鼓励 R 变大</span><br><span class="line">    - 差回合（A&lt;0）：打压 R 变小</span><br><span class="line">    - 但 R 变化不超过 [0.9, 1.3]</span><br><span class="line">    - 整体模型不跑偏（KL 惩罚）</span><br><span class="line">    ↓</span><br><span class="line">反向传播更新模型参数</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -771,7 +1146,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
+      <time title="Modified: 2026-08-16 19:55:08" itemprop="dateModified" datetime="2026-08-16T19:55:08+08:00">2026-08-16</time>
     </span>
 
   
@@ -807,6 +1182,14 @@ mjx-container[display="true"] + br {
 <h4 id="最简单的考虑l1范数的KNN示例-K等于1"><a href="#最简单的考虑l1范数的KNN示例-K等于1" class="headerlink" title="最简单的考虑l1范数的KNN示例:(K等于1)"></a><em>最简单的考虑l1范数的KNN示例:(K等于1)</em></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NearestNeighbor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">self, X, y</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example. Y is 1-dimension of size N&quot;&quot;&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.Xtr = X  <span class="comment"># 保存训练数据</span></span><br><span class="line">        <span class="variable language_">self</span>.yt = y   <span class="comment"># 保存训练标签</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example we wish to predict label for&quot;&quot;&quot;</span></span><br><span class="line">        num_test = X.shape[<span class="number">0</span>]  <span class="comment"># 测试样本数量</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建存储预测结果的数组</span></span><br><span class="line">        Ypred = np.zeros(num_test, dtype=<span class="variable language_">self</span>.yt.dtype)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_test):  <span class="comment"># 遍历每个测试样本</span></span><br><span class="line">            <span class="comment"># 计算L1距离</span></span><br><span class="line">            distances = np.<span class="built_in">sum</span>(np.<span class="built_in">abs</span>(<span class="variable language_">self</span>.Xtr - X[i, :]), axis=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 找到距离最近的训练样本索引</span></span><br><span class="line">            min_index = np.argmin(distances)</span><br><span class="line">            <span class="comment"># 预测为该样本的标签</span></span><br><span class="line">            Ypred[i] = <span class="variable language_">self</span>.yt[min_index]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
 <p>l1范数对空间过于敏感，l2范数更加的平滑，距离度量稳定<br>k近邻方法存在维度的诅咒，无法获取足够多的点覆盖高维空间</p>
 <p>线性分类难以解决XOR问题</p>
+<h2 id="第三讲"><a href="#第三讲" class="headerlink" title="第三讲"></a>第三讲</h2><blockquote>
+<p>损失函数的核心的量化模型不同错误的严重程度</p>
+</blockquote>
+<ul>
+<li>softmax</li>
+<li>对数似然估计</li>
+<li>梯度</li>
+</ul>
 
       
     </div>
@@ -869,7 +1252,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-10 18:05:30" itemprop="dateModified" datetime="2026-08-10T18:05:30+08:00">2026-08-10</time>
+      <time title="Modified: 2026-08-17 09:12:04" itemprop="dateModified" datetime="2026-08-17T09:12:04+08:00">2026-08-17</time>
     </span>
 
   
@@ -887,97 +1270,136 @@ mjx-container[display="true"] + br {
 <h2 id="早期方法缺点"><a href="#早期方法缺点" class="headerlink" title="早期方法缺点:"></a>早期方法缺点:</h2><p>需要大量数据，可能会因为叠加导致毁坏原先结构需反复验证，计算量庞大。且非完全黑盒，不切实际,以及愚弄的概念可能需要专门设计</p>
 <h2 id="细碎想法"><a href="#细碎想法" class="headerlink" title="细碎想法"></a>细碎想法</h2><p>很让人惊讶的一点是:即使经过打印、光照变化、角度倾斜、摄像头传感器噪声等物理失真，对抗样本依然能骗过模型。这与我之前对对抗样本这种细微扰动的直觉判断是不符合的。<br>这里还提到range prior的做法，按照高斯分布生成随机数据d来模拟真实的x，防止扰动脱离实际，但是随机生成的数据d本身缺乏意义性，是否会对训练有影响？</p>
 <p>  L2 范数（能量）比均值更能代表“神经元整体兴奋程度”，连乘迫使所有层都充分激活，因此 GD-UAP 更强。</p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法:"></a>算法:</h2><pre><code class="language-markdown"># GD-UAP 算法流程
-
----
-
-## 算法输入输出
-
-| 项目 | 说明 |
-| :--- | :--- |
-| **输入** | 目标CNN模型 `f`，数据载体 `g`（0 / 伪数据 / 真实数据） |
-| **输出** | 通用扰动 `δ` |
-| **超参数** | 限幅 ξ=10，学习率 η=0.1，饱和率阈值 θ=1e-5 |
-
-
-## 算法步骤
-
-# GD-UAP 算法流程
-
-## 一、输入与输出
-
-- **输入**：目标CNN模型 f，数据载体 g（g=0 或 g=伪数据 d 或 g=真实数据 x）
-- **输出**：通用扰动 δ
-- **超参数**：ξ=10，η=0.1，θ=1e-5，H（耐心值）
-
-
-## 二、算法步骤
-
-1. **初始化**
-   - 随机初始化 δ₀ ~ U[-ξ, ξ]
-   - t = 0
-   - F_t = 0
-
-2. **循环迭代**（重复执行以下步骤）
-
-   - **2.1 采样数据载体 g**
-     - No Prior：g = 0
-     - Range Prior：g = 高斯伪数据 d（随机裁剪+增强）
-     - Data Prior：g = 真实图片 x（随机采样）
-
-   - **2.2 前向传播**
-     - 计算各层特征图：l₁(g+δ)，l₂(g+δ)，...，l_K(g+δ)
-     - 只刺激卷积层，不碰全连接层
-
-   - **2.3 计算损失**
-     - Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
-     - 连乘：确保每一层都被充分激活
-     - 取对数：防止数值下溢
-
-   - **2.4 反向传播与更新**
-     - 计算梯度：∇_δ(Loss)
-     - 梯度上升更新：δ ← δ + η · ∇_δ(Loss)
-     - 限幅：δ ← clip(δ, -ξ, ξ)
-     - 注意：模型权重冻结，只更新 δ
-
-   - **2.5 自适应缩放**
-     - 计算饱和率 S_t（像素值 == ±ξ 的比例）
-     - if S_t 增长速度 &lt; θ：
-       - δ ← δ / 2（释放空间，保留方向模式）
-
-   - **2.6 验证**
-     - 每 200/400 步在验证集 D 上测试愚弄率 F_t
-
-3. **收敛判断**
-   - if F_t 连续 H 次不再提升：
-     - 停止迭代
-
-4. **返回结果**
-   - j ← argmax(F_t)
-   - return δ_j
-
-
-## 三、核心损失函数
-
-&gt; Loss = -∑ log( ∏ ||l_i(g+δ)||₂ )
-
-- l_i：第 i 层卷积层的输出特征图
-- ||·||₂：L2范数（该层总能量）
-
-
-## 四、三种数据模式
-
-| 模式 | 载体 g | 说明 |
-| :--- | :--- | :--- |
-| No Prior | g = 0 | 纯黑背景，完全无数据 |
-| Range Prior | g = d | 高斯伪数据，使用数据均值和动态范围 |
-| Data Prior | g = x | 真实训练样本，仅作对比 |
-
-
-## 五、一句话总结
-
-&gt; 通过梯度上升最大化CNN中间层的激活能量，在纯噪声或伪数据上学习，生成无需真实数据的通用对抗扰动。
-</code></pre>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法:"></a>算法:</h2><p>GD-UAP 算法流程</p>
+<hr>
+<h2 id="算法输入输出"><a href="#算法输入输出" class="headerlink" title="算法输入输出"></a>算法输入输出</h2><table>
+<thead>
+<tr>
+<th align="left">项目</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>输入</strong></td>
+<td align="left">目标CNN模型 <code>f</code>，数据载体 <code>g</code>（0 &#x2F; 伪数据 &#x2F; 真实数据）</td>
+</tr>
+<tr>
+<td align="left"><strong>输出</strong></td>
+<td align="left">通用扰动 <code>δ</code></td>
+</tr>
+<tr>
+<td align="left"><strong>超参数</strong></td>
+<td align="left">限幅 ξ&#x3D;10，学习率 η&#x3D;0.1，饱和率阈值 θ&#x3D;1e-5</td>
+</tr>
+</tbody></table>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><h1 id="GD-UAP-算法流程"><a href="#GD-UAP-算法流程" class="headerlink" title="GD-UAP 算法流程"></a>GD-UAP 算法流程</h1><h2 id="一、输入与输出"><a href="#一、输入与输出" class="headerlink" title="一、输入与输出"></a>一、输入与输出</h2><ul>
+<li><strong>输入</strong>：目标CNN模型 f，数据载体 g（g&#x3D;0 或 g&#x3D;伪数据 d 或 g&#x3D;真实数据 x）</li>
+<li><strong>输出</strong>：通用扰动 δ</li>
+<li><strong>超参数</strong>：ξ&#x3D;10，η&#x3D;0.1，θ&#x3D;1e-5，H（耐心值）</li>
+</ul>
+<h2 id="二、算法步骤"><a href="#二、算法步骤" class="headerlink" title="二、算法步骤"></a>二、算法步骤</h2><ol>
+<li><p><strong>初始化</strong></p>
+<ul>
+<li>随机初始化 δ₀ ~ U[-ξ, ξ]</li>
+<li>t &#x3D; 0</li>
+<li>F_t &#x3D; 0</li>
+</ul>
+</li>
+<li><p><strong>循环迭代</strong>（重复执行以下步骤）</p>
+<ul>
+<li><p><strong>2.1 采样数据载体 g</strong></p>
+<ul>
+<li>No Prior：g &#x3D; 0</li>
+<li>Range Prior：g &#x3D; 高斯伪数据 d（随机裁剪+增强）</li>
+<li>Data Prior：g &#x3D; 真实图片 x（随机采样）</li>
+</ul>
+</li>
+<li><p><strong>2.2 前向传播</strong></p>
+<ul>
+<li>计算各层特征图：l₁(g+δ)，l₂(g+δ)，…，l_K(g+δ)</li>
+<li>只刺激卷积层，不碰全连接层</li>
+</ul>
+</li>
+<li><p><strong>2.3 计算损失</strong></p>
+<ul>
+<li>Loss &#x3D; -∑ log( ∏ ||l_i(g+δ)||₂ )</li>
+<li>连乘：确保每一层都被充分激活</li>
+<li>取对数：防止数值下溢</li>
+</ul>
+</li>
+<li><p><strong>2.4 反向传播与更新</strong></p>
+<ul>
+<li>计算梯度：∇_δ(Loss)</li>
+<li>梯度上升更新：δ ← δ + η · ∇_δ(Loss)</li>
+<li>限幅：δ ← clip(δ, -ξ, ξ)</li>
+<li>注意：模型权重冻结，只更新 δ</li>
+</ul>
+</li>
+<li><p><strong>2.5 自适应缩放</strong></p>
+<ul>
+<li>计算饱和率 S_t（像素值 &#x3D;&#x3D; ±ξ 的比例）</li>
+<li>if S_t 增长速度 &lt; θ：<ul>
+<li>δ ← δ &#x2F; 2（释放空间，保留方向模式）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>2.6 验证</strong></p>
+<ul>
+<li>每 200&#x2F;400 步在验证集 D 上测试愚弄率 F_t</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>收敛判断</strong></p>
+<ul>
+<li>if F_t 连续 H 次不再提升：<ul>
+<li>停止迭代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>返回结果</strong></p>
+<ul>
+<li>j ← argmax(F_t)</li>
+<li>return δ_j</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、核心损失函数"><a href="#三、核心损失函数" class="headerlink" title="三、核心损失函数"></a>三、核心损失函数</h2><blockquote>
+<p>Loss &#x3D; -∑ log( ∏ ||l_i(g+δ)||₂ )</p>
+</blockquote>
+<ul>
+<li>l_i：第 i 层卷积层的输出特征图</li>
+<li>||·||₂：L2范数（该层总能量）</li>
+</ul>
+<h2 id="四、三种数据模式"><a href="#四、三种数据模式" class="headerlink" title="四、三种数据模式"></a>四、三种数据模式</h2><table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">载体 g</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">No Prior</td>
+<td align="left">g &#x3D; 0</td>
+<td align="left">纯黑背景，完全无数据</td>
+</tr>
+<tr>
+<td align="left">Range Prior</td>
+<td align="left">g &#x3D; d</td>
+<td align="left">高斯伪数据，使用数据均值和动态范围</td>
+</tr>
+<tr>
+<td align="left">Data Prior</td>
+<td align="left">g &#x3D; x</td>
+<td align="left">真实训练样本，仅作对比</td>
+</tr>
+</tbody></table>
+<h2 id="五、一句话总结"><a href="#五、一句话总结" class="headerlink" title="五、一句话总结"></a>五、一句话总结</h2><blockquote>
+<p>通过梯度上升最大化CNN中间层的激活能量，在纯噪声或伪数据上学习，生成无需真实数据的通用对抗扰动。  </p>
+</blockquote>
 
       
     </div>
@@ -1393,89 +1815,6 @@ mjx-container[display="true"] + br {
 <p>统计学中往往行是样本，列是特征，XXT的每一个位置是样本i和样本j的点积，这个大小可以反映出样本之间的相似度，在几何上，他还可以用来计算在某个方向向量上所有列向量的投影平方和。因此 XXT 的较大特征值对应的特征向量，就是基向量集合整体延伸的主要方向。</p>
 <p>  要多关注点积在描述向量相关性方面的想法，useful</p>
 <h2 id="拉格朗日"><a href="#拉格朗日" class="headerlink" title="拉格朗日"></a>拉格朗日</h2><p> 想象等高线和切出的曲线，相切，所以平行，所以梯度为0。<br>  我学不会线性代数</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/13/W%E7%9A%84%E5%8A%9B%E6%89%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/13/W%E7%9A%84%E5%8A%9B%E6%89%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">W的力扣学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-03-13 09:23:47" itemprop="dateCreated datePublished" datetime="2026-03-13T09:23:47+08:00">2026-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-04 16:42:42" itemprop="dateModified" datetime="2026-08-04T16:42:42+08:00">2026-08-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="最小覆盖字串"><a href="#最小覆盖字串" class="headerlink" title="最小覆盖字串"></a>最小覆盖字串</h2><p>正确的维护一个滑动窗口是我掌握的不够熟练的一个技巧，关于这道题，只需要考虑向右扩展边界，在符合要求时左侧收缩，即可实现。需要注意的是可以通过计数法来实现O(1)的检测是否匹配。</p>
-<h2 id="关于二叉树"><a href="#关于二叉树" class="headerlink" title="关于二叉树"></a>关于二叉树</h2><p>大多数二叉树的简单题目需要关注好对称的性质和递归的对称调用，理应更关注局部的性质而推广向全局</p>
-<h2 id="关于最小栈"><a href="#关于最小栈" class="headerlink" title="关于最小栈"></a>关于最小栈</h2><p>这是个比较有意思的问题，一开始的时候我的想法完全跑偏了，公式化刻板印象的往优先队列的方向去思考，忽视了栈先进后出的本质。可以利用这个性质确定每个元素出栈之前栈的最小值，这样子再维护一个辅助栈来实现常数时间获取最小值的操作。</p>
-<h2 id="关于快速排序"><a href="#关于快速排序" class="headerlink" title="关于快速排序"></a>关于快速排序</h2><p>我们需要记得基准值的选定规则对快速排序整体性能的巨大影响，以及快速选择时对 <strong>K的原地调整递归剪枝</strong> 能有效的提升效率 </p>
-<p><small>记笔记：堆排序打不过快速选择（电子斗蛐蛐这一块）</small></p>
-<h2 id="关于倍数筛选"><a href="#关于倍数筛选" class="headerlink" title="关于倍数筛选"></a>关于倍数筛选</h2><p>这个方法在所有关于素数约数的问题都非常好用，记住他。i的倍数都不是因数，i的倍数的因数中都包含i,同时考虑选择合适的起点来为算法加速</p>
-<h2 id="关于线段树"><a href="#关于线段树" class="headerlink" title="关于线段树"></a>关于线段树</h2><p>这是个很漂亮的办法，在一切需要频繁更新子段和的问题上考虑它，或者尝试构造这样的问题<br><small>尝试利用你已有的空间做文章，最小正数的问题是个很好的例子(负数标记)</small></p>
-<h2 id="关于差分"><a href="#关于差分" class="headerlink" title="关于差分"></a>关于差分</h2><p>对于一个组内频繁的数据更新，考虑记录变化的节点，然后再累加回去</p>
 
       
     </div>

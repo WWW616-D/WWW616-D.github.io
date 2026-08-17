@@ -28,7 +28,7 @@
 <meta property="og:description" content="第一讲 在视觉中 边缘纹理和信息沿着视觉处理的方向流动是一切的根基   计算机视觉的目的是通用且可泛化的三维场景理解与重建   几何化？   分割图形？ 像素分组？   基于特征的对象识别？识别关键特征然后去匹配类似的对象  第二讲图像识别的难点: 只能看到数字 方向，光照，姿态等等影响，甚至只露出部分 与背景相似的猫？   我们的算法需要考虑以上所有问题，而真正明确的显式算法是不存在的，于是人们">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-11T12:22:00.000Z">
-<meta property="article:modified_time" content="2026-08-12T02:42:17.587Z">
+<meta property="article:modified_time" content="2026-08-16T11:55:08.031Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -239,7 +239,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">第一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="nav-number">2.</span> <span class="nav-text">第二讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E7%9A%84%E9%9A%BE%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">图像识别的难点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K%E8%BF%91%E9%82%BB"><span class="nav-number">2.2.</span> <span class="nav-text">K近邻:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E8%80%83%E8%99%91l1%E8%8C%83%E6%95%B0%E7%9A%84KNN%E7%A4%BA%E4%BE%8B-K%E7%AD%89%E4%BA%8E1"><span class="nav-number">2.2.1.</span> <span class="nav-text">最简单的考虑l1范数的KNN示例:(K等于1)</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">第一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="nav-number">2.</span> <span class="nav-text">第二讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E7%9A%84%E9%9A%BE%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">图像识别的难点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K%E8%BF%91%E9%82%BB"><span class="nav-number">2.2.</span> <span class="nav-text">K近邻:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E8%80%83%E8%99%91l1%E8%8C%83%E6%95%B0%E7%9A%84KNN%E7%A4%BA%E4%BE%8B-K%E7%AD%89%E4%BA%8E1"><span class="nav-number">2.2.1.</span> <span class="nav-text">最简单的考虑l1范数的KNN示例:(K等于1)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2"><span class="nav-number">3.</span> <span class="nav-text">第三讲</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,7 +252,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -316,7 +316,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
+      <time title="Modified: 2026-08-16 19:55:08" itemprop="dateModified" datetime="2026-08-16T19:55:08+08:00">2026-08-16</time>
     </span>
 
   
@@ -351,6 +351,14 @@ mjx-container[display="true"] + br {
 <h4 id="最简单的考虑l1范数的KNN示例-K等于1"><a href="#最简单的考虑l1范数的KNN示例-K等于1" class="headerlink" title="最简单的考虑l1范数的KNN示例:(K等于1)"></a><em>最简单的考虑l1范数的KNN示例:(K等于1)</em></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NearestNeighbor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">self, X, y</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example. Y is 1-dimension of size N&quot;&quot;&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.Xtr = X  <span class="comment"># 保存训练数据</span></span><br><span class="line">        <span class="variable language_">self</span>.yt = y   <span class="comment"># 保存训练标签</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;X is N x D where each row is an example we wish to predict label for&quot;&quot;&quot;</span></span><br><span class="line">        num_test = X.shape[<span class="number">0</span>]  <span class="comment"># 测试样本数量</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建存储预测结果的数组</span></span><br><span class="line">        Ypred = np.zeros(num_test, dtype=<span class="variable language_">self</span>.yt.dtype)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_test):  <span class="comment"># 遍历每个测试样本</span></span><br><span class="line">            <span class="comment"># 计算L1距离</span></span><br><span class="line">            distances = np.<span class="built_in">sum</span>(np.<span class="built_in">abs</span>(<span class="variable language_">self</span>.Xtr - X[i, :]), axis=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 找到距离最近的训练样本索引</span></span><br><span class="line">            min_index = np.argmin(distances)</span><br><span class="line">            <span class="comment"># 预测为该样本的标签</span></span><br><span class="line">            Ypred[i] = <span class="variable language_">self</span>.yt[min_index]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
 <p>l1范数对空间过于敏感，l2范数更加的平滑，距离度量稳定<br>k近邻方法存在维度的诅咒，无法获取足够多的点覆盖高维空间</p>
 <p>线性分类难以解决XOR问题</p>
+<h2 id="第三讲"><a href="#第三讲" class="headerlink" title="第三讲"></a>第三讲</h2><blockquote>
+<p>损失函数的核心的量化模型不同错误的严重程度</p>
+</blockquote>
+<ul>
+<li>softmax</li>
+<li>对数似然估计</li>
+<li>梯度</li>
+</ul>
 
     </div>
 
