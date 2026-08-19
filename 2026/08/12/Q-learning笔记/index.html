@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="强化学习就是让机器去模仿人类与环境交互，在不断的交互中学习  Q-Learning 核心公式  一、核心公式                    #mjx-a79d9708{         display:contents;         mjx-assistive-mml {           user-select: text !important;           clip:">
+    <meta name="description" content="强化学习就是让机器去模仿人类与环境交互，在不断的交互中学习  Q-Learning 核心公式  一、核心公式                    #mjx-1f6edf6{         display:contents;         mjx-assistive-mml {           user-select: text !important;           clip: a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Q-learning笔记">
 <meta property="og:url" content="http://example.com/2026/08/12/Q-learning%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="强化学习就是让机器去模仿人类与环境交互，在不断的交互中学习  Q-Learning 核心公式  一、核心公式                    #mjx-a79d9708{         display:contents;         mjx-assistive-mml {           user-select: text !important;           clip:">
+<meta property="og:description" content="强化学习就是让机器去模仿人类与环境交互，在不断的交互中学习  Q-Learning 核心公式  一、核心公式                    #mjx-1f6edf6{         display:contents;         mjx-assistive-mml {           user-select: text !important;           clip: a">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-12T04:49:57.000Z">
-<meta property="article:modified_time" content="2026-08-12T11:58:34.724Z">
+<meta property="article:modified_time" content="2026-08-19T14:24:26.175Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -252,7 +252,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -308,9 +308,15 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-08-12 12:49:57 / Modified: 19:58:34" itemprop="dateCreated datePublished" datetime="2026-08-12T12:49:57+08:00">2026-08-12</time>
+      <time title="Created: 2026-08-12 12:49:57" itemprop="dateCreated datePublished" datetime="2026-08-12T12:49:57+08:00">2026-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-19 22:24:26" itemprop="dateModified" datetime="2026-08-19T22:24:26+08:00">2026-08-19</time>
     </span>
 
   
@@ -329,9 +335,9 @@ mjx-container[display="true"] + br {
 <hr>
 <h3 id="一、核心公式">一、核心公式</h3>
 
-    <span id="mjx-a79d9708">
+    <span id="mjx-1f6edf6">
       <style>
-      #mjx-a79d9708{
+      #mjx-1f6edf6{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -501,9 +507,9 @@ g[data-mml-node="xypic"] path {
 <tbody>
 <tr>
 <td style="text-align:center">
-    <span id="mjx-e50c9078">
+    <span id="mjx-428de698">
       <style>
-      #mjx-e50c9078{
+      #mjx-428de698{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -663,9 +669,9 @@ g[data-mml-node="xypic"] path {
     </span>
   </td>
 <td style="text-align:left">在状态 
-    <span id="mjx-32d2541">
+    <span id="mjx-bcb5a6f">
       <style>
-      #mjx-32d2541{
+      #mjx-bcb5a6f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -824,9 +830,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.023ex" role="img" focusable="false" viewBox="0 -442 469 452" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>s</mi></math></mjx-assistive-mml></mjx-container>
     </span>
    做动作 
-    <span id="mjx-e2c92778">
+    <span id="mjx-a0c7298">
       <style>
-      #mjx-e2c92778{
+      #mjx-a0c7298{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -988,9 +994,9 @@ g[data-mml-node="xypic"] path {
 </tr>
 <tr>
 <td style="text-align:center">
-    <span id="mjx-6b35c6a">
+    <span id="mjx-9c8e4558">
       <style>
-      #mjx-6b35c6a{
+      #mjx-9c8e4558{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1153,9 +1159,9 @@ g[data-mml-node="xypic"] path {
 </tr>
 <tr>
 <td style="text-align:center">
-    <span id="mjx-ba5c6a4">
+    <span id="mjx-610feb98">
       <style>
-      #mjx-ba5c6a4{
+      #mjx-610feb98{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1318,9 +1324,9 @@ g[data-mml-node="xypic"] path {
 </tr>
 <tr>
 <td style="text-align:center">
-    <span id="mjx-1f86f0b">
+    <span id="mjx-09bdc448">
       <style>
-      #mjx-1f86f0b{
+      #mjx-09bdc448{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1483,9 +1489,9 @@ g[data-mml-node="xypic"] path {
 </tr>
 <tr>
 <td style="text-align:center">
-    <span id="mjx-709d5c08">
+    <span id="mjx-415bb688">
       <style>
-      #mjx-709d5c08{
+      #mjx-415bb688{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1669,9 +1675,9 @@ g[data-mml-node="xypic"] path {
 <tr>
 <td style="text-align:left"><strong>正常</strong></td>
 <td style="text-align:left">
-    <span id="mjx-ac6068d8">
+    <span id="mjx-59c91b78">
       <style>
-      #mjx-ac6068d8{
+      #mjx-59c91b78{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1834,9 +1840,9 @@ g[data-mml-node="xypic"] path {
 <tr>
 <td style="text-align:left"><strong>终止状态</strong></td>
 <td style="text-align:left">
-    <span id="mjx-8a6134">
+    <span id="mjx-0514f5a">
       <style>
-      #mjx-8a6134{
+      #mjx-0514f5a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1995,9 +2001,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="18.146ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 8020.4 1000" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mo" transform="translate(1068.8,0)"><path data-c="2190" d="M944 261T944 250T929 230H165Q167 228 182 216T211 189T244 152T277 96T303 25Q308 7 308 0Q308 -11 288 -11Q281 -11 278 -11T272 -7T267 2T263 21Q245 94 195 151T73 236Q58 242 55 247Q55 254 59 257T73 264Q121 283 158 314T215 375T247 434T264 480L267 497Q269 503 270 505T275 509T288 511Q308 511 308 500Q308 493 303 475Q293 438 278 406T246 352T215 315T185 287T165 270H929Q944 261 944 250Z"></path></g><g data-mml-node="mi" transform="translate(2346.6,0)"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mo" transform="translate(3359.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mi" transform="translate(4360,0)"><path data-c="1D6FC" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"></path></g><g data-mml-node="mo" transform="translate(5000,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mi" transform="translate(5278,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(5951.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(6951.4,0)"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mo" transform="translate(7742.4,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><mo stretchy="false">←</mo><mi>Q</mi><mo>+</mo><mi>α</mi><mo stretchy="false">[</mo><mi>r</mi><mo>−</mo><mi>Q</mi><mo stretchy="false">]</mo></math></mjx-assistive-mml></mjx-container>
     </span>
   （没有 
-    <span id="mjx-2cdc2c8">
+    <span id="mjx-88e7574">
       <style>
-      #mjx-2cdc2c8{
+      #mjx-88e7574{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2160,9 +2166,9 @@ g[data-mml-node="xypic"] path {
 <tr>
 <td style="text-align:left"><strong>撞墙（状态不变）</strong></td>
 <td style="text-align:left">同上，
-    <span id="mjx-dead1598">
+    <span id="mjx-c200753">
       <style>
-      #mjx-dead1598{
+      #mjx-c200753{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2321,9 +2327,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="5.767ex" height="1.903ex" role="img" focusable="false" viewBox="0 -759 2549 841" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(502,363) scale(0.707)"><path data-c="2032" d="M79 43Q73 43 52 49T30 61Q30 68 85 293T146 528Q161 560 198 560Q218 560 240 545T262 501Q262 496 260 486Q259 479 173 263T84 45T79 43Z"></path></g></g><g data-mml-node="mo" transform="translate(1024.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(2080,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>s</mi><mo data-mjx-alternate="1">′</mo></msup><mo>=</mo><mi>s</mi></math></mjx-assistive-mml></mjx-container>
     </span>
   ，
-    <span id="mjx-1fbd9568">
+    <span id="mjx-2e5c52c8">
       <style>
-      #mjx-1fbd9568{
+      #mjx-2e5c52c8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;

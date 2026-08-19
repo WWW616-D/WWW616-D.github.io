@@ -28,7 +28,7 @@
 <meta property="og:description" content="这里会记录一些简单精炼的内容，让我能在未来回忆起一些知识  给定正确的输出，把观察到的错误回溯到最初，指导它改进路线。这是监督学习 关于transformer token对应预设的向量，向量的方向和长度携带着实际的语义信息，它们散布在高维语义空间中。通过可学习的修正矩阵（Q&#x2F;K&#x2F;V投影矩阵），模型探索token之间的相互联系和作用方式，最终为每个位置生成融合了上下文信息的向量。最后，这个向量被投影">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T14:59:35.000Z">
-<meta property="article:modified_time" content="2026-08-12T02:42:17.587Z">
+<meta property="article:modified_time" content="2026-08-19T14:16:00.198Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -252,7 +252,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -316,7 +316,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-12 10:42:17" itemprop="dateModified" datetime="2026-08-12T10:42:17+08:00">2026-08-12</time>
+      <time title="Modified: 2026-08-19 22:16:00" itemprop="dateModified" datetime="2026-08-19T22:16:00+08:00">2026-08-19</time>
     </span>
 
   
@@ -363,6 +363,9 @@ emmmm,我认为流形假设是有一定道理的但是现在的神经网络没�
 <h2 id="关于adam">关于adam</h2>
 <p>Adam = 带动量的自适应学习率优化算法，每个参数独立调整步长。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g = ∇f(θ)                           <span class="comment"># 1. 计算梯度</span></span><br><span class="line">m = β₁·m + (<span class="number">1</span>-β₁)·g                 <span class="comment"># 2. 一阶动量（方向）</span></span><br><span class="line">v = β₂·v + (<span class="number">1</span>-β₂)·g²                <span class="comment"># 3. 二阶动量（步长控制）</span></span><br><span class="line">m̂ = m/(<span class="number">1</span>-β₁ᵗ), v̂ = v/(<span class="number">1</span>-β₂ᵗ)      <span class="comment"># 4. 偏差修正</span></span><br><span class="line">θ = θ - α·m̂/(√v̂ + ε)               <span class="comment"># 5. 更新参数</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>黑盒攻击的两种形式:查询攻击，迁移攻击</p>
+</blockquote>
 
     </div>
 
