@@ -28,7 +28,7 @@
 <meta property="og:description" content="第一讲  在视觉中 边缘纹理和信息沿着视觉处理的方向流动是一切的根基 计算机视觉的目的是通用且可泛化的三维场景理解与重建   几何化？ 分割图形？ 像素分组？ 基于特征的对象识别？识别关键特征然后去匹配类似的对象  第二讲 图像识别的难点:  只能看到数字 方向，光照，姿态等等影响，甚至只露出部分 与背景相似的猫？   我们的算法需要考虑以上所有问题，而真正明确的显式算法是不存在的，于是人们考虑把">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-11T12:22:00.000Z">
-<meta property="article:modified_time" content="2026-08-16T11:55:08.031Z">
+<meta property="article:modified_time" content="2026-08-19T02:13:37.076Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -239,7 +239,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">第一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="nav-number">2.</span> <span class="nav-text">第二讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E7%9A%84%E9%9A%BE%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">图像识别的难点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K%E8%BF%91%E9%82%BB"><span class="nav-number">2.2.</span> <span class="nav-text">K近邻:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E8%80%83%E8%99%91l1%E8%8C%83%E6%95%B0%E7%9A%84KNN%E7%A4%BA%E4%BE%8B-K%E7%AD%89%E4%BA%8E1"><span class="nav-number">2.2.1.</span> <span class="nav-text">最简单的考虑l1范数的KNN示例:(K等于1)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2"><span class="nav-number">3.</span> <span class="nav-text">第三讲</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">第一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="nav-number">2.</span> <span class="nav-text">第二讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E7%9A%84%E9%9A%BE%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">图像识别的难点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K%E8%BF%91%E9%82%BB"><span class="nav-number">2.2.</span> <span class="nav-text">K近邻:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E8%80%83%E8%99%91l1%E8%8C%83%E6%95%B0%E7%9A%84KNN%E7%A4%BA%E4%BE%8B-K%E7%AD%89%E4%BA%8E1"><span class="nav-number">2.2.1.</span> <span class="nav-text">最简单的考虑l1范数的KNN示例:(K等于1)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2"><span class="nav-number">3.</span> <span class="nav-text">第三讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%AE%B2"><span class="nav-number">4.</span> <span class="nav-text">第四讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%EF%BC%88Computational-Graph%EF%BC%89%E2%80%94-%E6%A0%B8%E5%BF%83%E6%91%98%E8%A6%81"><span class="nav-number">5.</span> <span class="nav-text">计算图（Computational Graph）— 核心摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text">1. 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%A4%E5%A4%A7%E9%98%B6%E6%AE%B5"><span class="nav-number">5.2.</span> <span class="nav-text">2. 两大阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E6%A0%87%E5%87%86%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.3.</span> <span class="nav-text">3. 每个节点的标准接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99%E5%9C%A8%E8%AE%A1%E7%AE%97%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%A1%A8%E8%BE%BE"><span class="nav-number">5.4.</span> <span class="nav-text">4. 链式法则在计算图上的表达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%86%E6%94%AF%E8%8A%82%E7%82%B9%E6%A2%AF%E5%BA%A6%E5%A4%84%E7%90%86%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">5. 分支节点梯度处理（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%89%8D%E5%90%91%E9%9C%80%E4%BF%9D%E5%AD%98%E7%9A%84%E4%B8%AD%E9%97%B4%E5%80%BC%EF%BC%88%E5%B8%B8%E8%A7%81%E7%AE%97%E5%AD%90%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">6. 前向需保存的中间值（常见算子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%B8%A4%E7%A7%8D%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.7.</span> <span class="nav-text">7. 两种构建模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="nav-number">5.8.</span> <span class="nav-text">8. 显存优化技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%AE%B2"><span class="nav-number">7.</span> <span class="nav-text">第五讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9ACNN-%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%93%B2%E5%AD%A6%E6%A0%B9%E5%9F%BA%EF%BC%88%E5%AE%83%E5%87%AD%E4%BB%80%E4%B9%88%E6%9C%89%E6%95%88%EF%BC%9F%EF%BC%89"><span class="nav-number">7.1.</span> <span class="nav-text">第一部分：CNN 的四大哲学根基（它凭什么有效？）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E4%BA%94%E5%A4%A7%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6%EF%BC%88%E7%BD%91%E7%BB%9C%E7%94%B1%E4%BB%80%E4%B9%88%E6%9E%84%E6%88%90%EF%BC%9F%EF%BC%89"><span class="nav-number">7.2.</span> <span class="nav-text">第二部分：五大核心部件（网络由什么构成？）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E8%B5%B7%E7%82%B9%EF%BC%9A%E7%9B%B4%E7%AD%92%E7%BD%91%E7%BB%9C%E7%9A%84%E8%87%B4%E5%91%BD%E4%BC%A4%EF%BC%88%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%EF%BC%89"><span class="nav-number">7.3.</span> <span class="nav-text">进化起点：直筒网络的致命伤（梯度消失）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E4%B8%80%EF%BC%9A%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5-%E2%80%94%E2%80%94-%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C%E7%9A%84%E2%80%9C%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E2%80%9D%E4%B8%8E%E2%80%9C%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E5%99%A8%E2%80%9D"><span class="nav-number">7.4.</span> <span class="nav-text">进化一：残差连接 —— 深度网络的“高速公路”与“差分放大器”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E4%BA%8C%EF%BC%9A%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF-%E2%80%94%E2%80%94-%E4%B8%8D%E5%A2%9E%E5%8A%A0%E5%8F%82%E6%95%B0%E5%8D%B4%E2%80%9C%E6%92%91%E5%A4%A7%E2%80%9D%E6%84%9F%E5%8F%97%E9%87%8E"><span class="nav-number">7.5.</span> <span class="nav-text">进化二：空洞卷积 —— 不增加参数却“撑大”感受野</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E4%B8%89%EF%BC%9A1x1%E5%8D%B7%E7%A7%AF-%E2%80%94%E2%80%94-%E9%80%9A%E9%81%93%E9%97%B4%E7%9A%84%E2%80%9C%E5%A4%96%E4%BA%A4%E9%83%A8%E9%95%BF%E2%80%9D"><span class="nav-number">7.6.</span> <span class="nav-text">进化三：1x1卷积 —— 通道间的“外交部长”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E5%9B%9B%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF-%E2%80%94%E2%80%94-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%9A%84%E2%80%9C%E7%9C%81%E6%B2%B9%E5%88%A9%E5%99%A8%E2%80%9D"><span class="nav-number">7.7.</span> <span class="nav-text">进化四：深度可分离卷积 —— 移动端的“省油利器”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E4%BA%94%EF%BC%9A%E5%88%86%E7%BB%84%E5%8D%B7%E7%A7%AF%E4%B8%8EShuffle-%E2%80%94%E2%80%94-%E5%A4%9AGPU%E7%9A%84%E2%80%9C%E5%8D%8F%E4%BD%9C%E5%88%86%E8%B5%83%E2%80%9D"><span class="nav-number">7.8.</span> <span class="nav-text">进化五：分组卷积与Shuffle —— 多GPU的“协作分赃”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E5%85%AD%EF%BC%9A%E5%8A%A8%E6%80%81%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%EF%BC%88CNN%E7%9A%84%E2%80%9C%E5%BC%80%E7%9C%BC%E7%9C%8B%E4%B8%96%E7%95%8C%E2%80%9D%EF%BC%89"><span class="nav-number">7.9.</span> <span class="nav-text">进化六：动态卷积与注意力机制（CNN的“开眼看世界”）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E6%9E%81%E8%AE%A4%E7%9F%A5%EF%BC%9A%E7%8E%B0%E4%BB%A3CNN%E7%9A%84%E2%80%9C%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E2%80%9D"><span class="nav-number">7.10.</span> <span class="nav-text">终极认知：现代CNN的“标准模板”</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,7 +252,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -316,7 +316,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-16 19:55:08" itemprop="dateModified" datetime="2026-08-16T19:55:08+08:00">2026-08-16</time>
+      <time title="Modified: 2026-08-19 10:13:37" itemprop="dateModified" datetime="2026-08-19T10:13:37+08:00">2026-08-19</time>
     </span>
 
   
@@ -365,6 +365,240 @@ k近邻方法存在维度的诅咒，无法获取足够多的点覆盖高维空�
 <li>softmax</li>
 <li>对数似然估计</li>
 <li>梯度</li>
+</ul>
+<h2 id="第四讲">第四讲</h2>
+<blockquote>
+<p>神经网络非常大，手工写梯度公式不现实</p>
+</blockquote>
+<hr>
+<h2 id="计算图（Computational-Graph）—-核心摘要">计算图（Computational Graph）— 核心摘要</h2>
+<h3 id="1-定义">1. 定义</h3>
+<p>有向无环图（DAG），节点 = 运算/变量，边 = 数据依赖。用于描述数学表达式的计算流程。</p>
+<h3 id="2-两大阶段">2. 两大阶段</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>方向</th>
+<th>做的事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前向传播</strong></td>
+<td>输入 → 输出</td>
+<td>执行运算，计算结果，<strong>保存反向所需的中间值</strong></td>
+</tr>
+<tr>
+<td><strong>反向传播</strong></td>
+<td>输出 → 输入</td>
+<td>沿图逆序，应用<strong>链式法则</strong>，计算损失对各参数的梯度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-每个节点的标准接口">3. 每个节点的标准接口</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">forward(*inputs):</span><br><span class="line">    <span class="comment"># 计算结果，保存中间变量到 self.saved</span></span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">backward(grad_output):</span><br><span class="line">    <span class="comment"># 用 self.saved 和 grad_output 算对每个输入的梯度</span></span><br><span class="line">    <span class="keyword">return</span> grad_inputs  <span class="comment"># 顺序与 forward 输入一致</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-链式法则在计算图上的表达">4. 链式法则在计算图上的表达</h3>
+<blockquote>
+<p>节点接收上游梯度 ( \frac{\partial L}{\partial out} )，乘上局部梯度 ( \frac{\partial out}{\partial in} )，传递给下游。</p>
+</blockquote>
+<p>公式：[<br>
+\frac{\partial L}{\partial in} = \frac{\partial L}{\partial out} \cdot \frac{\partial out}{\partial in}<br>
+]</p>
+<h3 id="5-分支节点梯度处理（重点）">5. 分支节点梯度处理（重点）</h3>
+<p>一个输出被多个下游节点使用时，反向到此节点的梯度需要<strong>累加</strong>（sum），不是覆盖。</p>
+<h3 id="6-前向需保存的中间值（常见算子）">6. 前向需保存的中间值（常见算子）</h3>
+<table>
+<thead>
+<tr>
+<th>算子</th>
+<th>保存内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加法</td>
+<td>无（局部梯度为常数1）</td>
+</tr>
+<tr>
+<td>乘法</td>
+<td>两个输入</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td>输入（或 &gt;0 的掩码）</td>
+</tr>
+<tr>
+<td>矩阵乘法</td>
+<td>两个输入矩阵</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>输出值</td>
+</tr>
+<tr>
+<td>BatchNorm</td>
+<td>均值、方差、输入</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-两种构建模式">7. 两种构建模式</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>动态图</th>
+<th>静态图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建时机</td>
+<td>运行时</td>
+<td>运行前</td>
+</tr>
+<tr>
+<td>代表</td>
+<td>PyTorch</td>
+<td>TensorFlow 1.x / JAX</td>
+</tr>
+<tr>
+<td>调试</td>
+<td>容易</td>
+<td>较难</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>有Python开销</td>
+<td>可做图优化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-显存优化技术">8. 显存优化技术</h3>
+<ul>
+<li><strong>梯度检查点</strong>：不存全部中间值，反向时重新前向计算（用时间换空间）</li>
+<li><strong>算子融合</strong>：多个小操作合并成一个内核，减少显存读写</li>
+</ul>
+<hr>
+<p><strong>一句话总结</strong>：计算图是自动微分的载体，前向存中间值，反向传梯度，节点自治，框架调度。</p>
+<hr>
+<h2 id="代码">代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Tensor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, children=(<span class="params"></span>), op=<span class="string">&#x27;&#x27;</span>, requires_grad=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data</span><br><span class="line">        <span class="variable language_">self</span>.grad = <span class="number">0.0</span></span><br><span class="line">        <span class="variable language_">self</span>.children = children      <span class="comment"># (左子, 右子)</span></span><br><span class="line">        <span class="variable language_">self</span>.op = op                  <span class="comment"># 操作名，用于调试</span></span><br><span class="line">        <span class="variable language_">self</span>.requires_grad = requires_grad</span><br><span class="line">        <span class="variable language_">self</span>._backward = <span class="keyword">lambda</span>: <span class="literal">None</span>  <span class="comment"># 反向函数，稍后赋值</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__add__</span>(<span class="params">self, other</span>):</span><br><span class="line">        out = Tensor(<span class="variable language_">self</span>.data + other.data, (<span class="variable language_">self</span>, other), <span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">_backward</span>():</span><br><span class="line">            <span class="variable language_">self</span>.grad += out.grad * <span class="number">1.0</span></span><br><span class="line">            other.grad += out.grad * <span class="number">1.0</span></span><br><span class="line">        out._backward = _backward</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__mul__</span>(<span class="params">self, other</span>):</span><br><span class="line">        out = Tensor(<span class="variable language_">self</span>.data * other.data, (<span class="variable language_">self</span>, other), <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">_backward</span>():</span><br><span class="line">            <span class="variable language_">self</span>.grad += out.grad * other.data</span><br><span class="line">            other.grad += out.grad * <span class="variable language_">self</span>.data</span><br><span class="line">        out._backward = _backward</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">relu</span>(<span class="params">self</span>):</span><br><span class="line">        out = Tensor(<span class="built_in">max</span>(<span class="number">0</span>, <span class="variable language_">self</span>.data), (<span class="variable language_">self</span>,), <span class="string">&#x27;ReLU&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">_backward</span>():</span><br><span class="line">            <span class="variable language_">self</span>.grad += out.grad * (<span class="number">1.0</span> <span class="keyword">if</span> <span class="variable language_">self</span>.data &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0.0</span>)</span><br><span class="line">        out._backward = _backward</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 拓扑排序（DFS 后序遍历）</span></span><br><span class="line">        topo = []</span><br><span class="line">        visited = <span class="built_in">set</span>()</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">build_topo</span>(<span class="params">v</span>):</span><br><span class="line">            <span class="keyword">if</span> v <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">                visited.add(v)</span><br><span class="line">                <span class="keyword">for</span> child <span class="keyword">in</span> v.children:</span><br><span class="line">                    build_topo(child)</span><br><span class="line">                topo.append(v)</span><br><span class="line">        build_topo(<span class="variable language_">self</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 反向传播（逆序调用 _backward）</span></span><br><span class="line">        <span class="variable language_">self</span>.grad = <span class="number">1.0</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> <span class="built_in">reversed</span>(topo):</span><br><span class="line">            node._backward()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">x = Tensor(<span class="number">2.0</span>)</span><br><span class="line">w = Tensor(<span class="number">3.0</span>)</span><br><span class="line">b = Tensor(<span class="number">4.0</span>)</span><br><span class="line">y = x * w + b          <span class="comment"># y = 2*3 + 4 = 10</span></span><br><span class="line">loss = y * y           <span class="comment"># loss = 100</span></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;dy/dx = <span class="subst">&#123;x.grad&#125;</span>&quot;</span>)   <span class="comment"># 60.0 ✅</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;dy/dw = <span class="subst">&#123;w.grad&#125;</span>&quot;</span>)   <span class="comment"># 40.0 ✅ (dy/dw = 2*x*y = 2*2*10=40)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;dy/db = <span class="subst">&#123;b.grad&#125;</span>&quot;</span>)   <span class="comment"># 20.0 ✅ (dy/db = 2*y = 20)</span></span><br></pre></td></tr></table></figure>
+<h2 id="第五讲">第五讲</h2>
+<blockquote>
+<p>卷积把像素组合成了特征</p>
+</blockquote>
+<h3 id="第一部分：CNN-的四大哲学根基（它凭什么有效？）">第一部分：CNN 的四大哲学根基（它凭什么有效？）</h3>
+<ol>
+<li><strong>局部感受野</strong>：全连接网络认为“像素远隔千里也有关联”，这导致参数量爆炸。CNN 认为**“近朱者赤”**——图像中，只有相邻的像素才有强相关性。每个神经元只需关注输入数据的一个小局部（如 3x3 区域）。</li>
+<li><strong>权值共享</strong>：一个在图像左上角检测“竖线”的卷积核，移动到右下角时<strong>参数完全不变</strong>。这赋予了 CNN <strong>平移不变性</strong>（无论猫在画面哪里，同一个卷积核都能找到它），同时将参数量从百万级骤降至几百级。</li>
+<li><strong>层次化特征提取</strong>：CNN 是一台“从具体到抽象”的提取机。浅层学<strong>点线面</strong>（边缘、颜色斑块），中层学<strong>组件</strong>（眼睛、轮子），深层学<strong>语义</strong>（人脸、汽车）。</li>
+<li><strong>空间维度保持</strong>：与全连接层压平输入不同，卷积操作保持输入的二维拓扑结构（高和宽），这让网络能理解“上下左右”的位置关系。</li>
+</ol>
+<hr>
+<h3 id="第二部分：五大核心部件（网络由什么构成？）">第二部分：五大核心部件（网络由什么构成？）</h3>
+<p>一个标准的 CNN 通常由以下 5 种层堆叠而成：</p>
+<ul>
+<li><strong>① 输入层</strong>：原始像素矩阵（如 ( 224 \times 224 \times 3 )）。通常需要归一化（减均值除方差），防止梯度爆炸。</li>
+<li><strong>② 卷积层</strong>：特征提取的核心引擎。包含多个可学习的<strong>卷积核</strong>（滤波器）。它们在输入上滑动，做<strong>点积运算</strong>（注意：不是矩阵乘法，是逐元素乘加）。</li>
+<li><strong>③ 激活函数层</strong>：引入非线性。早年用 Sigmoid（易饱和），现在<strong>ReLU（线性修正单元）及其变体</strong>是绝对主流（计算快、缓解梯度消失）。</li>
+<li><strong>④ 池化层</strong>：降采样操作（如 Max Pooling / Average Pooling）。作用是<strong>增大感受野</strong>、降低计算量、提供轻微的平移不变性（微小位移不影响最大响应值）。<strong>注意：现代大模型（如 ViT）已开始摒弃池化，用步长卷积替代。</strong></li>
+<li><strong>⑤ 全连接层</strong>：网络的“决策者”。位于末端，将卷积提取的高维特征图压平（Flatten），映射到样本标签空间（如分类的 1000 个类别）。<br>
+好的，我们来把<strong>第四部分：现代CNN的进化</strong>彻底掰开揉碎。这不仅是网络结构的堆叠史，更是一部<strong>解决“深度”带来的顽疾</strong>的战役史。</li>
+</ul>
+<p>为了让你获得“肌肉记忆”般的理解，我们不讲抽象概念，而是直接代入**“信号如何穿过网络”**的第一人称视角。</p>
+<hr>
+<h3 id="进化起点：直筒网络的致命伤（梯度消失）">进化起点：直筒网络的致命伤（梯度消失）</h3>
+<p>早期的AlexNet（8层）和VGG（19层）是“直筒”——数据像子弹一样从枪口（输入）打进，必须笔直穿透枪管（每一层）到达枪托（输出）。</p>
+<p><strong>数学灾难</strong>：假设每层反向传播时梯度乘以权重 ( w )（通常 ( |w| &lt; 1 )）。经过50层后，梯度变成 ( 0.9^{50} \approx 0.005 )。<strong>浅层卷积核几乎接收不到梯度</strong>，它们永远不会更新，网络陷入“前50层随机瞎猜，后50层拼命拟合”的死局。</p>
+<hr>
+<h3 id="进化一：残差连接-——-深度网络的“高速公路”与“差分放大器”">进化一：残差连接 —— 深度网络的“高速公路”与“差分放大器”</h3>
+<p><strong>（这是CNN历史上最伟大的单一突破，2015年ResNet提出）</strong></p>
+<p><strong>1. 结构颠覆</strong><br>
+传统直筒：( \text{输出} = \text{卷积层}(\text{输入}) )  （记为 ( F(x) )）<br>
+残差块：( \text{输出} = \text{卷积层}(\text{输入}) + \text{输入} )  （记为 ( F(x) + x )）</p>
+<p><strong>2. 彻底改变学习目标</strong><br>
+网络不再苦学“这张图到底是什么”（这是大海捞针），而是只学**“输入和输出之间的细微差异（残差）”**。</p>
+<ul>
+<li><strong>直观比喻</strong>：让你画一头大象（( x )），如果直接画，很难。但如果给你一张模糊的象图（( x )），让你<strong>只修改画错的小细节</strong>（比如把鼻子加长点，耳朵改圆点，即 ( F(x) )），这就极其简单。</li>
+<li><strong>数学铁壁</strong>：反向传播时，梯度路径有两条：一条穿过卷积层（可能衰减），另一条<strong>直接恒等映射</strong>（梯度 = 1，无损通过）。这保证了哪怕网络有1000层，浅层也能收到最强力的梯度信号。</li>
+</ul>
+<p><strong>3. 实战变体（你遇到的预训练模型大部分都是这个）</strong></p>
+<ul>
+<li><strong>Bottleneck（瓶颈块）</strong>：用于ResNet-50/101。顺序是 <strong>1x1卷积（降维）→ 3x3卷积（空间提取）→ 1x1卷积（升维）</strong>。1x1卷积负责压缩计算量，使得3x3卷积只在极低的通道数（如64）上运算，速度极快。</li>
+</ul>
+<hr>
+<h3 id="进化二：空洞卷积-——-不增加参数却“撑大”感受野">进化二：空洞卷积 —— 不增加参数却“撑大”感受野</h3>
+<p><strong>（专为语义分割、目标检测等密集预测任务而生）</strong></p>
+<p><strong>1. 核心痛点</strong>：如果想看到更大的范围（感受野），传统做法是堆叠更多层或加大卷积核（如7x7）。但这要么让网络变慢，要么让参数量爆炸。<br>
+<strong>2. 惊人之举</strong>：在3x3的卷积核像素之间插入<strong>空洞（0值间隔）</strong>。</p>
+<ul>
+<li><strong>rate=1</strong>：标准3x3，感受野3x3。</li>
+<li><strong>rate=2</strong>：相当于5x5的核（但只有9个点有参数，中间插了0），参数量不变，<strong>感受野扩展到5x5</strong>。</li>
+<li><strong>rate=4</strong>：感受野扩展到9x9。</li>
+</ul>
+<p><strong>3. 别名“Atrous Convolution”</strong>：如同在密集的像素中打井，让你站在3楼（小核）却能俯视9楼（大感受野）的风景。常用在DeepLab系列中，在不缩小特征图尺寸的前提下聚合多尺度上下文信息。</p>
+<hr>
+<h3 id="进化三：1x1卷积-——-通道间的“外交部长”">进化三：1x1卷积 —— 通道间的“外交部长”</h3>
+<p><strong>（由Network in Network提出，被Google Inception发扬光大）</strong></p>
+<p>很多人初见1x1时不屑一顾：“1x1能提取什么空间特征？” 但它根本不看空间，它只做一件事：<strong>跨通道的特征融合</strong>。</p>
+<ul>
+<li><strong>假设输入</strong>：( 56 * 56 * 256 )。</li>
+<li><strong>操作</strong>：1x1卷积核本质是一个长度为256的权重向量。它在每个像素位置上，将256个通道的数值进行<strong>加权线性组合</strong>，输出一个新值。</li>
+<li><strong>两大神效</strong>：
+<ol>
+<li><strong>灵活降维</strong>：用32个1x1核，瞬间把256通道压成32通道，计算量骤降（后续3x3卷积的运算量只有原来的1/8）。</li>
+<li><strong>增加非线性</strong>：先降维，后接ReLU，再升维，这相当于在通道维度上引入了一个“小型全连接网络”，极大提升了模型的表达能力。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="进化四：深度可分离卷积-——-移动端的“省油利器”">进化四：深度可分离卷积 —— 移动端的“省油利器”</h3>
+<p><strong>（MobileNet、EfficientNet的基石，将标准卷积的计算量砍到1/9）</strong></p>
+<p><strong>1. 拆解标准卷积</strong>：标准卷积是“空间提取+通道融合”一步到位。<br>
+<strong>2. 强行拆分两步</strong>：</p>
+<ul>
+<li><strong>第一步（Depthwise，逐深度卷积）</strong>：输入有几个通道，就用几个独立的2D卷积核。<strong>只提取空间特征，绝不融合通道</strong>。输入3通道，输出仍是3通道（计算量 = ( 3 \times 3 \times 3 \times H \times W )）。</li>
+<li><strong>第二步（Pointwise，逐点卷积）</strong>：用1x1卷积对上一步的输出进行<strong>通道融合</strong>，升降维度全靠这一步</li>
+</ul>
+<hr>
+<p><strong>计算量对比</strong></p>
+<ul>
+<li>
+<p><strong>标准卷积</strong><br>
+计算量为：<br>
+<code>K x K x C_in x C_out</code></p>
+</li>
+<li>
+<p><strong>深度可分离卷积</strong><br>
+计算量为：<br>
+<code>K x K x C_in + C_in x C_out</code></p>
+</li>
+</ul>
+<p>当输出通道数 <code>C_out</code> 较大时，深度可分离卷积的计算量约为标准卷积的 <strong>1/9 ~ 1/8</strong>。</p>
+<h3 id="进化五：分组卷积与Shuffle-——-多GPU的“协作分赃”">进化五：分组卷积与Shuffle —— 多GPU的“协作分赃”</h3>
+<ul>
+<li><strong>起源</strong>：2012年AlexNet用两张GTX 580训练，被迫将卷积核分成两组，分别在不同GPU上运算，这叫分组卷积（Group Convolution）。</li>
+<li><strong>现代妙用</strong>：分组卷积切断了组间信息交流（信息隔离），导致性能下降。<strong>ShuffleNet</strong> 发明了“通道混洗”（Channel Shuffle）：将分组卷积后的输出通道重新打乱排列，再送入下一组，相当于强制不同组之间“互通有无”，在不增加计算量的前提下恢复了信息流通。</li>
+</ul>
+<hr>
+<h3 id="进化六：动态卷积与注意力机制（CNN的“开眼看世界”）">进化六：动态卷积与注意力机制（CNN的“开眼看世界”）</h3>
+<p><strong>（2020年后，CNN吸收了Transformer的注意力思想）</strong></p>
+<p><strong>1. 传统静态卷积</strong>：卷积核训练完后，无论输入是猫还是车，核权重一动不动。这很死板。<br>
+<strong>2. 动态卷积（CondConv/DY-CNN）</strong>：根据输入图像的内容，<strong>动态加权组合多个卷积核</strong>。比如输入模糊，就用锐化核权重高一点；输入纹理丰富，就用平滑核权重高一点。每个样本都有专属的卷积核。<br>
+<strong>3. 通道注意力（SENet，2017年ImageNet冠军）</strong>：它像一个“内部监工”，先全局池化压缩每个通道为一个数值，然后用全连接层学习出<strong>每个通道的重要性权重（0~1之间）</strong>，再乘回原特征图。<strong>重要的通道（如“眼睛”特征）放大，不重要的（如“背景噪声”）抑制</strong>。这是第一个将注意力引入CNN的里程碑。</p>
+<hr>
+<h3 id="终极认知：现代CNN的“标准模板”">终极认知：现代CNN的“标准模板”</h3>
+<p>现在（2026年），你在工业界看到的最标准CNN（如ResNeXt、EfficientNet）基本遵循以下黄金组合：</p>
+<blockquote>
+<p><strong>前段（Stem）</strong>：一个大步长卷积 + 最大池化（快速压缩空间尺寸）。<br>
+<strong>中段（Body）</strong>：堆叠 <strong>“残差连接 + 深度可分离卷积（或分组卷积） + 通道注意力（SE模块）”</strong> 的复合块。这是效率与精度的平衡点。<br>
+<strong>末段（Head）</strong>：全局平均池化（取代全连接层，减少过拟合） + 一个分类全连接层。</p>
+</blockquote>
+<hr>
+<ul>
+<li>池化层的池化之间最好不要有重叠，因为我们的目的是减少样本量，而不考察区域之间的相关性 作用是增大感受野、降低计算量、提供轻微的平移不变性（微小位移不影响最大响应值）。注意：现代大模型（如 ViT）已开始摒弃池化，用步长卷积替代。</li>
+<li>残差网络:输出等于卷积层(输入)+输入，可将梯度直接回传到起点</li>
 </ul>
 
     </div>
