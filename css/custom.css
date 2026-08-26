@@ -8,6 +8,17 @@
 /* ===== 页面主体文字 ===== */
 body {
   color: #e8f0fe !important;
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", "Microsoft JhengHei", Arial, sans-serif !important;
+}
+
+/* 强制正文/标题/卡片使用中文字体（覆盖 font-family: initial），但保留代码等宽字体 */
+body, h1, h2, h3, h4, h5, h6, p, div, span, a, li, td, th, .article-title, .post-title {
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", "Microsoft JhengHei", Arial, sans-serif !important;
+}
+
+/* 代码块保持等宽字体 */
+code, pre, kbd, samp, .highlight, #article-container code {
+  font-family: Consolas, Monaco, "Courier New", monospace !important;
 }
 
 /* ===== 布局：文章页隐藏右侧栏并全宽 ===== */
