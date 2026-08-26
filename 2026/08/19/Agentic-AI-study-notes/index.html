@@ -1,0 +1,509 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Agentic AI study notes | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="��ɬ�Ľ�ѵ ����һ����Ҫ�Ľ�ѵ��Ȼ���������˹�����������δ��ȫ��ȡ�����ѵ����Ϊ�������ڲ��Ϸ���ͬ�Ĵ���Ҫ������Щ�������Ǳ����������ǵ������������Ǳ���ѧ�������ɬ�Ľ�ѵ����ͼ������˼ά��������ʽֱ��ֲ���˹�����ϵͳ���ӳ�Զ�������в�ͨ�ġ���ʷ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agentic AI study notes">
+<meta property="og:url" content="http://example.com/2026/08/19/Agentic-AI-study-notes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="��ɬ�Ľ�ѵ ����һ����Ҫ�Ľ�ѵ��Ȼ���������˹�����������δ��ȫ��ȡ�����ѵ����Ϊ�������ڲ��Ϸ���ͬ�Ĵ���Ҫ������Щ�������Ǳ����������ǵ������������Ǳ���ѧ�������ɬ�Ľ�ѵ����ͼ������˼ά��������ʽֱ��ֲ���˹�����ϵͳ���ӳ�Զ�������в�ͨ�ġ���ʷ">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-08-19T02:20:59.000Z">
+<meta property="article:modified_time" content="2026-08-24T13:22:54.011Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Agentic AI study notes",
+  "url": "http://example.com/2026/08/19/Agentic-AI-study-notes/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-08-19T02:20:59.000Z",
+  "dateModified": "2026-08-24T13:22:54.011Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/08/19/Agentic-AI-study-notes/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Agentic AI study notes',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">Agentic AI study notes</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Agentic AI study notes</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-08-19T02:20:59.000Z" title="Created 2026-08-19 10:20:59">2026-08-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-08-24T13:22:54.011Z" title="Updated 2026-08-24 21:22:54">2026-08-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<h1>��ɬ�Ľ�ѵ</h1>
+<p>����һ����Ҫ�Ľ�ѵ��Ȼ���������˹�����������δ��ȫ��ȡ�����ѵ����Ϊ�������ڲ��Ϸ���ͬ�Ĵ���Ҫ������Щ�������Ǳ����������ǵ������������Ǳ���ѧ�������ɬ�Ľ�ѵ����ͼ������˼ά��������ʽֱ��ֲ���˹�����ϵͳ���ӳ�Զ�������в�ͨ�ġ���ʷ�Ѿ�����֤����</p>
+<ul>
+<li>AI �о���������ͼ���������й���֪ʶ��</li>
+<li>�ڶ����ڣ����ַ���ȷʵ�ܴ���һ���������������о��߸е����㡣</li>
+<li>���ӳ�Զ���������ַ�����Ч�����ջ�ﵽƿ���������谭��һ����չ��</li>
+<li>���յ�ͻ��������ͨ����ȫ�෴�ķ���ʵ�ֵġ�����ͨ��������ѧϰ����չ�����ģ��</li>
+</ul>
+<p>���յĳɹ��������п�ɬ��ζ������Ϊ���Ƕ������������巽���ĵ߸������ֳɹ��������Ա���ȫ���ܣ���Ϊ�������о���Ա�����������Ӱ������ۿ�ܡ�</p>
+<h2 id="Ӧ�oӿ�ɬ�L�ѵ��ѧ��ʲo��">Ӧ�ôӿ�ɬ�Ľ�ѵ��ѧ��ʲô��</h2>
+<p>���ȣ�����Ӧ����ʶ��ͨ�÷�����ǿ��֮������Щ���ż������������Ӷ��ܲ�����չ�ķ�����������ֵ���о��ġ���Ŀǰ�ľ���������������ѧϰ��Ψ�����ڼ����������������������������չ�ķ�����</p>
+<p>��Σ�����Ӧ����ʶ��������˼ά�����ݱ������Ǽ��临�ӵģ��������޷����ɵġ�����Ӧ�÷�����Щ��ͼ�ü򵥹���������˼ά���ݵĳ��ԣ�����Կռ䡢���塢�������塢�Գ��Եļ򵥽�ģ��������Щ�����ⲿ���籾���ϸ��ӵ�һ���֣�������Ӧ��ֱ�ӹ�����AIϵͳ�е����ݡ�����Ӧ�ñ�������ϵͳ������Щ�ܹ����ֺͲ�׽���ָ����Ե�Ԫ��������Щ�����ĺ��������������ҵ��õĽ��ƽ⣬�������������Ӧ����AI�Լ���ɣ�������������Ԥ�衣</p>
+<p>����ϣ��AI��������һ��ȥ��������������Ǽ򵥵ظ��������Ѿ����ֵ�֪ʶ��������ǽ����е�֪ʶӲ���뵽ϵͳ�У���������AI�������ⷢ�ֹ��̱�������ν��еġ�</p>
+</blockquote>
+<h2 id="��һ��">��һ��</h2>
+<ul>
+<li>Ԥѵ��</li>
+<li>����ǿ��ѧϰ(ȥ˼����֪���д𰸵�����)(ģ�Ϳ���Ѱ������а����󻯽���)</li>
+<li>�Ի�ǿ��ѧϰ(��ѵ��)</li>
+<li>΢��(һ���µ������?���Զ�סǰ��Ȩ�ػ��߲��ֽⶳ�����������µľ��������ԭ��)</li>
+</ul>
+<p><strong>�ڵ������ݵı߼�����Զ�����㷨�ĵ���,�㻹��Ҫѧ��������Ľ�չ</strong></p>
+<h3 id="��������">��������</h3>
+<h3 id="�׶�һ�����ݲɼ����ȡ">�׶�һ�����ݲɼ����ȡ</h3>
+<p>�����������̵���㣬Ŀ���ǴӾ����ܹ㷺����Դ�ռ������ı����ݡ�</p>
+<ul>
+<li><strong>��Ҫ��Դ</strong>��������Ҫ���Թ�������ҳ����Common Crawl��Ŀ������������������������ҳ���գ�����Դ���ݼ�����ά���ٿơ��鼮��ѧ�����ģ�������⣨��GitHub�����Լ�һЩ��������ר�����ݡ�</li>
+<li><strong>���ݹ�ģ</strong>��Ϊѵ��һ��������ģ�ͣ�ԭʼ���ݵĹ�ģͨ����ﵽ<strong>����TB����PB����</strong>���������γɵ�ѵ�����ݼ���������<strong>100���ڸ�Token</strong>��</li>
+</ul>
+<h3 id="�׶ζ���������ϴ�����">�׶ζ���������ϴ�����</h3>
+<p>�˽׶������ݴ����ĺ��ģ�Ŀ����ȥ��ԭʼ�����еġ����������������������ı�����ͨ����һ���ಽ�����ˮ�ߡ�</p>
+<ol>
+<li><strong>����ʶ�������</strong>��ʹ�ù��ߣ���fastText��ʶ���ı����֣�������Ŀ�����ԣ������ġ�Ӣ�ģ������ݣ����˵��������ֵ��ı���</li>
+<li><strong>����ʽ�������ϴ</strong>��ͨ���ƶ������������ı������磬ɾ���ظ��ĵ�����������ҳ��ģ�����ݣ�ͳһ�ı����루ͳһתΪUTF-8�����޸����룻�Ƴ�HTML��ǩ����������š�</li>
+<li><strong>�������������</strong>�����Ǹ��߼���һ����ͨ��һЩָ�꣨������ȡ����������������ŷֲ��ȣ����ĵ��������д�֣����˵������͵ġ�������Ļ�������ɵ������ı�����ǰ�ص������ǣ����������ô�ģ���Լ���ѧϰ���ɺ��ƶ���ϴ����</li>
+</ol>
+<h3 id="�׶���������z��������">�׶���������ȥ��������</h3>
+<p>�˽׶�ּ���������ݵġ���Ϣ�ܶȡ�����ȷ�����ݵĺϷ����밲ȫ�ԡ�</p>
+<ul>
+<li><strong>ȥ��</strong>���ظ����ݻ���ģ�Ͳ���ƫ�����˷�������ȥ�ط�Ϊ�������棺
+<ul>
+<li><strong>��ȷȥ��</strong>������URL���ı��Ĺ�ϣֵ����MD5��ֱ��ɾ����ȫ��ͬ���ĵ���</li>
+<li><strong>ģ��ȥ��</strong>��ʹ��MinHash��LSH���ֲ����й�ϣ�����㷨���ҳ���ɾ�����ݸ߶����ƣ�����޸ļ����֣����ĵ������ܸ���Ч���������ݶ����ԡ�</li>
+</ul>
+</li>
+<li><strong>��˽�밲ȫ���ˣ�������</strong>��Ϊ���Ϸ��沢����ģ�����������Ϣ����Ҫɾ�����滻�ı��еĸ�����˽��Ϣ��������֤�š����䡢�绰���룩�������˵���ޡ��������к����ݡ�</li>
+</ul>
+<h3 id="�׶��g��ִʣ�Tokenization������">�׶��ģ��ִʣ�Tokenization������</h3>
+<p>����Ԥ������ˮ�ߵ����һ��������ϴ�õ��ı�ת����ģ�Ϳ��ԡ��Ķ��������ָ�ʽ��</p>
+<ol>
+<li><strong>ѵ���ִ���</strong>�����������Ͽ���ѵ��һ���ִ�����ͨ��ʹ��<strong>BPE���ֽڶԱ��룩</strong> �㷨�������ı��зֳ�һ�����ŵ��Ӵʣ�subword���ʱ�����ƽ��ģ��Ч�����δ��¼�ʣ�OOV���Ĵ���������</li>
+<li><strong>Tokenization�����л�</strong>��ʹ��ѵ���õķִ�������ȫ���ı��зֳ�Token����Ԫ������ת��Ϊ��Ӧ������ID��</li>
+<li><strong>�����ѵ����ʽ</strong>��Ϊ�˷���ѵ��ʱ���ٶ�ȡ����ЩID���лᱻ������ض��Ķ����Ƹ�ʽ����<strong>MMAP���ڴ�ӳ���ļ���</strong> ��ʽ��ͨ������<code>.bin</code>��<code>.idx</code>�����ļ��������ָ�ʽ�������������ݼ����ٶȡ�</li>
+</ol>
+<hr>
+<h3 id="1-g�͹�g�������g����Y��ɡ�-Scaling-Laws">1. ģ�͹�ģ�������ġ����Ŷ��ɡ� (Scaling Laws)</h3>
+<p>����AI�����������ġ�����֮һ����OpenAI��2020����������ĺ���˼�������һ�仰������<strong>ģ�͵����������ģ����������������������������֮����ѭһ����Ԥ������ɹ�ϵ</strong>��</p>
+<ul>
+<li><strong>��˵����</strong>�������ģ�Ͳ���������һ����ѵ����������һ���������ʱ���ӳ�һ��ʱ��ģ�͵������������ڲ��Լ��ϵ�׼ȷ�ʣ�����һ���ȶ�����Ԥ�������������ֻҪͶ�������Դ��ģ�;ͻ��ø�����������</li>
+<li><strong>ʵ������</strong>�����ù�˾���ں�����������ȥѵ��ǧ�ڡ����ڲ�����ģ�ͣ���Ϊ���ǿ�����С��ģʵ������֤���ɣ�Ȼ��ȷԤ������ģͶ�������ܻر�������˵�����������漣��������������ݾ������Ŷ��ɡ�</li>
+</ul>
+<hr>
+<h3 id="2-��չ�����ĳ��ȵg�λ�n������s�-Positional-Encoding-Scaling">2. ��չ�����ĳ��ȵġ�λ�ñ������š� (Positional Encoding Scaling)</h3>
+<p>��ֱ�ӹ�����ղ��ʵġ���ô���������ĳ��ȡ�����������ģ�ʹ�����ѵ��ʱ���ö���ı�ʱ�������������λ�ñ��루����������õ�RoPE��������ġ����š�ָ�ľ���<strong>��λ������ֵ���С�ѹ���������족</strong>������Ӧ�µĳ��ȡ�</p>
+<ul>
+<li><strong>��������</strong>��ģ�;���һ��ֻѧ����100���ܵ����ܲ����˶�Ա����ͻȻ������1000�ף�������Ϊλ����Ϣ�����١�����֪���루ע��������ʧЧ����</li>
+<li><strong>��ô������ֵ����</strong>�����������ǡ�λ�ò�ֵ������ԭʼλ����������0, 1, 2, …, 8000�����ձ���<strong>����</strong>��ӳ�䵽�µġ������������Χ����0, 1, 2, …, 128000����������ģ�Ϳ����ġ�λ�����֡���Ȼ������Ϥ�ķ�Χ�ڣ��൱�ڰѾɵ�λ�ñ��롰���족��Ӧ�õ��³����ϡ�</li>
+<li><strong>����΢��</strong>���������֡����š���ģ��ͨ������Ҫ��С���ĳ��ı��Ͻ��ж��ݵġ�΢������������Ӧ�����µ�λ��ӳ���ϵ�����վ����ȶ��ش��������������ˡ�</li>
+</ul>
+<h3 id="sft��������������">sft��������������</h3>
+<ul>
+<li>�߼�llm������</li>
+<li>��֤����ɸѡ����(deepseek-R1)</li>
+</ul>
+<h2 id="o��ѧϰ����-PPO-GRPO">ǿ��ѧϰ����(PPO GRPO)</h2>
+<hr>
+<h2 id="PPO-vs-GRPO-����Աoʼ�">PPO vs GRPO ����Աȱʼ�</h2>
+<h3 id="1-����һ�仰">1. ����һ�仰</h3>
+<table>
+<thead>
+<tr>
+<th>�㷨</th>
+<th>����˼��</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPO</strong></td>
+<td>��Ҫһ��<strong>����ļ�ֵģ�ͣ�Critic��</strong>��Ԥ����������Ϊ����׼�ߡ�</td>
+</tr>
+<tr>
+<td><strong>GRPO</strong></td>
+<td><strong>������ֵģ��</strong>����<strong>ͬһ���ش��ƽ����</strong>��Ϊ����׼�ߡ�</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="2-ѵ��ʱ���ص�g������">2. ѵ��ʱ���ص�ģ������</h3>
+<table>
+<thead>
+<tr>
+<th>�㷨</th>
+<th>ģ������</th>
+<th>��������Щ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPO</strong></td>
+<td><strong>4 ��</strong></td>
+<td>����ģ�� + �ο�ģ�� + ����ģ�� + <strong>��ֵģ��</strong></td>
+</tr>
+<tr>
+<td><strong>GRPO</strong></td>
+<td><strong>3 ��</strong></td>
+<td>����ģ�� + �ο�ģ�� + ����ģ�ͣ�<strong>�޼�ֵģ��</strong>��</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>ע���������ģ���ù�����֤������������������GRPO �ɼ��� <strong>2 ��</strong>��</p>
+</blockquote>
+<hr>
+<h3 id="3-����׼�ߣ�Baseline������������">3. ����׼�ߣ�Baseline������������</h3>
+<p>����������ʵ�����</p>
+<table>
+<thead>
+<tr>
+<th>�㷨</th>
+<th>��׼����Դ</th>
+<th>ͨ�׽���</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPO</strong></td>
+<td><strong>��ֵģ�ͣ�Critic��</strong>��̬Ԥ��</td>
+<td>�࿼��ʦԤ��������һ������ȥ�������ܵü��֡�</td>
+</tr>
+<tr>
+<td><strong>GRPO</strong></td>
+<td><strong>ͬһ����� N ���ش��ƽ����</strong></td>
+<td>�� N ���ش�����Ϊ�����������˭��Ը���</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="4-�������̶Աou����l���">4. �������̶Աȣ����ſ���</h3>
+<table>
+<thead>
+<tr>
+<th>����</th>
+<th>PPO</th>
+<th>GRPO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>�� ����</strong></td>
+<td>����ģ������ 1 ���ش�</td>
+<td>����ģ������ <strong>N ��</strong>�ش��� 8 ����</td>
+</tr>
+<tr>
+<td><strong>�� ���</strong></td>
+<td>����ģ�͸��� 1 ���ش���</td>
+<td>����ģ�͸��� N ���ش�<strong>�ֱ�</strong>���</td>
+</tr>
+<tr>
+<td><strong>�� ���׼��</strong></td>
+<td>��ֵģ��Ԥ�����״̬����������</td>
+<td>������ N ��������<strong>ƽ��ֵ</strong></td>
+</tr>
+<tr>
+<td><strong>�� ������</strong></td>
+<td>ʵ�ʷ��� ? ��ֵģ��Ԥ��ֵ</td>
+<td>��ʵ�ʷ��� ? ����ƽ���֣�/ ��׼���<strong>��һ��</strong>��</td>
+</tr>
+<tr>
+<td><strong>�� ����</strong></td>
+<td>�á����ơ�ָ������ģ�͸���</td>
+<td>�á���һ�������Է�����ָ������ģ�͸���</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="6-���ⲹ�䣨��չ�ʼae�">6. ���ⲹ�䣨��չ�ʼǣ�</h3>
+<ul>
+<li><strong>KL ɢ�ȳͷ�</strong>�����߶��У�������ֹ����ģ��ƫ��ο�ģ��̫Զ����ֹ��ѧ��������</li>
+<li><strong>GRPO �ĵ�������</strong>��DeepSeek �Ŷ�Ϊ��� PPO ѵ������ģ�ͣ��� 671B ������ʱ�Դ�Ų��� 4 ��ģ�͵�����������</li>
+<li><strong>GRPO ������</strong>�����ͬһ�� N ���ش������ܲ��׼�߻ᡰ����ƫ�ơ����������Ĵ𰸱����������</li>
+</ul>
+<hr>
+<p><strong>GPU��ƿ���Ƿ������ݣ�</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/08/19/Agentic-AI-study-notes/">http://example.com/2026/08/19/Agentic-AI-study-notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/08/19/%E5%85%B3%E4%BA%8E-NAA/" title="关于 NAA"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">关于 NAA</div></div><div class="info-2"><div class="info-item-1"> 这篇文章关注的是去量化每个神经元对输出的实际贡献，采取了积分梯度的方法，也就是去积分图像从0到1路上输出对神经元的梯度以及像素对神经元的影响(衡量这个神经元本身的变化)。作者把像素对神经元的影响简化为了实际图像从0到1的过程中神经元的变化量，这在数学上不严谨，但是经过后验证明是可行的。  NAA (Neuron Attribution-based Attack) 论文阅读笔记 1. 论文信息  标题: Neuron Attribution-based Attack (NAA) 任务: 黑盒迁移攻击 (Black-box Transfer-based Attack)  2. 核心问题 2.1 研究背景  DNNs 易受对抗样本攻击，黑盒攻击最符合现实场景 迁移攻击（在替代模型上生成，去攻击目标模型）最实用 特征级攻击比输出级攻击迁移性更好  2.2 现有方法的缺陷    方法 做法 缺陷     NRDM 所有神经元一视同仁 ❌ 不区分正负特征   FDA 用平均激活值区分正负 ❌ 只分极性，不分大小   FIA 用“激活值×梯度”衡量重要性 ❌ 梯度饱和，估计不准    核心问...</div></div></div></a><a class="pagination-related" href="/2026/08/18/%E5%85%B3%E4%BA%8EFIA/" title="关于FIA"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">关于FIA</div></div><div class="info-2"><div class="info-item-1">   不同网络会提取专属特征（exclusive features）来适应自己的数据分布，这导致模型特定的特征表示（model-specific feature representation）。 这种方法在寻找诸多扰动下最能影响分辨结果的特征，避开过拟合到原模型的缺点，以提升模型的迁移性     这个方法攻击的是中间层也就是特征，在中间层产生了对物体的模糊感知而又没有完全定型，然后往前推算出对应的输入改变(随机丢弃像素)(还有许多贴近现实的扰动方法)    FIA 方法总结（含公式版）  一、核心思想（一句话）  用聚合梯度找到跨模型一致的“重要特征”，然后有选择地破坏它们。   二、三步走（含公式） 第1步：找重要特征——聚合梯度                    #mjx-ff75442{         display:contents;         mjx-assistive-mml {           user-select: text !important;           clip: auto !important;           color:...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">��ɬ�Ľ�ѵ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%D3%A6%EF%BF%BDo%D3%BF%EF%BF%BD%C9%AC%EF%BF%BDL%EF%BF%BD%D1%B5%EF%BF%BD%EF%BF%BD%D1%A7%EF%BF%BD%EF%BF%BD%CA%B2o%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.1.</span> <span class="toc-text">Ӧ�ôӿ�ɬ�Ľ�ѵ��ѧ��ʲô��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BF%BD%EF%BF%BD%D2%BB%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.</span> <span class="toc-text">��һ��</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.1.</span> <span class="toc-text">��������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BF%BD%D7%B6%EF%BF%BD%D2%BB%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%DD%B2%C9%BC%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C8%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">�׶�һ�����ݲɼ����ȡ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BF%BD%D7%B6%CE%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CF%B4%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.3.</span> <span class="toc-text">�׶ζ���������ϴ�����</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BF%BD%D7%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDz%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.4.</span> <span class="toc-text">�׶���������ȥ��������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BF%BD%D7%B6%EF%BF%BD%EF%BF%BDg%EF%BF%BD%EF%BF%BD%D6%B4%CA%A3%EF%BF%BDTokenization%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.5.</span> <span class="toc-text">�׶��ģ��ִʣ�Tokenization������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-g%EF%BF%BD%CD%B9%EF%BF%BDg%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDg%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDY%EF%BF%BD%EF%BF%BD%C9%A1%EF%BF%BD-Scaling-Laws"><span class="toc-number">1.2.6.</span> <span class="toc-text">1. ģ�͹�ģ�������ġ����Ŷ��ɡ� (Scaling Laws)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%EF%BF%BD%EF%BF%BD%D5%B9%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C4%B3%EF%BF%BD%EF%BF%BD%C8%B5g%EF%BF%BD%CE%BB%EF%BF%BDn%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDs%EF%BF%BD-Positional-Encoding-Scaling"><span class="toc-number">1.2.7.</span> <span class="toc-text">2. ��չ�����ĳ��ȵġ�λ�ñ������š� (Positional Encoding Scaling)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sft%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.8.</span> <span class="toc-text">sft��������������</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#o%EF%BF%BD%EF%BF%BD%D1%A7%CF%B0%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD-PPO-GRPO"><span class="toc-number">1.3.</span> <span class="toc-text">ǿ��ѧϰ����(PPO GRPO)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PPO-vs-GRPO-%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%D4%B1o%CA%BC%EF%BF%BD"><span class="toc-number">1.4.</span> <span class="toc-text">PPO vs GRPO ����Աȱʼ�</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%D2%BB%EF%BF%BD%E4%BB%B0"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. ����һ�仰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%D1%B5%EF%BF%BD%EF%BF%BD%CA%B1%EF%BF%BD%EF%BF%BD%EF%BF%BD%D8%B5%EF%BF%BDg%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. ѵ��ʱ���ص�ģ������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%D7%BC%EF%BF%BD%DF%A3%EF%BF%BDBaseline%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. ����׼�ߣ�Baseline������������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CC%B6%D4%B1ou%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDl%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. �������̶Աȣ����ſ���</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%EF%BF%BD%EF%BF%BD%EF%BF%BD%E2%B2%B9%EF%BF%BD%E4%A3%A8%EF%BF%BD%EF%BF%BD%D5%B9%EF%BF%BD%CA%BCae%EF%BF%BD"><span class="toc-number">1.4.5.</span> <span class="toc-text">6. ���ⲹ�䣨��չ�ʼǣ�</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/24/%E5%85%B3%E4%BA%8EIG/" title="关于IG">关于IG</a><time datetime="2026-08-24T12:32:53.000Z" title="Created 2026-08-24 20:32:53">2026-08-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/24/%E5%85%B3%E4%BA%8E-CAM/" title="关于-CAM">关于-CAM</a><time datetime="2026-08-24T05:34:43.000Z" title="Created 2026-08-24 13:34:43">2026-08-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/19/%E5%85%B3%E4%BA%8E-NAA/" title="关于 NAA">关于 NAA</a><time datetime="2026-08-19T13:43:20.000Z" title="Created 2026-08-19 21:43:20">2026-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/19/Agentic-AI-study-notes/" title="Agentic AI study notes">Agentic AI study notes</a><time datetime="2026-08-19T02:20:59.000Z" title="Created 2026-08-19 10:20:59">2026-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/18/%E5%85%B3%E4%BA%8EFIA/" title="关于FIA">关于FIA</a><time datetime="2026-08-18T11:49:24.000Z" title="Created 2026-08-18 19:49:24">2026-08-18</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
