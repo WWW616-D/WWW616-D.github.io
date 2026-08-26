@@ -1,0 +1,172 @@
+/* 自定义样式：深海蓝主题 —— 深蓝底色 + 白色文字 */
+
+/* ===== 全局背景 ===== */
+#web_bg {
+  background-color: #0a1e3c !important;
+}
+
+/* ===== 页面主体文字 ===== */
+body {
+  color: #e8f0fe !important;
+}
+
+/* ===== 布局：文章页隐藏右侧栏并全宽 ===== */
+.layout {
+  max-width: 100% !important;
+}
+
+/* 文章详情页(含 #post)隐藏侧边栏 */
+.post-layout #aside-content,
+#post + #aside-content,
+.layout:has(#post) #aside-content {
+  display: none !important;
+}
+
+.layout:has(#post) > div:first-child:not(.nc) {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#post {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.container.post-content {
+  padding: 20px 30px !important;
+}
+
+/* ===== 卡片：深蓝 + 白字 ===== */
+.recent-post-item,
+#aside-content .card-widget,
+#article-container .shuoshuo-item,
+.layout .pagination > *:not(.space),
+.layout > div:first-child:not(.nc),
+#post,
+.container.post-content,
+#post .post-content {
+  background: rgba(15, 42, 84, 0.85) !important;
+  color: #e8f0fe !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 文章标题：白色加粗 */
+.recent-post-info .article-title,
+#article-container .post-title,
+#post-info .post-title {
+  color: #ffffff !important;
+  font-size: 1.9em !important;
+  line-height: 1.5;
+}
+
+/* 日期/元信息 */
+.recent-post-info .article-meta-wrap {
+  color: #a8c4e8 !important;
+  font-size: 1.1em !important;
+}
+
+/* 文章正文 */
+#article-container {
+  color: #e8f0fe !important;
+}
+
+/* 正文内标题 */
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  color: #ffffff !important;
+}
+
+/* 正文引用块 */
+#article-container blockquote {
+  background: rgba(30, 90, 168, 0.2) !important;
+  border-left-color: #2f81d5 !important;
+  color: #d5e4f8 !important;
+}
+
+/* 正文代码块 */
+#article-container code {
+  color: #8ec5ff !important;
+  background: rgba(10, 30, 60, 0.6) !important;
+}
+
+#article-container pre,
+#article-container .highlight {
+  background: rgba(8, 22, 48, 0.9) !important;
+  color: #e8f0fe !important;
+}
+
+/* 表格 */
+#article-container table tr {
+  background: rgba(15, 42, 84, 0.5) !important;
+  color: #e8f0fe !important;
+}
+
+#article-container table thead tr {
+  background: rgba(30, 90, 168, 0.4) !important;
+}
+
+/* 文章标签/分类链接 */
+#article-container .tag-link,
+#article-container a {
+  color: #8ec5ff !important;
+}
+
+/* 链接 */
+a {
+  color: #8ec5ff !important;
+}
+
+a:hover {
+  color: #ffffff !important;
+}
+
+/* 侧边栏文字 */
+#aside-content .card-widget {
+  color: #e8f0fe !important;
+}
+
+#aside-content .card-widget .item-headline,
+#aside-content .card-widget .card-title {
+  color: #ffffff !important;
+}
+
+/* 导航栏 */
+#nav {
+  background: rgba(10, 30, 60, 0.9) !important;
+  color: #ffffff !important;
+}
+
+#nav .site-name,
+#nav .menus_item a {
+  color: #ffffff !important;
+}
+
+/* 页脚 */
+#footer {
+  color: #a8c4e8 !important;
+}
+
+#footer a {
+  color: #8ec5ff !important;
+}
+
+/* 文章标题 hover */
+.recent-post-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.3s ease;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .recent-post-info .article-title {
+    font-size: 1.6em !important;
+  }
+  .recent-post-info .article-meta-wrap {
+    font-size: 1em !important;
+  }
+}
