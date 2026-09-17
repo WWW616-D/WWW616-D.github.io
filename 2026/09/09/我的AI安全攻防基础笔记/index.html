@@ -1,0 +1,427 @@
+<!DOCTYPE html><html lang="en" data-theme="both"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>我的AI安全攻防基础笔记 | WWW的个人博客</title><meta name="author" content="WWW616-D"><meta name="copyright" content="WWW616-D"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的AI安全攻防基础笔记">
+<meta property="og:url" content="https://www616-d.github.io/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="WWW的个人博客">
+<meta property="og:description" content="1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www616-d.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-09-09T11:47:08.000Z">
+<meta property="article:modified_time" content="2026-09-09T11:55:04.893Z">
+<meta property="article:author" content="WWW616-D">
+<meta property="article:tag" content="课程学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www616-d.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "我的AI安全攻防基础笔记",
+  "url": "https://www616-d.github.io/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/",
+  "image": "https://www616-d.github.io/img/avatar.jpg",
+  "datePublished": "2026-09-09T11:47:08.000Z",
+  "dateModified": "2026-09-09T11:55:04.893Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "WWW616-D",
+      "url": "https://github.com/WWW616-D"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www616-d.github.io/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: 
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '我的AI安全攻防基础笔记',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-color: #0a1e3c;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/banner.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">WWW的个人博客</span></a><a class="nav-page-title" href="/"><span class="site-name">我的AI安全攻防基础笔记</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">我的AI安全攻防基础笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-09-09T11:47:08.000Z" title="Created 2026-09-09 19:47:08">2026-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-09-09T11:55:04.893Z" title="Updated 2026-09-09 19:55:04">2026-09-09</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:30,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2026-09-09 19:55:04&quot;}" hidden></div><h1 id="由fgsm衍生出发">由FGSM衍生出发</h1>
+<h3 id="核心概念：fgsm-fast-gradient-sign-method">核心概念：FGSM (Fast Gradient Sign Method)</h3>
+<ul>
+<li><strong>提出者</strong>：Goodfellow 等人 (ICLR 2015)</li>
+<li><strong>核心思想</strong>：神经网络在高维空间中是<strong>线性</strong>的。沿着梯度<strong>上升</strong>的方向（使损失增大）迈出一大步，就能让模型分类错误。</li>
+<li><strong>公式</strong>：( x^{adv} = x + \epsilon \cdot sign(\nabla_x J(\theta, x, y)) )</li>
+<li><strong>特点</strong>：<strong>极快</strong>（仅需一次梯度计算），但<strong>成功率较低</strong>，且生成的扰动较大（噪声明显）。</li>
+</ul>
+<hr>
+<h3 id="第一分支：迭代法（把大步变成小步）">第一分支：迭代法（把大步变成小步）</h3>
+<p>针对 FGSM 一次迈步太大、容易“走偏”的问题，衍生出了迭代方法。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">全称</th>
+<th style="text-align:left">核心逻辑</th>
+<th style="text-align:left">与 FGSM 的区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>BIM</strong></td>
+<td style="text-align:left">Basic Iterative Method</td>
+<td style="text-align:left">将 ( \epsilon ) 拆成多步 ( \alpha )，每步计算梯度并前进，<strong>始终从原始样本出发</strong>。</td>
+<td style="text-align:left">攻击成功率<strong>更高</strong>，但计算量增加。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>I-FGSM</strong></td>
+<td style="text-align:left">Iterative FGSM</td>
+<td style="text-align:left">本质与 BIM 相同（常被混用），是“迭代版 FGSM”的通用称呼。</td>
+<td style="text-align:left">通过多次小步攻击，效果更精准。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>PGD</strong></td>
+<td style="text-align:left">Projected Gradient Descent</td>
+<td style="text-align:left">与 BIM 流程一致，但<strong>起点不是原始样本</strong>，而是在原始样本的 ( \epsilon ) 邻域内<strong>随机选取一个起点</strong>。</td>
+<td style="text-align:left">增加了<strong>随机性</strong>，是目前公认的<strong>最强一阶攻击</strong>，也是对抗训练的标准对手。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="第二分支：优化法（追求最小扰动）">第二分支：优化法（追求最小扰动）</h3>
+<p>这类方法不再盲目增加噪声，而是追求“以最小的改动骗过模型”。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">全称</th>
+<th style="text-align:left">核心逻辑</th>
+<th style="text-align:left">与 FGSM 的区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>DeepFool</strong><a href="/2026/08/11/About-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks/">About-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks</a></td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">迭代地将样本向<strong>最近的分类决策边界</strong>推动，直到越过边界。</td>
+<td style="text-align:left">扰动比 FGSM <strong>更小</strong>，能计算出更紧致的扰动下限。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>C&amp;W</strong></td>
+<td style="text-align:left">Carlini &amp; Wagner</td>
+<td style="text-align:left">将攻击视为一个<strong>优化问题</strong>，通过改进损失函数，确保模型以高置信度错分。</td>
+<td style="text-align:left">这是 FGSM 家族中<strong>攻击力最强</strong>的方法，成功攻破了防御蒸馏。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="第三分支：物理世界与高级应用">第三分支：物理世界与高级应用</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">核心逻辑</th>
+<th style="text-align:left">应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>物理世界攻击</strong></td>
+<td style="text-align:left">允许对抗样本经过打印、拍摄等物理变换后依然有效。</td>
+<td style="text-align:left">攻击人脸识别门禁、自动驾驶路牌识别。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Universal Perturbations</strong></td>
+<td style="text-align:left">寻找一个<strong>通用的扰动向量</strong>，可以加到<strong>任何图片</strong>上，使大部分图片都被错分。</td>
+<td style="text-align:left">这是一种“万能钥匙”式的攻击。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="基础对抗检测">基础对抗检测</h1>
+<ul>
+<li>用对抗样本和原始数据训练一个分类器</li>
+<li>需要警惕分类器被敌人拿去联动训练对抗样本(这有尽头吗？)</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/WWW616-D">WWW616-D</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://www616-d.github.io/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/">https://www616-d.github.io/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">课程学习笔记</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related  no-desc" href="/2026/09/14/%E5%85%B3%E4%BA%8ELSTA-%E5%BE%85%E7%A0%94%E7%A9%B6/" title="关于LSTA(待研究)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">关于LSTA(待研究)</div></div></div></a><a class="pagination-related" href="/2026/09/04/%E6%88%91%E7%9A%84%E6%9A%91%E5%81%87%E6%80%BB%E7%BB%93/" title="我的暑假总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">我的暑假总结</div></div><div class="info-2"><div class="info-item-1">太短了没有摘要</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/13/W%E7%9A%84%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="W的算法导论学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-13</div><div class="info-item-2">W的算法导论学习笔记</div></div><div class="info-2"><div class="info-item-1">算法导论零散思考——堆两种构建的时间复杂度、递归树求和、动态规划要点。</div></div></div></a><a class="pagination-related" href="/2026/03/22/W%E7%9A%84python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="W的python学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-22</div><div class="info-item-2">W的python学习笔记</div></div><div class="info-2"><div class="info-item-1">Python 初体验</div></div></div></a><a class="pagination-related" href="/2026/05/04/W%E7%9A%84CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="W的CSAPP学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-04</div><div class="info-item-2">W的CSAPP学习笔记</div></div><div class="info-2"><div class="info-item-1">CSAPP 笔记——静态/动态链接、异常控制流、缺页异常，以及它们与深度学习显存优化的关联。</div></div></div></a><a class="pagination-related" href="/2026/09/02/%E6%88%91%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0-%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" title="我的计算机视觉学习:生成模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-02</div><div class="info-item-2">我的计算机视觉学习:生成模型</div></div><div class="info-2"><div class="info-item-1">CS231n 生成模型笔记——VIN 值迭代网络、自回归模型、VAE、GAN、扩散模型与 CFG 引导。</div></div></div></a><a class="pagination-related" href="/2026/04/08/W%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="W的深度学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-08</div><div class="info-item-2">W的深度学习</div></div><div class="info-2"><div class="info-item-1">深度学习入门笔记——Transformer、CNN、RNN、Adam、核方法、流形与对抗扰动成因。</div></div></div></a><a class="pagination-related" href="/2026/08/19/Agentic-AI-study-notes/" title="Agentic AI study notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-19</div><div class="info-item-2">Agentic AI study notes</div></div><div class="info-2"><div class="info-item-1">Agentic AI 课程笔记</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">WWW616-D</div><div class="author-info-description">记录学习和生活，留下一些痕迹</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/WWW616-D"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/WWW616-D" target="_blank" title="fab fa-github"><i class="github" style="color: GitHub;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B1fgsm%E8%A1%8D%E7%94%9F%E5%87%BA%E5%8F%91"><span class="toc-number">1.</span> <span class="toc-text">由FGSM衍生出发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9Afgsm-fast-gradient-sign-method"><span class="toc-number">1.1.</span> <span class="toc-text">核心概念：FGSM (Fast Gradient Sign Method)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%88%86%E6%94%AF%EF%BC%9A%E8%BF%AD%E4%BB%A3%E6%B3%95%EF%BC%88%E6%8A%8A%E5%A4%A7%E6%AD%A5%E5%8F%98%E6%88%90%E5%B0%8F%E6%AD%A5%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">第一分支：迭代法（把大步变成小步）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%88%86%E6%94%AF%EF%BC%9A%E4%BC%98%E5%8C%96%E6%B3%95%EF%BC%88%E8%BF%BD%E6%B1%82%E6%9C%80%E5%B0%8F%E6%89%B0%E5%8A%A8%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">第二分支：优化法（追求最小扰动）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%88%86%E6%94%AF%EF%BC%9A%E7%89%A9%E7%90%86%E4%B8%96%E7%95%8C%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">第三分支：物理世界与高级应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%AF%B9%E6%8A%97%E6%A3%80%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">基础对抗检测</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/14/%E5%85%B3%E4%BA%8ELSTA-%E5%BE%85%E7%A0%94%E7%A9%B6/" title="关于LSTA(待研究)">关于LSTA(待研究)</a><time datetime="2026-09-14T08:58:31.000Z" title="Created 2026-09-14 16:58:31">2026-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/09/%E6%88%91%E7%9A%84AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" title="我的AI安全攻防基础笔记">我的AI安全攻防基础笔记</a><time datetime="2026-09-09T11:47:08.000Z" title="Created 2026-09-09 19:47:08">2026-09-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/04/%E6%88%91%E7%9A%84%E6%9A%91%E5%81%87%E6%80%BB%E7%BB%93/" title="我的暑假总结">我的暑假总结</a><time datetime="2026-09-04T14:42:45.000Z" title="Created 2026-09-04 22:42:45">2026-09-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/02/%E6%88%91%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0-%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" title="我的计算机视觉学习:生成模型">我的计算机视觉学习:生成模型</a><time datetime="2026-09-02T02:27:40.000Z" title="Created 2026-09-02 10:27:40">2026-09-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/31/linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AC%94%E8%AE%B0/" title="linux命令行笔记">linux命令行笔记</a><time datetime="2026-08-31T11:36:17.000Z" title="Created 2026-08-31 19:36:17">2026-08-31</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">你好！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div></div></body></html>

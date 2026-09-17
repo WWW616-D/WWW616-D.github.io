@@ -181,3 +181,8 @@ a:hover {
     font-size: 1em !important;
   }
 }
+
+/* ===== 正文段落首行缩进两字符 ===== */
+#article-container > p {
+  text-indent: 2em;
+}
