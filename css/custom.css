@@ -21,26 +21,39 @@ code, pre, kbd, samp, .highlight, #article-container code {
   font-family: Consolas, Monaco, "Courier New", monospace !important;
 }
 
-/* ===== 布局：文章页隐藏右侧栏并全宽 ===== */
-.layout {
-  max-width: 100% !important;
+/* ===== 布局：文章页 内容 + 右侧目录自然并排 =====
+   版面加宽到 1480px；整块贴右侧对齐（右缘留 20px），目录贴最右、文章更宽 */
+.layout:has(#post) {
+  max-width: 1480px !important;
+  margin-left: auto !important;
+  margin-right: 20px !important;
 }
 
-/* 文章详情页(含 #post)隐藏侧边栏 */
-.post-layout #aside-content,
-#post + #aside-content,
-.layout:has(#post) #aside-content {
+/* 文章页右侧只保留目录，其余侧边栏卡片隐藏 */
+.layout:has(#post) #aside-content .card-widget:not([id="card-toc"]) {
   display: none !important;
 }
 
-.layout:has(#post) > div:first-child:not(.nc) {
-  width: 100% !important;
-  max-width: 100% !important;
+/* 目录不做卡片：透明背景、无边框阴影，自然融入页面 */
+.layout:has(#post) #aside-content #card-toc {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
 }
-
-#post {
-  width: 100% !important;
-  max-width: 100% !important;
+#card-toc .item-headline {
+  color: #ffffff !important;
+  font-size: 1.1em !important;
+  margin-bottom: 10px !important;
+}
+#card-toc .toc-link {
+  color: #a8c4e8 !important;
+}
+#card-toc .toc-link:hover {
+  color: #ffffff !important;
+}
+#card-toc .toc-item.active > .toc-link {
+  color: #3a9df5 !important;
 }
 
 .container.post-content {
@@ -185,4 +198,36 @@ a:hover {
 /* ===== 正文段落首行缩进两字符 ===== */
 #article-container > p {
   text-indent: 2em;
+}
+
+/* ===== 无卡片模式：文章列表与正文去掉卡片框（类 rotaxs 直排风格）=====
+   不喜欢可整段删除恢复卡片 */
+/* 首页文章列表：去卡片背景/阴影/圆角，改为分隔线直排 */
+.recent-post-item {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 12px 0 !important;
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid rgba(168, 196, 232, 0.15) !important;
+}
+.recent-post-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* 分页条去卡片 */
+.layout .pagination > *:not(.space) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* 文章页正文容器去卡片 */
+.layout > div:first-child:not(.nc),
+#post,
+.container.post-content,
+#post .post-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
 }
