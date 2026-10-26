@@ -1,0 +1,845 @@
+<!DOCTYPE html><html lang="en" data-theme="both"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions | WWW的个人博客</title><meta name="author" content="WWW616-D"><meta name="copyright" content="WWW616-D"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="VLM知识库 论文中 VLM 模型的详细展开解析 以下按论文的三大分类，逐一展开各模型的核心架构、训练方式、优势与局限。 一、视觉-语言理解模型（VLU） 这类模型的核心目标是理解视觉与语言的关系，输出通常是判别式结果（分类、检索、对齐），而非自由生成文本。 1.1 仅图像模态 CLIP（OpenAI）  架构：双编码器（图像编码器 + 文本编码器），通过对比学习将图文映射到同一嵌入空间。 训练：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions">
+<meta property="og:url" content="https://www616-d.github.io/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/index.html">
+<meta property="og:site_name" content="WWW的个人博客">
+<meta property="og:description" content="VLM知识库 论文中 VLM 模型的详细展开解析 以下按论文的三大分类，逐一展开各模型的核心架构、训练方式、优势与局限。 一、视觉-语言理解模型（VLU） 这类模型的核心目标是理解视觉与语言的关系，输出通常是判别式结果（分类、检索、对齐），而非自由生成文本。 1.1 仅图像模态 CLIP（OpenAI）  架构：双编码器（图像编码器 + 文本编码器），通过对比学习将图文映射到同一嵌入空间。 训练：">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www616-d.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-10-25T13:56:55.000Z">
+<meta property="article:modified_time" content="2026-10-25T13:59:03.498Z">
+<meta property="article:author" content="WWW616-D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www616-d.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions",
+  "url": "https://www616-d.github.io/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/",
+  "image": "https://www616-d.github.io/img/avatar.jpg",
+  "datePublished": "2026-10-25T13:56:55.000Z",
+  "dateModified": "2026-10-25T13:59:03.498Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "WWW616-D",
+      "url": "https://github.com/WWW616-D"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www616-d.github.io/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: 
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-color: #0a1e3c;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/library/"><i class="fa-fw fas fa-book-open"></i><span> 文献库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/banner.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">WWW的个人博客</span></a><a class="nav-page-title" href="/"><span class="site-name">关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/library/"><i class="fa-fw fas fa-book-open"></i><span> 文献库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-25T13:56:55.000Z" title="Created 2026-10-25 21:56:55">2026-10-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-25T13:59:03.498Z" title="Updated 2026-10-25 21:59:03">2026-10-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">论文研读</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:30,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2026-10-25 21:59:03&quot;}" hidden></div><p><a href="/2026/10/25/VLM%E7%9F%A5%E8%AF%86%E5%BA%93/">VLM知识库</a></p>
+<h1 id="论文中-vlm-模型的详细展开解析">论文中 VLM 模型的详细展开解析</h1>
+<p>以下按论文的三大分类，逐一展开各模型的核心架构、训练方式、优势与局限。</p>
+<h2 id="一、视觉-语言理解模型（vlu）">一、视觉-语言理解模型（VLU）</h2>
+<p>这类模型的核心目标是<strong>理解</strong>视觉与语言的关系，输出通常是判别式结果（分类、检索、对齐），而非自由生成文本。</p>
+<h3 id="1-1-仅图像模态">1.1 仅图像模态</h3>
+<p><strong>CLIP（OpenAI）</strong></p>
+<ul>
+<li><strong>架构</strong>：双编码器（图像编码器 + 文本编码器），通过对比学习将图文映射到同一嵌入空间。</li>
+<li><strong>训练</strong>：大规模图文对上的对比预训练，实现零样本迁移。</li>
+<li><strong>优势</strong>：在通用图像分类上比微调的深度学习视觉模型更鲁棒；零样本能力接近GPT系列。</li>
+<li><strong>局限</strong>：擅长常见物体识别，但在抽象任务、细粒度分类、泛化性和措辞敏感性上表现较弱。</li>
+</ul>
+<p><strong>AlphaCLIP</strong></p>
+<ul>
+<li><strong>改进</strong>：在CLIP基础上引入alpha通道，用于注意力区域指示，增强区域感知。</li>
+<li><strong>优势</strong>：能聚焦特定区域，同时保持CLIP的识别精度，可作为多种应用的视觉骨干。</li>
+<li><strong>局限</strong>：多物体场景和注意力幅度设定存在挑战。</li>
+</ul>
+<blockquote>
+<p>什么是alpha通道?  :传统上指的是图片信息的另一维度用来衡量透明度，现在被用来衡量区域的重要程度让大模型对重要的地方更加关注。但这样对输入提出了更高的要求</p>
+</blockquote>
+<p><strong>MetaCLIP</strong></p>
+<ul>
+<li><strong>核心思路</strong>：CLIP的成功不仅靠模型和预训练目标，还靠数据质量。MetaCLIP用源自CLIP概念的元数据精炼原始数据，解决数据透明度问题。</li>
+<li><strong>规模</strong>：基于CommonCrawl的4亿图文对。</li>
+<li><strong>效果</strong>：在基准上优于CLIP。</li>
+</ul>
+<blockquote>
+<p>精巧的处理数据维护数据的多样性,证明了更好的数据才能带来更好的能力</p>
+</blockquote>
+<p><strong>GLIP</strong></p>
+<ul>
+<li><strong>思路</strong>：受CLIP启发，用对比预训练学习语言-图像表示，强调<strong>对象级对齐</strong>（短语接地）。</li>
+<li><strong>创新</strong>：把目标检测重新定义为视觉-语言任务，采用深度融合提升表示。</li>
+<li><strong>优势</strong>：语义丰富数据上的可扩展预训练，支持自动生成接地框，零/少样本迁移能力强；在图像描述任务上优于CLIP基线，在下游目标检测上可与全监督动态头竞争。</li>
+</ul>
+<blockquote>
+<p>把短语和图像区间做匹配?输出N(框)*N(词)的对齐矩阵</p>
+</blockquote>
+<p><strong>VLMo</strong></p>
+<ul>
+<li><strong>架构</strong>：模块化Transformer，采用**模态混合专家（MOME）**框架，每个模块内集成模态特定专家 + 共享自注意力。</li>
+<li><strong>双重能力</strong>：既可作为融合编码器（视觉-语言分类），也可作为双编码器（高效图文检索）。</li>
+<li><strong>训练</strong>：分阶段预训练，充分利用大规模图像、文本及图文对。</li>
+<li><strong>效果</strong>：在VQA、图像检索等任务上达到SOTA。</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">图像 token ─┐</span><br><span class="line">            ├─→ 【共享自注意力层】图文互相注意、交换信息</span><br><span class="line">文本 token ─┘</span><br><span class="line">                    ↓</span><br><span class="line">        ┌───────────┴───────────┐</span><br><span class="line">   图像 token                文本 token</span><br><span class="line">        ↓                       ↓</span><br><span class="line">  视觉专家 V-FFN          语言专家 L-FFN</span><br><span class="line">        ↓                       ↓</span><br><span class="line">   输出（进入下一层）图像 token ─┐</span><br><span class="line">            ├─→ 【共享自注意力层】图文互相注意、交换信息</span><br><span class="line">文本 token ─┘</span><br><span class="line">                    ↓</span><br><span class="line">        ┌───────────┴───────────┐</span><br><span class="line">   图像 token                文本 token</span><br><span class="line">        ↓                       ↓</span><br><span class="line">  视觉专家 V-FFN          语言专家 L-FFN</span><br><span class="line">        ↓                       ↓</span><br><span class="line">   输出（进入下一层）</span><br></pre></td></tr></table></figure>
+<p><strong>ImageBind</strong></p>
+<ul>
+<li><strong>核心</strong>：通过多样配对数据源，把多模态嵌入（音频、深度、热成像、IMU）对齐到图像嵌入的共享表示空间。</li>
+<li><strong>优势</strong>：零样本跨模态识别；部署到不同任务和模态所需训练极少；在音频基准上超越专用模型。</li>
+<li><strong>数据</strong>：大规模图文对 + 自然配对的自监督多模态数据。</li>
+</ul>
+<p><strong>VideoCLIP</strong></p>
+<ul>
+<li><strong>目标</strong>：零样本视频-文本理解，不依赖下游任务标签。</li>
+<li><strong>方法</strong>：对比学习框架，预训练时引入<strong>硬检索负样本</strong>和<strong>时间重叠正样本</strong>；采用基于检索的负采样。</li>
+<li><strong>效果</strong>：在YouCook2等视频语言数据集上SOTA，部分场景超越监督方法。</li>
+</ul>
+<p><strong>VideoMAE</strong></p>
+<ul>
+<li><strong>定位</strong>：自监督视频预训练方法，挑战&quot;必须大规模数据集&quot;的假设。</li>
+<li><strong>创新</strong>：将掩码自编码器框架适配到视频，采用独特的**视频管状掩码（tube masking）**策略。</li>
+<li><strong>效率</strong>：在仅3k-4k视频的小数据集上实现数据高效性；采用联合时空注意力的ViT。</li>
+<li><strong>表现</strong>：在下游动作检测等任务上优于传统方法；但预训练能耗较高。</li>
+</ul>
+<h3 id="1-2-视频模态（图1中-handles-videos-分支）">1.2 视频模态（图1中&quot;Handles Videos&quot;分支）</h3>
+<p>论文正文对VLU类视频模型的展开较少，主要在图1分类树中列出。结合后文，视频理解相关模型包括VideoCLIP、VideoMAE，以及后续文本生成类中的VideoCoCa等。</p>
+<hr>
+<h2 id="二、多模态输入、文本生成模型">二、多模态输入、文本生成模型</h2>
+<p>这是VLM中数量最多的一类，接收多模态输入（图像/视频），生成文本输出。论文按输入类型细分为&quot;仅图像&quot;和&quot;视频&quot;两大分支。</p>
+<h3 id="2-1-仅图像输入">2.1 仅图像输入</h3>
+<p><strong>GPT-4V（OpenAI）</strong></p>
+<ul>
+<li><strong>能力</strong>：允许用户指示GPT-4分析图像输入，继承文本与视觉能力，在两者交叉处呈现新特性。</li>
+<li><strong>训练</strong>：用海量文本和图像数据做下一词预测。</li>
+<li><strong>安全</strong>：进行了广泛安全评估、早期访问、红队测试和缓解措施后才广泛发布。</li>
+</ul>
+<p><strong>LLaVA</strong></p>
+<ul>
+<li><strong>定位</strong>：开源多模态框架，增强LLM对语言和图像的理解。</li>
+<li><strong>方法</strong>：用纯语言GPT-4生成多模态指令跟随数据；集成CLIP视觉编码器 + LLM。</li>
+<li><strong>训练</strong>：先在图文对上预训练，再端到端微调。</li>
+<li><strong>效果</strong>：多模态对话能力出色；在合成多模态指令数据集上达到GPT-4的85.1%相对分数；在ScienceQA上微调后与GPT-4共同达到92.53%的SOTA准确率。</li>
+</ul>
+<p><strong>Flamingo（DeepMind）</strong></p>
+<ul>
+<li><strong>架构创新</strong>：交错交叉注意力层 + 冻结的纯语言自注意力层；采用Perceiver架构转换输入序列。</li>
+<li><strong>优势</strong>：擅长处理图文交错序列；能无缝集成纯视觉模型和纯语言模型。</li>
+<li><strong>训练</strong>：冻结视觉编码器和LLM，只训练交叉注意力等新增模块。</li>
+</ul>
+<p><strong>InstructBLIP</strong></p>
+<ul>
+<li><strong>核心</strong>：<strong>指令感知的视觉特征提取</strong>，能根据给定指令提取有信息量的特征。</li>
+<li><strong>效果</strong>：在13个留出数据集上零样本SOTA，超越BLIP-2和更大的Flamingo；ScienceQA IMG达90.7%。</li>
+<li><strong>定性优势</strong>：知识接地的图像描述、视觉场景理解、多轮视觉对话。</li>
+</ul>
+<p><strong>BLIP-2</strong></p>
+<ul>
+<li><strong>架构</strong>：冻结图像编码器 + 冻结LLM + 轻量Q-Former。</li>
+<li><strong>Q-Former两阶段预训练</strong>：①学习连接视觉与语言的表示，理解与文本相关的视觉元素；②生成式学习，把Q-Former输出连接到冻结LLM。</li>
+<li><strong>效率</strong>：以少54倍可训练参数在零样本VQA-v2上超越Flamingo-80B达8.7%。</li>
+</ul>
+<p><strong>KOSMOS-1（微软）</strong></p>
+<ul>
+<li><strong>训练</strong>：网络规模多模态语料（The Pile、Common Crawl），语言指令微调。</li>
+<li><strong>能力</strong>：语言理解与生成、免OCR的NLP、多种感知-语言任务；支持<strong>思维链提示</strong>，在复杂问答前生成推理依据。</li>
+</ul>
+<p><strong>KOSMOS-2（微软研究院）</strong></p>
+<ul>
+<li><strong>升级</strong>：引入感知对象描述（如边界框）和文本接地能力。</li>
+<li><strong>表示</strong>：用独特表示格式把文本片段链接到图像空间位置；结合视觉编码与位置token。</li>
+<li><strong>意义</strong>：迈向具身AI，推动语言、视觉感知、动作与世界建模的融合。</li>
+</ul>
+<p><strong>IDEFICS</strong></p>
+<ul>
+<li><strong>定位</strong>：DeepMind闭源Flamingo的开源复现，80B和9B两个版本，托管于HuggingFace。</li>
+<li><strong>能力</strong>：在VQA、图像描述等图文基准上表现良好，支持上下文少样本学习。</li>
+</ul>
+<p><strong>PaLI（Google Research）</strong></p>
+<ul>
+<li><strong>架构</strong>：大型预训练编码器-解码器语言模型 + 视觉Transformer，联合建模语言与视觉。</li>
+<li><strong>规模</strong>：10B图像和文本的多语言数据集，覆盖100+语言。</li>
+<li><strong>理念</strong>：强调视觉与语言组件的<strong>联合缩放</strong>对有效训练和性能的重要性；设计简单、模块化、可扩展。</li>
+</ul>
+<p><strong>Frozen（DeepMind）</strong></p>
+<ul>
+<li><strong>思路</strong>：把在图像描述数据上训练的视觉编码器与<strong>冻结语言模型</strong>结合。</li>
+<li><strong>训练</strong>：梯度通过冻结LLM的自注意力层反传，训练视觉编码器。</li>
+<li><strong>优势</strong>：少样本快速适应新任务（如VQA）。</li>
+<li><strong>局限</strong>：少样本性能不如使用全训练集的SOTA模型，零/少样本泛化仍有提升空间。</li>
+</ul>
+<p><strong>Qwen-VL（阿里）</strong></p>
+<ul>
+<li><strong>系列</strong>：Qwen-VL和Qwen-VL-Chat，擅长图像描述、问答、视觉定位、多才交互。</li>
+<li><strong>数据</strong>：多语言图文数据（英文和中文为主）。</li>
+<li><strong>能力</strong>：训练时并发处理多张图像，能对复杂场景做上下文分析；高分辨率输入 + 细粒度训练数据，在接地、文本理解、问答和对话上优于同类。</li>
+</ul>
+<p><strong>Fuyu-8B（Adept AI）</strong></p>
+<ul>
+<li><strong>定位</strong>：为数字代理设计的多模态文本-图像Transformer。</li>
+<li><strong>架构</strong>：极简的<strong>纯解码器Transformer</strong>，图像patch经线性投影直接进入第一层；图像token像文本token一样按光栅扫描顺序处理，用换行符表示行分隔。</li>
+<li><strong>优势</strong>：支持任意图像分辨率；擅长图表/示意图理解、UI查询；10万毫秒内处理大图。</li>
+<li><strong>局限</strong>：为Adept用例优化，但标准图像理解基准上表现仍不错。</li>
+</ul>
+<p><strong>SPHINX</strong></p>
+<ul>
+<li><strong>思路</strong>：整合模型权重、调优任务和视觉嵌入。</li>
+<li><strong>训练</strong>：预训练时<strong>解冻LLM</strong>以加强视觉-语言对齐；混合真实数据与合成数据训练的LLM权重。</li>
+<li><strong>任务</strong>：引入区域级理解、人体姿态估计等多样任务，实现跨场景相互增强。</li>
+<li><strong>优势</strong>：多模态理解强；高效捕获高分辨率图像细粒度细节，擅长视觉解析与推理。</li>
+</ul>
+<p><strong>Mirasol（Google DeepMind/Research）</strong></p>
+<ul>
+<li><strong>定位</strong>：多模态自回归模型，处理<strong>时间对齐模态</strong>（音频、视频）和<strong>非对齐模态</strong>（文本）。</li>
+<li><strong>架构</strong>：把长视频-音频序列切块，分别过编码器，用Combiner融合视频和音频特征；自回归训练预测序列特征；独立Transformer块通过跨模态注意力整合文本提示。</li>
+<li><strong>训练</strong>：在VTP的12%上预训练，微调时对非对齐文本损失加权10倍。</li>
+<li><strong>能力</strong>：保持内容一致性，适应视频-音频序列的动态变化。</li>
+</ul>
+<p><strong>MiniGPT-4</strong></p>
+<ul>
+<li><strong>架构</strong>：冻结视觉编码器（ViT + BLIP-2的Q-Former）+ 单个可训练投影层 + LLM。</li>
+<li><strong>训练</strong>：对齐图文对预训练 + 详细图像描述微调。</li>
+<li><strong>能力</strong>：无需分别训练视觉和语言模块即展现类GPT-4能力（表情包解读、食谱生成、写诗）。</li>
+</ul>
+<p><strong>MiniGPT-v2</strong></p>
+<ul>
+<li><strong>架构</strong>：ViT视觉骨干 + 投影层 + LLaMA-2；ViT冻结，四个相邻视觉输出token拼接后投影到LLaMA-2空间。</li>
+<li><strong>训练</strong>：三阶段策略，使用弱标注图文数据集和多模态指令数据集；引入<strong>任务特定标识符</strong>提升多任务学习效率。</li>
+<li><strong>表现</strong>：VQA和视觉接地上优于其他通用模型。</li>
+<li><strong>局限</strong>：偶有幻觉，需要更高质量图文对齐数据。</li>
+</ul>
+<p><strong>LLaVA-Plus</strong></p>
+<ul>
+<li><strong>定位</strong>：通用多模态助手，通过视觉指令调优增强LMM。</li>
+<li><strong>机制</strong>：维护<strong>技能库</strong>（多种视觉和视觉-语言预训练模型），根据用户输入激活相关工具。</li>
+<li><strong>训练</strong>：用GPT-4生成指令数据，通过指令调优集成新工具，可持续增强。</li>
+<li><strong>效果</strong>：在Visit-Bench上SOTA，工具使用能力优于其他工具增强LLM。</li>
+</ul>
+<p><strong>BakLLaVA</strong></p>
+<ul>
+<li><strong>构成</strong>：LAION、Ontocord、Skunkworks AI合作；Mistral 7B底座 + LLaVA 1.5架构。</li>
+<li><strong>定位</strong>：配合llama.cpp，比GPT-4V更快、更省资源。</li>
+</ul>
+<p><strong>LLaVA-1.5</strong></p>
+<ul>
+<li><strong>改进</strong>：CLIP-ViT-L-336px + MLP投影；加入学术任务导向的VQA数据。</li>
+<li><strong>局限</strong>：使用完整图像patch导致训练迭代时间长；多图像处理和特定领域任务有挑战。</li>
+</ul>
+<p><strong>CogVLM（清华）</strong></p>
+<ul>
+<li><strong>架构</strong>：ViT编码器（如EVA2-CLIP-E）+ MLP适配器映射到文本特征空间 + 预训练GPT风格语言模型 + <strong>每层视觉专家模块</strong>（QKV矩阵 + MLP）。</li>
+<li><strong>融合</strong>：<strong>深度融合</strong>，多层整合视觉与语言特征，超越传统浅层对齐。</li>
+<li><strong>训练</strong>：15亿图文对上预训练（图像描述损失 + 指代表达理解REC）；微调后得CogVLM-Chat。</li>
+</ul>
+<p><strong>FERRET</strong></p>
+<ul>
+<li><strong>定位</strong>：图像中任意形状、任意粒度的空间指代与接地。</li>
+<li><strong>创新</strong>：<strong>混合区域表示</strong>（离散坐标 + 连续视觉特征）；<strong>空间感知视觉采样器</strong>处理不同区域形状。</li>
+<li><strong>训练</strong>：Ground-and-Refer Instruction-Tuning（GRIT）数据集，含层次空间知识和难负样本。</li>
+<li><strong>优势</strong>：多模态对话中显著增强指代-接地能力；缓解物体幻觉。</li>
+</ul>
+<p><strong>BARD（Google）</strong></p>
+<ul>
+<li><strong>定位</strong>：用强化学习框架自动化ML模型设计、架构搜索和超参调优，面向无深厚AI专业知识的用户。</li>
+<li><strong>训练</strong>：多样数据源预训练；响应经上下文考虑、安全参数分类、质量重排；人类反馈微调 + RLHF。</li>
+<li><strong>局限</strong>：潜在不准确、偏见、人格归因、假阳性/阴性、对抗提示脆弱性。</li>
+</ul>
+<p><strong>CoVLM</strong></p>
+<ul>
+<li><strong>思路</strong>：通过视觉-语言<strong>通信解码</strong>增强LLM的组合推理。</li>
+<li><strong>机制</strong>：用通信token动态组合视觉实体和关系，与视觉编码器和检测网络迭代通信改进语言生成。</li>
+<li><strong>表现</strong>：视觉推理、阅读理解、VQA表现强；组合性仍有改进空间。</li>
+</ul>
+<p><strong>Emu2</strong></p>
+<ul>
+<li><strong>规模</strong>：370亿参数生成式多模态模型。</li>
+<li><strong>架构</strong>：视觉编码器 + 多模态建模 + 视觉解码器；统一自回归目标整合视觉嵌入和文本token。</li>
+<li><strong>能力</strong>：上下文学习强；图像问答、主题驱动生成、零样本文生图SOTA。</li>
+<li><strong>局限</strong>：幻觉、偏见、问答能力等需负责任部署。</li>
+</ul>
+<p><strong>LAVIN</strong></p>
+<ul>
+<li><strong>思路</strong>：用**模态混合适配（MMA）**低成本适配LLM到视觉-语言任务。</li>
+<li><strong>效率</strong>：轻量适配器；仅需1.4训练小时和380万可训练参数。</li>
+<li><strong>表现</strong>：ScienceQA上性能可比，训练时间和存储成本大降。</li>
+<li><strong>局限</strong>：可能产生错误回答；难以识别图像细粒度细节。</li>
+</ul>
+<p><strong>BEiT-3</strong></p>
+<ul>
+<li><strong>定位</strong>：多模态基础模型，统一语言、视觉和多模态预训练。</li>
+<li><strong>架构</strong>：<strong>多路Transformer</strong>，模块化架构，支持深度融合和模态特定编码；统一骨干执行掩码&quot;语言&quot;建模（图像、英文文本、图文对即&quot;平行句&quot;）。</li>
+<li><strong>表现</strong>：目标检测、语义分割、图像分类、视觉推理、VQA、图像描述、跨模态检索等多任务SOTA。</li>
+</ul>
+<p><strong>mPLUG-2</strong></p>
+<ul>
+<li><strong>创新</strong>：<strong>多模块组合网络</strong>，摒弃传统序列到序列生成，促进模态协作、解决模态纠缠。</li>
+<li><strong>灵活性</strong>：可跨文本、图像、视频模态选择性使用不同模块。</li>
+<li><strong>效果</strong>：30+下游任务SOTA或竞争性结果；视频QA top-1准确率48.0、CIDEr 80.3，模型规模和数据集规模显著更小；零样本迁移强。</li>
+</ul>
+<p><strong>X²-VLM</strong></p>
+<ul>
+<li><strong>架构</strong>：灵活模块化，统一图文和视频-文本预训练。</li>
+<li><strong>优势</strong>：不同规模下平衡性能与模型规模；模块化设计增强可迁移性；替换文本编码器即可用于多语言/多领域，无需专门多语言预训练，优于SOTA多语言多模态预训练模型。</li>
+</ul>
+<p><strong>Lyrics</strong></p>
+<ul>
+<li><strong>基础</strong>：基于BLIP-2，通过跨模态协作微调指令和多模态预训练。</li>
+<li><strong>创新</strong>：视觉精炼器提取特定视觉特征；语义分割、目标检测、图像标注模块；Querying Transformer中视觉特征与语言输入融合，辅以边界框和标签。</li>
+<li><strong>训练</strong>：两阶段训练，预训练时对齐视觉-语言目标以弥合模态鸿沟；<strong>语义感知视觉特征提取</strong>。</li>
+</ul>
+<p><strong>X-FM</strong></p>
+<ul>
+<li><strong>架构</strong>：一个语言编码器 + 一个视觉编码器 + 一个融合编码器。</li>
+<li><strong>训练创新</strong>：语言编码器学习时<strong>停止来自视觉-语言训练的梯度</strong>；用视觉-语言训练指导视觉编码器学习。</li>
+<li><strong>表现</strong>：优于现有通用基础模型，与专用语言/视觉/视觉-语言模型竞争或超越。</li>
+<li><strong>局限</strong>：计算需求大；未探索超大模型或在超大数据集上预训练大模型，可扩展性是关键考量。</li>
+</ul>
+<p><strong>VALOR</strong></p>
+<ul>
+<li><strong>定位</strong>：统一视觉-音频-语言跨模态预训练，面向三模态理解与生成。</li>
+<li><strong>预训练任务</strong>：多模态分组对齐（Multimodal Grouping Alignment）+ 多模态分组描述（Multimodal Grouping Captioning）。</li>
+<li><strong>数据集</strong>：VALOR-1M和VALOR-32K，用于视听-语言检索和描述的基准。</li>
+<li><strong>表现</strong>：在含视觉、音频、视听输入的检索、描述、问答等下游任务上建立新基准。</li>
+<li><strong>展望</strong>：无监督扩展VALOR-1M；在框架内整合视觉和音频生成建模。</li>
+</ul>
+<p><strong>Prismer</strong></p>
+<ul>
+<li><strong>思路</strong>：数据和参数高效的VLM，使用<strong>冻结的领域专家集成</strong>，最小化训练数据需求。</li>
+<li><strong>机制</strong>：继承各领域预训练专家权重并冻结，高效适配不同视觉-语言推理任务。</li>
+<li><strong>表现</strong>：语言模型基础规模小，但微调和少样本性能有竞争力，训练数据远少于SOTA。</li>
+<li><strong>局限</strong>：缺乏零样本上下文泛化；推理时适配新专家或部分专家集成会导致性能下降。</li>
+</ul>
+<p><strong>MM-REACT</strong></p>
+<ul>
+<li><strong>思路</strong>：新颖的文本提示设计，让语言模型处理多模态信息（文本描述、空间坐标、文件名等密集视觉信号）。</li>
+<li><strong>表现</strong>：零样本实验有效，展示高级视觉理解潜力。</li>
+<li><strong>局限</strong>：缺乏野外识别能力的标注基准，难以系统评估；集成视觉专家可能引入错误；专家数量受ChatGPT上下文窗口限制；视觉信号转文本词对某些任务非最优；需人工提示工程。</li>
+</ul>
+<p><strong>PICA</strong></p>
+<ul>
+<li><strong>思路</strong>：用图像描述提示GPT-3做知识型VQA；把GPT-3视为隐式非结构化知识库。</li>
+<li><strong>方法</strong>：图像转为描述或标签供GPT-3理解；少样本上下文学习适配VQA。</li>
+<li><strong>效果</strong>：仅16个示例就在OK-VQA上超越监督SOTA；首个用GPT-3做多模态任务的方法。</li>
+<li><strong>局限</strong>：图像被抽象为文本，描述可能只提供部分信息，遗漏关键视觉细节（如特定视觉属性查询）。</li>
+</ul>
+<p><strong>PNP-VQA</strong></p>
+<ul>
+<li><strong>定位</strong>：零样本VQA的模块化框架，<strong>无需额外训练PLM</strong>。</li>
+<li><strong>机制</strong>：用自然语言和网络解释作为中间表示连接预训练模型；生成问题引导的信息性图像描述，作为PLM问答的上下文。</li>
+<li><strong>效果</strong>：零样本VQAv2和GQA上新SOTA；110亿参数模型在VQAv2上超越800亿参数模型，GQA上比同类模型提升9.1%。</li>
+</ul>
+<p><strong>Img2LLM</strong></p>
+<ul>
+<li><strong>定位</strong>：面向LLM的零样本VQA，无需端到端训练。</li>
+<li><strong>机制</strong>：开发LLM无关模型，用示例问答对阐述图像内容，作为LLM的有效提示。</li>
+<li><strong>效果</strong>：VQAv2上比Flamingo高5.6%；A-OKVQA上优势明显；可无缝集成各种LLM。</li>
+<li><strong>代价</strong>：图像描述和问答对生成带来额外推理开销，计算时间增加24.4%；可通过缩短提示缓解。</li>
+</ul>
+<p><strong>SimVLM</strong></p>
+<ul>
+<li><strong>思路</strong>：极简预训练框架，大规模弱监督 + 单一前缀语言建模目标的端到端训练。</li>
+<li><strong>效果</strong>：无需额外数据或任务定制即超越OSCAR、VILLA等，多项视觉-语言任务新基准；零样本开放VQA和跨模态迁移泛化强。</li>
+</ul>
+<p><strong>VideoCoCa</strong></p>
+<ul>
+<li><strong>基础</strong>：CoCa模型适配视频-文本任务。</li>
+<li><strong>机制</strong>：均匀采样帧过CoCa图像编码器，形成整个视频序列的张量；经注意力池化层做生成和对比建模。</li>
+<li><strong>效果</strong>：零样本视频分类和文本到视频检索SOTA，额外训练极少；注意力池化方法最有效；多规模多任务持续优于CoCa。</li>
+<li><strong>局限</strong>：细微时间关系有挑战。</li>
+</ul>
+<p><strong>TinyGPT-V</strong></p>
+<ul>
+<li><strong>定位</strong>：应对GPT-4V等闭源、高算力多模态模型的挑战。</li>
+<li><strong>效率</strong>：训练仅需24GB，推理仅需8GB。</li>
+<li><strong>构成</strong>：Phi-2 + CLIP视觉模式。</li>
+<li><strong>表现</strong>：VQA和理解基准上与LLaVA等更大模型有竞争力；小而高效的骨干 + 大模型能力。</li>
+</ul>
+<p><strong>ChatBridge</strong></p>
+<ul>
+<li><strong>思路</strong>：以语言为&quot; conduit&quot;，利用语言配对数据连接多种模态。</li>
+<li><strong>训练</strong>：两阶段——各模态与语言对齐；用新多模态指令数据集精炼。</li>
+<li><strong>效果</strong>：零样本多模态任务（文本、图像、视频、音频）强。</li>
+<li><strong>局限</strong>：长视频和音频理解受限，需更精细时间建模；冻结模块可能性能不足并引入预训练模型偏见；可扩展草图、点云等模态。</li>
+</ul>
+<p><strong>Macaw-LLM</strong></p>
+<ul>
+<li><strong>架构</strong>：模态模块（编码多模态信息）+ 认知模块（预训练LLM）+ 对齐模块（协调不同表示）。</li>
+<li><strong>数据</strong>：构建了全面的多模态指令数据集支持多轮对话。</li>
+<li><strong>局限</strong>：评估准确性未完全捕捉能力；未针对多轮对话优化；幻觉、毒性、公平性未评估。</li>
+</ul>
+<p><strong>GPT4Tools</strong></p>
+<ul>
+<li><strong>目标</strong>：让开源LLM（LLaMA、OPT）高效使用多模态工具。</li>
+<li><strong>方法</strong>：创建指令数据集，通过LoRA优化支持开源大模型解决视觉挑战；显著提升工具调用准确率，支持未见工具零样本能力。</li>
+<li><strong>局限</strong>：显式固定提示降低计算效率；探索隐式工具调用方法。</li>
+</ul>
+<p><strong>PandaGPT</strong></p>
+<ul>
+<li><strong>思路</strong>：增强LLM的视觉和听觉指令跟随能力。</li>
+<li><strong>构成</strong>：ImageBind多模态编码器 + Vicuna LLM；仅需对齐图文对训练。</li>
+<li><strong>能力</strong>：图像描述、视频启发故事写作、音频问答；涌现跨模态行为。</li>
+<li><strong>改进方向</strong>：额外对齐数据、细粒度特征提取、更丰富多媒体内容、新基准、解决常见语言模型缺陷。</li>
+</ul>
+<p><strong>mPLUG-Owl</strong></p>
+<ul>
+<li><strong>思路</strong>：模块化学习——基础LLM + 视觉知识模块 + 视觉抽象器模块；两阶段训练对齐图文。</li>
+<li><strong>表现</strong>：指令和视觉理解、多轮对话、知识推理优越；涌现多图像关联和多语言理解能力。</li>
+<li><strong>局限</strong>：多图像关联有挑战；多语言训练有限；复杂场景OCR表现参差；文档理解有潜力但其他应用受限。</li>
+</ul>
+<p><strong>Ying-VLM</strong></p>
+<ul>
+<li><strong>训练</strong>：M³IT数据集（240万实例，40种任务指令，中文）。</li>
+<li><strong>效果</strong>：能跟随人类指令、提供吸引人的回答；在未见视频和任务上表现强；任务数量增加提升性能，指令多样性影响结果。</li>
+</ul>
+<p><strong>BLIVA</strong></p>
+<ul>
+<li><strong>定位</strong>：处理文本丰富视觉问题的多模态LLM，整合查询嵌入和patch嵌入。</li>
+<li><strong>架构</strong>：Q-Former（指令感知视觉特征）+ 全连接投影层（额外视觉信息）。</li>
+<li><strong>效果</strong>：OCR-VQA和视觉空间推理基准显著提升；MME基准比InstructBLIP整体提升17.72%；可处理YouTube缩略图问答等真实场景；优于GPT-4和Flamingo。</li>
+</ul>
+<p><strong>LLaVA-Phi</strong></p>
+<ul>
+<li><strong>构成</strong>：Phi-2（2.7B）驱动的紧凑多模态助手。</li>
+<li><strong>训练</strong>：①特征对齐（预训练视觉编码器 + LAION-CC-SBU子集连接语言模型）；②视觉指令调优（GPT生成的多模态指令数据 + VQA数据）。</li>
+<li><strong>效果</strong>：视觉理解、推理、知识感知基准表现优异；适合具身代理等实时交互；证明小语言模型也能达到高级理解。</li>
+</ul>
+<p><strong>MoE-LLaVA</strong></p>
+<ul>
+<li><strong>创新</strong>：<strong>MoE-tuning</strong>训练策略，部署时通过路由器只激活top-k专家，管理多模态学习性能退化和模型稀疏性。</li>
+<li><strong>架构</strong>：视觉编码器 + MLP视觉投影层 + 词嵌入层 + 堆叠LLM和MoE块。</li>
+<li><strong>三阶段</strong>：MLP训练 → 除视觉编码器外的参数训练 → 初始化MoE专家并只训练MoE层。</li>
+<li><strong>效果</strong>：30亿稀疏激活参数，性能可比或优于SOTA，同时最小化幻觉。</li>
+</ul>
+<p><strong>Yi-VL</strong></p>
+<ul>
+<li><strong>基础</strong>：Yi LLM系列，开源多模态模型。</li>
+<li><strong>能力</strong>：内容理解、识别、多轮图像对话；中英文基准领先；448×448细粒度分辨率。</li>
+<li><strong>架构</strong>：LLaVA式（ViT + 投影模块 + LLM）。</li>
+<li><strong>局限</strong>：仅支持VQA、单图输入；复杂场景可能生成问题或物体识别不准；固定448×448分辨率导致低分辨率信息损失、高分辨率缺乏额外知识。</li>
+</ul>
+<p><strong>Moondream</strong></p>
+<ul>
+<li><strong>规模</strong>：16亿参数。</li>
+<li><strong>构成</strong>：SigLIP + Phi-1.5 + LLaVA训练数据集。</li>
+<li><strong>定位</strong>：非商业学术探索，融合前沿技术与稳健数据集。</li>
+</ul>
+<p><strong>Shikra</strong></p>
+<ul>
+<li><strong>定位</strong>：弥合对话中类人指代能力的多模态LLM。</li>
+<li><strong>架构</strong>：视觉编码器 + 对齐层 + LLM；无需额外词汇表或外部插件。</li>
+<li><strong>能力</strong>：用自然语言解释空间坐标；REC、PointQA、图像描述、VQA表现强；可提供物体坐标、比较用户指向区域。</li>
+<li><strong>局限</strong>：仅支持英文；可能生成有害或反事实回答。</li>
+</ul>
+<p><strong>BuboGPT</strong></p>
+<ul>
+<li><strong>定位</strong>：具备视觉接地的VLM，增强视觉、音频、语言跨模态交互。</li>
+<li><strong>机制</strong>：基于SAM的现成视觉接地模块做实体提取和掩码对应；两阶段训练 + 大量指令数据集。</li>
+<li><strong>能力</strong>：生成回答时精确定位图像中物体；理解多模态和视觉接地任务。</li>
+<li><strong>局限</strong>：语言幻觉；Grounding QA能力有限。</li>
+</ul>
+<p><strong>ChatSpot</strong></p>
+<ul>
+<li><strong>定位</strong>：统一端到端多模态LLM，增强人机交互。</li>
+<li><strong>交互</strong>：支持鼠标点击、拖拽、画框等多种交互形式。</li>
+<li><strong>机制</strong>：基于精确指代指令，用点、框等多种参考表示聚焦特定区域；构建多粒度视觉-语言指令跟随数据集。</li>
+<li><strong>优势</strong>：区域指代鲁棒性强，即使框有噪声也极少出现区域指代幻觉。</li>
+</ul>
+<p><strong>MiniGPT-5</strong></p>
+<ul>
+<li><strong>创新</strong>：<strong>交错视觉-语言生成</strong>，用&quot;生成voken&quot;协调图文输出。</li>
+<li><strong>训练</strong>：两阶段，聚焦无描述的多模态生成，无需完整图像描述；无分类器引导增强模型完整性。</li>
+<li><strong>效果</strong>：在MMDialog数据集上显著优于Diver等基线；VIST数据集人类评估中多模态结果更优。</li>
+</ul>
+<p><strong>DRESS</strong></p>
+<ul>
+<li><strong>思路</strong>：利用LLM的**自然语言反馈（NLF）**通过交互增强对齐，缓解VLM关键局限。</li>
+<li><strong>NLF分类</strong>：critique（批评，对齐人类偏好）和refinement（精炼，提供建设性改进建议）。</li>
+<li><strong>训练</strong>：用强化学习处理NLF不可微性。</li>
+<li><strong>效果</strong>：生成更有益、更良性的输出；多轮交互中从反馈学习；超越SOTA VLM。</li>
+</ul>
+<p><strong>X-InstructBLIP</strong></p>
+<ul>
+<li><strong>定位</strong>：基于冻结LLM的跨模态框架，无需大量定制即可集成多种模态。</li>
+<li><strong>数据</strong>：自动收集高质量指令调优数据，支持不同模态微调。</li>
+<li><strong>效果</strong>：无需大量预训练或定制即可与前沿模型相当；提出新评估任务<strong>DisCRn</strong>（判别式跨模态推理）；展现涌现跨模态推理能力，DisCRn上优于强描述基线。</li>
+<li><strong>局限</strong>：各模态内部复杂性和未解问题仍存。</li>
+</ul>
+<p><strong>VILA</strong></p>
+<ul>
+<li><strong>定位</strong>：视觉语言模型家族，增强的预训练配方系统性地将LLM扩展为VLM。</li>
+<li><strong>效果</strong>：主要基准上持续优于LLaVA-1.5等SOTA，无额外复杂性。</li>
+<li><strong>涌现特性</strong>：多图像推理、增强的上下文学习、改进的世界知识。</li>
+</ul>
+<h3 id="2-2-视频输入">2.2 视频输入</h3>
+<p><strong>LLaMA-VID</strong></p>
+<ul>
+<li><strong>创新</strong>：<strong>双token策略</strong>——上下文token（Et）+ 内容token（Ev），高效编码每帧。</li>
+<li><strong>机制</strong>：Q-Former计算查询生成的文本嵌入（Q）与视觉token（X）的注意力得Et；对视觉token平均池化得Ev；两者输入V解码器生成文本响应。</li>
+<li><strong>能力</strong>：处理长达一小时的视频，缓解计算复杂度；兼顾视频效率和单图细节。</li>
+<li><strong>效率</strong>：8×A100 GPU上两天完成训练；EVA-G视觉编码 + QFormer文本解码。</li>
+<li><strong>效果</strong>：零样本视频QA基准高准确率，每帧仅2个token。</li>
+</ul>
+<p><strong>Video-LLaMA</strong></p>
+<ul>
+<li><strong>定位</strong>：理解视频视觉和听觉方面。</li>
+<li><strong>架构</strong>：预训练视觉和音频编码器 + 静态LLM；Video Q-former处理时间信息，Audio Q-former编码音频；对齐视听数据与文本。</li>
+<li><strong>效果</strong>：理解视频内容，在音视频接地对话中生成有意义回答。</li>
+<li><strong>局限</strong>：感知能力有限；长视频有挑战。</li>
+</ul>
+<p><strong>Video-ChatGPT</strong></p>
+<ul>
+<li><strong>架构</strong>：视频适配视觉编码器（CLIP ViT-L/14做时空表示）+ V-v1.1语言模型。</li>
+<li><strong>数据</strong>：10万视频-指令对微调，聚焦时间关系和上下文理解。</li>
+<li><strong>表现</strong>：正确性、细节导向、上下文和时间理解、一致性有竞争力；零样本QA超越同期模型。</li>
+<li><strong>局限</strong>：细微时间关系和小视觉细节有挑战。</li>
+</ul>
+<p><strong>ChatUniVi</strong>（图1列出，正文未详细展开）</p>
+<hr>
+<h2 id="三、多模态输入、多模态输出模型">三、多模态输入、多模态输出模型</h2>
+<p>最先进的一类，既能接受多模态输入，也能生成多模态输出。</p>
+<p><strong>CoDi（Composable Diffusion）</strong></p>
+<ul>
+<li><strong>架构</strong>：潜在扩散模型处理文本、图像、视频、音频。文本用VAE + BERT + GPT-2；图像用LDM + VAE；音频用LDM + VAE编解码器做mel频谱表示。</li>
+<li><strong>融合</strong>：通过跨模态生成与联合多模态生成、交叉注意力模块创建共享多模态空间。</li>
+<li><strong>训练</strong>：个体扩散模型 + 对齐的提示编码器；以线性数量训练目标实现任意到任意生成。</li>
+</ul>
+<p><strong>CoDi-2</strong></p>
+<ul>
+<li><strong>架构</strong>：多模态编码器ImageBind + 对齐编码器 + MLP模态投影；扩散模型集成到MLLM。</li>
+<li><strong>融合</strong>：多模态数据投影为特征序列，由MLLM处理，扩散模型提升生成质量。</li>
+<li><strong>对齐</strong>：利用对齐多模态编码器的投影让MLLM理解模态交错输入序列，支持上下文学习和多轮交互对话。</li>
+</ul>
+<p><strong>Google Gemini</strong></p>
+<ul>
+<li><strong>架构</strong>：变革性深度融合架构，擅长整合文本、图像、音频、视频。</li>
+<li><strong>效果</strong>：32个基准中30个超越GPT-4；在Google TPU v4/v5e上高效扩展。</li>
+<li><strong>训练</strong>：多模态多语言数据集，注重质量和安全；RLHF；偏见和毒性安全评估与外部专家合作。</li>
+</ul>
+<p><strong>NEXT-GPT</strong></p>
+<ul>
+<li><strong>三阶段</strong>：多模态编码 → LLM理解推理 → 多模态生成。</li>
+<li><strong>机制</strong>：ImageBind等编码；Transformer层生成；推理时模态编码器转换输入，LLM决定内容，扩散解码器用信号token合成。</li>
+<li><strong>训练</strong>：多模态对齐学习对齐特征；**模态切换指令调优（MosIT）**通过将模态信号token与金标描述对齐提升LLM能力；多样MosIT数据集增强用户交互处理。</li>
+</ul>
+<p><strong>VideoPoet</strong></p>
+<ul>
+<li><strong>定位</strong>：高质量视频合成并匹配音频的语言模型。</li>
+<li><strong>架构</strong>：仅解码器Transformer，处理图像、视频、文本、音频等多模态输入。</li>
+<li><strong>训练</strong>：两阶段协议。</li>
+<li><strong>能力</strong>：零样本视频生成SOTA；文本到视频、视频风格化；LLM骨干、自定义空间超分辨率、随模型规模扩展。</li>
+<li><strong>评估</strong>：人类评估中文本保真度、视频质量、运动趣味性优越；零样本编辑、任务链、多阶段质量保持。</li>
+</ul>
+<hr>
+<h2 id="四、跨模型观察与总结">四、跨模型观察与总结</h2>
+<p>从上述展开可以提炼出几条贯穿全文的线索：</p>
+<ol>
+<li>
+<p><strong>架构趋同与分化并存</strong>：多数文本生成类VLM采用&quot;视觉编码器（多为CLIP ViT）+ 投影/适配层 + LLM&quot;的范式（LLaVA、MiniGPT、Yi-VL等），但融合深度差异大——从单层投影（MiniGPT-4）到每层视觉专家（CogVLM）、多路Transformer（BEiT-3）、MoE（MoE-LLaVA、VLMo）。</p>
+</li>
+<li>
+<p><strong>效率是核心竞争维度</strong>：BLIP-2（少54倍参数超Flamingo-80B）、LAVIN（1.4小时/380万参数）、TinyGPT-V（24GB训练/8GB推理）、LLaVA-Phi（2.7B）、MoE-LLaVA（30亿稀疏激活）代表不同效率路径。</p>
+</li>
+<li>
+<p><strong>视频理解的两条路线</strong>：一条是token压缩（LLaMA-VID每帧2 token、Video-ChatGPT的时空表示），另一条是多模态融合（Video-LLaMA的音视频Q-former、Mirasol的Combiner）。</p>
+</li>
+<li>
+<p><strong>接地与指代成为标配</strong>：FERRET、Shikra、ChatSpot、BuboGPT、KOSMOS-2、GLIP等把空间坐标、边界框、区域指代纳入模型能力，反映从&quot;看图说话&quot;向&quot;看图定位&quot;的演进。</p>
+</li>
+<li>
+<p><strong>工具使用与模块化</strong>：LLaVA-Plus、GPT4Tools、MM-REACT、Prismer、mPLUG-Owl代表&quot;LLM作为调度器 + 专家模块&quot;的路线，与端到端大模型形成张力。</p>
+</li>
+<li>
+<p><strong>多模态输出的早期探索</strong>：CoDi、CoDi-2、Gemini、NEXT-GPT、VideoPoet、Emu2、MiniGPT-5展示&quot;任意到任意&quot;生成的雏形，但成熟度明显低于文本生成类。</p>
+</li>
+<li>
+<p><strong>共性局限</strong>：幻觉（MiniGPT-v2、BuboGPT、Emu2等均提及）、细粒度细节识别不足（LAVIN、Video-ChatGPT）、长视频/长音频处理受限（Video-LLaMA、ChatBridge）、多语言支持不足（Shikra仅英文）、固定分辨率信息损失（Yi-VL）——这些正是论文第3节未来方向所回应的痛点。</p>
+</li>
+</ol>
+<p>如需针对某一具体模型（如Flamingo的Perceiver架构、BLIP-2的Q-Former两阶段训练、CogVLM的视觉专家模块）做更深入的技术拆解，可以继续展开。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/WWW616-D">WWW616-D</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://www616-d.github.io/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/">https://www616-d.github.io/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width no-desc" href="/2026/10/25/%E4%B8%80%E6%97%B6%E5%85%B4%E8%B5%B7%E7%9A%84%E6%9D%82%E8%AE%B0/" title="一时兴起的杂记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">一时兴起的杂记</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">WWW616-D</div><div class="author-info-description">记录学习和生活，留下一些痕迹</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/WWW616-D"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/WWW616-D" target="_blank" title="fab fa-github"><i class="github" style="color: GitHub;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E4%B8%AD-vlm-%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E5%B1%95%E5%BC%80%E8%A7%A3%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">论文中 VLM 模型的详细展开解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%A7%86%E8%A7%89-%E8%AF%AD%E8%A8%80%E7%90%86%E8%A7%A3%E6%A8%A1%E5%9E%8B%EF%BC%88vlu%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">一、视觉-语言理解模型（VLU）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%85%E5%9B%BE%E5%83%8F%E6%A8%A1%E6%80%81"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 仅图像模态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%86%E9%A2%91%E6%A8%A1%E6%80%81%EF%BC%88%E5%9B%BE1%E4%B8%AD-handles-videos-%E5%88%86%E6%94%AF%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 视频模态（图1中&quot;Handles Videos&quot;分支）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81%E8%BE%93%E5%85%A5%E3%80%81%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">二、多模态输入、文本生成模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BB%85%E5%9B%BE%E5%83%8F%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 仅图像输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%A7%86%E9%A2%91%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 视频输入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81%E8%BE%93%E5%85%A5%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">三、多模态输入、多模态输出模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%B7%A8%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">四、跨模型观察与总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/25/%E5%85%B3%E4%BA%8E-VLM-Survey-Exploring-the-Frontier-of-Vision-Language-Models-A-Survey-of-Current-Methodologies-and-Future-Directions/" title="关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions">关于 VLM Survey-Exploring the Frontier of Vision-Language Models A Survey of Current Methodologies and Future Directions</a><time datetime="2026-10-25T13:56:55.000Z" title="Created 2026-10-25 21:56:55">2026-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/25/%E4%B8%80%E6%97%B6%E5%85%B4%E8%B5%B7%E7%9A%84%E6%9D%82%E8%AE%B0/" title="一时兴起的杂记">一时兴起的杂记</a><time datetime="2026-10-25T13:34:55.000Z" title="Created 2026-10-25 21:34:55">2026-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/25/VLM%E7%9F%A5%E8%AF%86%E5%BA%93/" title="VLM知识库">VLM知识库</a><time datetime="2026-10-25T11:20:05.000Z" title="Created 2026-10-25 19:20:05">2026-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/25/VLM-Attack/" title="VLM_Attack">VLM_Attack</a><time datetime="2026-10-25T11:13:58.000Z" title="Created 2026-10-25 19:13:58">2026-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/20/%E5%85%B3%E4%BA%8EX-transfer/" title="关于X-transfer">关于X-transfer</a><time datetime="2026-10-20T15:53:21.000Z" title="Created 2026-10-20 23:53:21">2026-10-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">你好！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div></div></body></html>
